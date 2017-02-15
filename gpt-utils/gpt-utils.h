@@ -81,7 +81,7 @@ extern "C" {
 #define PTN_XBL                         "xbl"
 #define PTN_SWAP_LIST                   PTN_XBL, "sbl1", "rpm", "tz", "aboot", "hyp", "lksecapp", "keymaster", "cmnlib", "cmnlib32", "cmnlib64", "pmic", "apdp", "devcfg", "hosd", "keystore", "msadp"
 #define AB_PTN_LIST PTN_SWAP_LIST, "boot", "system", "vendor", "modem", "bluetooth"
-#define BOOT_DEV_DIR    "/dev/block/bootdevice/by-name"
+#define BOOT_DEV_DIR    "/dev/block/platform/soc/624000.ufshc/by-name"
 
 /******************************************************************************
  * HELPER MACROS
@@ -169,7 +169,7 @@ int gpt_utils_is_ufs_device();
 //
 //The algorithm to do this is as follows:
 //- Find the real block device(eg: /dev/block/sdb) that corresponds
-//  to the /dev/block/bootdevice/by-name/xbl(bak) symlink
+//  to the /dev/block/platform/soc/624000.ufshc/by-name/xbl(bak) symlink
 //
 //- Once we have the block device 'node' name(sdb in the above example)
 //  use this node to to locate the scsi generic device that represents

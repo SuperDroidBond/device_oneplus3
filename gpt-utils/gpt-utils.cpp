@@ -649,7 +649,7 @@ error:
 //
 //The algorithm to do this is as follows:
 //- Find the real block device(eg: /dev/block/sdb) that corresponds
-//  to the /dev/block/bootdevice/by-name/xbl(bak) symlink
+//  to the /dev/block/platform/soc/624000.ufshc/by-name/xbl(bak) symlink
 //
 //- Once we have the block device 'node' name(sdb in the above example)
 //  use this node to to locate the scsi generic device that represents
@@ -978,7 +978,7 @@ int prepare_boot_update(enum boot_update_stage stage)
         uint32_t i = 0;
         int is_error = 0;
         const char ptn_swap_list[][MAX_GPT_NAME_SIZE] = { PTN_SWAP_LIST };
-        //Holds /dev/block/bootdevice/by-name/*bak entry
+        //Holds /dev/block/platform/soc/624000.ufshc/by-name/*bak entry
         char buf[PATH_MAX] = {0};
         //Holds the resolved path of the symlink stored in buf
         char real_path[PATH_MAX] = {0};
@@ -992,7 +992,7 @@ int prepare_boot_update(enum boot_update_stage stage)
                 //and set them up for failsafe updates.To do
                 //this we find out where the symlinks for the
                 //each of the paths under
-                ///dev/block/bootdevice/by-name/PTN_SWAP_LIST
+                ///dev/block/platform/soc/624000.ufshc/by-name/PTN_SWAP_LIST
                 //actually point to.
                 fprintf(stderr, "%s: Running on a UFS device\n",
                                 __func__);
@@ -1053,7 +1053,7 @@ int prepare_boot_update(enum boot_update_stage stage)
 //Given a parttion name(eg: rpm) get the path to the block device that
 //represents the GPT disk the partition resides on. In the case of emmc it
 //would be the default emmc dev(/dev/mmcblk0). In the case of UFS we look
-//through the /dev/block/bootdevice/by-name/ tree for partname, and resolve
+//through the /dev/block/platform/soc/624000.ufshc/by-name/ tree for partname, and resolve
 //the path to the LUN from there.
 static int get_dev_path_from_partition_name(const char *partname,
                 char *buf,
