@@ -161,7 +161,6 @@ TARGET_PROVIDES_POWERHAL := true
 TARGET_USES_INTERACTION_BOOST := true
 
 # libinit
-TARGET_UNIFIED_DEVICE := true
 TARGET_INIT_VENDOR_LIB := libinit_oneplus3
 
 # liblights
