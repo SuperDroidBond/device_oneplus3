@@ -11,4 +11,6 @@ allow system_server sysfs_graphics:dir search;
 allow system_server sysfs_fpc_proximity:file rw_file_perms;
 allow system_server shell_prop:property_service set;
 allow system_server remosaic_service:service_manager find;
+allow system_server mpctl_data_file:dir search;
+allow system_server mpctl_data_file:sock_file write;
 get_prop(system_server, diag_prop);
