@@ -71,6 +71,7 @@ on enable-low-power
     write /sys/devices/soc/soc:qcom,bcl/mode "enable"
 
     # Input boost configuration
+    # may be overruled power hal POWER_HINT_INTERACTION
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:1036800"
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 

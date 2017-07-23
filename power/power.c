@@ -106,6 +106,8 @@ static pthread_mutex_t s_interaction_lock = PTHREAD_MUTEX_INITIALIZER;
 static struct timespec s_previous_boost_timespec;
 static int s_previous_duration;
 
+static int interaction_enabled = 1;
+
 static struct hw_module_methods_t power_module_methods = {
     .open = NULL,
 };
@@ -116,6 +118,7 @@ static void power_init(struct power_module *module)
 
     int fd;
     char buf[10] = {0};
+    char prop[PATH_MAX] = {0};
 
     fd = open("/sys/devices/soc0/soc_id", O_RDONLY);
     if (fd >= 0) {
@@ -124,11 +127,17 @@ static void power_init(struct power_module *module)
         } else {
             int soc_id = atoi(buf);
             if (soc_id == 194 || (soc_id >= 208 && soc_id <= 218) || soc_id == 178) {
+                // not used
                 display_boost = 1;
             }
         }
         close(fd);
     }
+
+    if (property_get("ro.power.interactive_enabled", prop, NULL)) {
+        interaction_enabled = atoi(prop);
+    }
+    ALOGI("QCOM power HAL interactive_enabled = %d", interaction_enabled);
 }
 
 static void process_video_decode_hint(void *metadata)
@@ -415,6 +424,10 @@ static void power_hint(struct power_module *module, power_hint_t hint,
         {
             char governor[80];
 
+            if (interaction_enabled == 0) {
+                return;
+            }
+
             if (get_scaling_governor(governor, sizeof(governor)) == -1) {
                 ALOGE("Can't obtain scaling governor.");
                 return;
@@ -426,7 +439,7 @@ static void power_hint(struct power_module *module, power_hint_t hint,
                 return;
             }
 
-            int duration = 1500; // 1.5s by default
+            int duration = 1000; // 1s by default
             if (data) {
                 int input_duration = *((int*)data) + 750;
                 if (input_duration > duration) {
@@ -449,8 +462,8 @@ static void power_hint(struct power_module *module, power_hint_t hint,
             // Scheduler is EAS.
             if (true || strncmp(governor, SCHED_GOVERNOR, strlen(SCHED_GOVERNOR)) == 0) {
                 // Setting the value of foreground schedtune boost to 50 and
-                // scaling_min_freq to 1100MHz.
-                int resources[] = {0x40800000, 1100, 0x40800100, 1100, 0x42C0C000, 0x32, 0x41800000, 0x33};
+                // scaling_min_freq to 1000MHz.
+                int resources[] = {0x40800000, 1000, 0x40800100, 1000, 0x42C0C000, 0x32, 0x41800000, 0x33};
                 interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
             } else { // Scheduler is HMP.
                 int resources[] = {0x41800000, 0x33, 0x40800000, 1000, 0x40800100, 1000, 0x40C00000, 0x1};
