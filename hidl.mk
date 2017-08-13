@@ -73,3 +73,6 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     android.hardware.wifi@1.0-supplicant
 
+#VR
+PRODUCT_PACKAGES += \
+    android.hardware.vr@1.0-impl
