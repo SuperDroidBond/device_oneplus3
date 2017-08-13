@@ -235,6 +235,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     thermal.msm8996
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/thermal-engine.conf:system/vendor/etc/thermal-engine.conf
+
 # Wifi
 PRODUCT_PACKAGES += \
     ipacm \

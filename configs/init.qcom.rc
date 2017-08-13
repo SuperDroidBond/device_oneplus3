@@ -576,13 +576,13 @@ service perfd /system/vendor/bin/perfd
    # will be started init init.qcom.power.rc
    disabled
 
-service thermal-engine /system/vendor/bin/thermal-engine
+service thermal-engine /system/vendor/bin/thermal-engine -c /system/vendor/etc/thermal-engine.conf
    class main
    user root
+   group root system
    socket thermal-send-client stream 0666 system system
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
-   group root
    writepid /dev/cpuset/system-background/tasks
 
 service time_daemon /system/bin/time_daemon
