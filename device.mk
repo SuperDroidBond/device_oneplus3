@@ -231,6 +231,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vr.high_performance.xml:system/etc/permissions/android.hardware.vr.high_performance.xml
 
+# Thermal
+PRODUCT_PACKAGES += \
+    thermal.msm8996
+
 # Wifi
 PRODUCT_PACKAGES += \
     ipacm \
