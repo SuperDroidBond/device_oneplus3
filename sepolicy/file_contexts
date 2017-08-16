@@ -37,4 +37,5 @@
 
 /sys/module/lpm_levels/parameters(/.*)?                         u:object_r:sysfs_power_management:s0
 /data/misc/perfd(/.*)?                                          u:object_r:mpctl_socket:s0
+/cache/org\.omnirom\.device\.dex                                u:object_r:dalvikcache_data_file:s0
 
