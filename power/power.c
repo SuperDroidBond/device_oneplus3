@@ -460,12 +460,13 @@ static void power_hint(struct power_module *module, power_hint_t hint,
             s_previous_duration = duration;
 
             // Scheduler is EAS.
-            if (true || strncmp(governor, SCHED_GOVERNOR, strlen(SCHED_GOVERNOR)) == 0) {
+            if (strncmp(governor, SCHED_GOVERNOR, strlen(SCHED_GOVERNOR)) == 0) {
                 // Setting the value of foreground schedtune boost to 50 and
                 // scaling_min_freq to 1000MHz.
                 int resources[] = {0x40800000, 1000, 0x40800100, 1000, 0x42C0C000, 0x32, 0x41800000, 0x33};
                 interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
             } else { // Scheduler is HMP.
+                // scaling_min_freq to 1000MHz
                 int resources[] = {0x41800000, 0x33, 0x40800000, 1000, 0x40800100, 1000, 0x40C00000, 0x1};
                 interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
             }
