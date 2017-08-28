@@ -128,4 +128,3 @@ wifi.interface=wlan0
 # misc
 ro.build.selinux=1
 
-ro.sys.sdcardfs=true
