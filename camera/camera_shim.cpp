@@ -19,35 +19,35 @@
 #include <string.h>
 
 extern "C" {
-    
-    static bool is_op3t_front_camera;
-    
-    // needed by camera.msm8996.so
-    const char *_ZN7android18gClientPackageNameE;
-    const char *_ZN7android16CameraParameters19CLIENT_PACKAGE_NAMEE = "client-package-name";
-    const char *_ZN7android16CameraParameters31KEY_SUPPORTED_VIDEO_SIZES_60FPSE = "support-60fps-video-sizes";
-    void _ZN7android20DisplayEventReceiverC1Ev() {}
-    
-    // needed by libFNVfbEngineHAL.so
-    void _ZN7android13GraphicBuffer10reallocateEjjij() {}
-    
-    // int32_t qcamera::QCameraParameters::setQuadraCfaMode(qcamera::QCameraParameters *this,
-    //         uint32_t enable, bool initCommit)
-    // _ZN7qcamera17QCameraParameters16setQuadraCfaModeEjb
-    int32_t _ZN7qcamera17QCameraParameters16setQuadraCfaModSHIM(const void *, uint32_t, bool)
-    {
-        return 0;
-    }
-    
-    // int32_t qcamera::QCameraParameters::setQuadraCfa(qcamera::QCameraParameters *this,
-    //         const QCameraParameters *params)
-    // _ZN7qcamera17QCameraParameters12setQuadraCfaERKS0_
-    int32_t _ZN7qcamera17QCameraParameters12setQuadraCfaERSHIM(const void *ptr, const void *)
-    {
-        char prop[PROPERTY_VALUE_MAX];
-        
-        // These hacks break OnePlus3's front camera; only use them on OnePlus3T
-        if (!property_get("ro.product.device", prop, NULL) ||
+
+static bool is_op3t_front_camera;
+
+// needed by camera.msm8996.so
+const char *_ZN7android18gClientPackageNameE;
+const char *_ZN7android16CameraParameters19CLIENT_PACKAGE_NAMEE = "client-package-name";
+const char *_ZN7android16CameraParameters31KEY_SUPPORTED_VIDEO_SIZES_60FPSE = "support-60fps-video-sizes";
+void _ZN7android20DisplayEventReceiverC1Ev() {}
+
+// needed by libFNVfbEngineHAL.so
+void _ZN7android13GraphicBuffer10reallocateEjjij() {}
+
+// int32_t qcamera::QCameraParameters::setQuadraCfaMode(qcamera::QCameraParameters *this,
+//         uint32_t enable, bool initCommit)
+// _ZN7qcamera17QCameraParameters16setQuadraCfaModeEjb
+int32_t _ZN7qcamera17QCameraParameters16setQuadraCfaModSHIM(const void *, uint32_t, bool)
+{
+    return 0;
+}
+
+// int32_t qcamera::QCameraParameters::setQuadraCfa(qcamera::QCameraParameters *this,
+//         const QCameraParameters *params)
+// _ZN7qcamera17QCameraParameters12setQuadraCfaERKS0_
+int32_t _ZN7qcamera17QCameraParameters12setQuadraCfaERSHIM(const void *ptr, const void *)
+{
+    char prop[PROPERTY_VALUE_MAX];
+
+    // These hacks break OnePlus3's front camera; only use them on OnePlus3T
+    if (!property_get("ro.product.device", prop, NULL) ||
             strcmp(prop, "OnePlus3T"))
             return 0;
         
