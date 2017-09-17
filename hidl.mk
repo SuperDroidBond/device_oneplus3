@@ -74,7 +74,7 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
+    android.hardware.usb@1.0-service.oneplus3
 
 # Vibrator
 PRODUCT_PACKAGES += \
