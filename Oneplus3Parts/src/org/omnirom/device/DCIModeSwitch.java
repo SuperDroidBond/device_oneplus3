@@ -36,8 +36,9 @@ public class DCIModeSwitch implements OnPreferenceChangeListener {
     }
 
     public static boolean isSupportedPanel() {
-        String panel = SystemProperties.get("ro.product.panel");
-        return panel != null && panel.contains("s6e3fa5");
+        //String panel = SystemProperties.get("ro.product.panel");
+        //return panel != null && panel.contains("s6e3fa5");
+        return true;
     }
 
     public static boolean isSupported() {
