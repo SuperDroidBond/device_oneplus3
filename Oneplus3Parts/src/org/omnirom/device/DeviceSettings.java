@@ -42,10 +42,10 @@ public class DeviceSettings extends PreferenceActivity implements
 
     public static final String KEY_VIBSTRENGTH = "vib_strength";
 
-    private static final String KEY_SLIDER_MODE_TOP = "slider_mode_top";
+    /*private static final String KEY_SLIDER_MODE_TOP = "slider_mode_top";
     private static final String KEY_SLIDER_MODE_CENTER = "slider_mode_center";
     private static final String KEY_SLIDER_MODE_BOTTOM = "slider_mode_bottom";
-    private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
+    private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";*/
     private static final String KEY_CATEGORY_GRAPHICS = "graphics";
 
     public static final String KEY_SRGB_SWITCH = "srgb";
@@ -54,10 +54,10 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_DCI_SWITCH = "dci";
 
     private VibratorStrengthPreference mVibratorStrength;
-    private ListPreference mSliderModeTop;
+    /*private ListPreference mSliderModeTop;
     private ListPreference mSliderModeCenter;
     private ListPreference mSliderModeBottom;
-    private TwoStatePreference mSwapBackRecents;
+    private TwoStatePreference mSwapBackRecents;*/
     private TwoStatePreference mSRGBModeSwitch;
     private TwoStatePreference mHBMModeSwitch;
     private TwoStatePreference mDCIModeSwitch;
@@ -74,7 +74,7 @@ public class DeviceSettings extends PreferenceActivity implements
             mVibratorStrength.setEnabled(VibratorStrengthPreference.isSupported());
         }
 
-        mSliderModeTop = (ListPreference) findPreference(KEY_SLIDER_MODE_TOP);
+        /*mSliderModeTop = (ListPreference) findPreference(KEY_SLIDER_MODE_TOP);
         mSliderModeTop.setOnPreferenceChangeListener(this);
         int sliderModeTop = getSliderAction(0);
         int valueIndex = mSliderModeTop.findIndexOfValue(String.valueOf(sliderModeTop));
@@ -97,7 +97,7 @@ public class DeviceSettings extends PreferenceActivity implements
 
         mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
         mSwapBackRecents.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
+                    Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);*/
 
         mSRGBModeSwitch = (TwoStatePreference) findPreference(KEY_SRGB_SWITCH);
         mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
@@ -135,17 +135,17 @@ public class DeviceSettings extends PreferenceActivity implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mSwapBackRecents) {
+        /*if (preference == mSwapBackRecents) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, mSwapBackRecents.isChecked() ? 1 : 0);
             return true;
-        }
+        }*/
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mSliderModeTop) {
+        /*if (preference == mSliderModeTop) {
             String value = (String) newValue;
             int sliderMode = Integer.valueOf(value);
             setSliderAction(0, sliderMode);
@@ -163,11 +163,11 @@ public class DeviceSettings extends PreferenceActivity implements
             setSliderAction(2, sliderMode);
             int valueIndex = mSliderModeBottom.findIndexOfValue(value);
             mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
-        }
+        }*/
         return true;
     }
 
-    private int getSliderAction(int position) {
+    /*private int getSliderAction(int position) {
         String value = Settings.System.getString(getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING);
         final String defaultValue = "5,3,0";
@@ -203,5 +203,5 @@ public class DeviceSettings extends PreferenceActivity implements
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING, newValue);
         } catch (Exception e) {
         }
-    }
+    }*/
 }

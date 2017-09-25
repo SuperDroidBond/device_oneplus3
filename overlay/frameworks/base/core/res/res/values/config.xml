@@ -348,7 +348,7 @@
     <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
     <bool name="config_multiColorBatteryLed">true</bool>
 
-    <bool name="config_multiColorNotificationLed">true</bool>
+    <!--<bool name="config_multiColorNotificationLed">true</bool>-->
 
     <!-- Flag specifying whether VoLTE & VT is available on device -->
     <bool name="config_device_volte_available">true</bool>
@@ -406,7 +406,7 @@
    <!-- Should the pinner service pin the Camera application? -->
    <bool name="config_pinnerCameraApp">true</bool>
 
-   <bool name="config_fingerprintRemoveClientOnCancel">true</bool>
+   <!--<bool name="config_fingerprintRemoveClientOnCancel">true</bool>-->
 
    <!-- If this is true, device supports Sustained Performance Mode. -->
    <bool name="config_sustainedPerformanceModeSupported">true</bool>

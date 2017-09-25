@@ -69,6 +69,7 @@ persist.data.iwlan.enable=true
 
 # NFC
 ro.nfc.port=I2C
+ro.hardware.nfc_nci=nqx.default
 
 # Perf
 ro.am.reschedule_service=true
@@ -125,6 +126,8 @@ persist.timed.enable=true
 # Wifi
 wifi.interface=wlan0
 
-# misc
-ro.build.selinux=1
+# omx
+persist.media.treble_omx=false
+
+ro.sys.sdcardfs=false
 

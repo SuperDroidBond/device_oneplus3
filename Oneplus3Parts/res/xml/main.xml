@@ -32,7 +32,7 @@
             android:summary="@string/vib_strength_summary_head" />
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <!--<PreferenceCategory
         android:title="@string/category_slider">
         <ListPreference
             android:key="slider_mode_top"
@@ -61,7 +61,7 @@
             android:summary="@string/swap_back_recents_summary"
             android:title="@string/swap_back_recents_title"
             android:persistent="false" />
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
     <PreferenceCategory
         android:key="graphics"
