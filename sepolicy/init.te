@@ -14,3 +14,4 @@ allow init self:netlink_socket { create setopt bind getattr write read };
 allow init perfd:unix_stream_socket connectto;
 allow init proc_touchpanel:file write;
 allow init proc_kernel_sched:file write;
+allow init { domain -lmkd -crash_dump }:process noatsecure;
