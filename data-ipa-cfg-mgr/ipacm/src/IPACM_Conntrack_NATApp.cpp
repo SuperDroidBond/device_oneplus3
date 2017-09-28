@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -28,6 +28,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #include "IPACM_Conntrack_NATApp.h"
 #include "IPACM_ConntrackClient.h"
+#ifdef FEATURE_IPACM_HAL
+#include "IPACM_OffloadManager.h"
+#endif
 
 #define INVALID_IP_ADDR 0x0
 
@@ -149,7 +152,7 @@ int NatApp::AddTable(uint32_t pub_ip)
 		return ret;
 	}
 
-	/* Add back the cashed NAT-entry */
+	/* Add back the cached NAT-entry */
 	if (pub_ip == pub_ip_addr_pre)
 	{
 		IPACMDBG("Restore the cache to ipa NAT-table\n");
@@ -197,7 +200,7 @@ void NatApp::Reset()
 	/* NAT tbl deleted, reset enabled bit */
 	for(cnt = 0; cnt < max_entries; cnt++)
 	{
-		cache[cnt].enabled ==false;
+		cache[cnt].enabled = false;
 	}
 }
 
@@ -242,7 +245,7 @@ bool NatApp::ChkForDup(const nat_table_entry *rule)
 			 cache[cnt].protocol == rule->protocol)
 		{
 			log_nat(rule->protocol,rule->private_ip,rule->target_ip,rule->private_port,\
-			rule->target_port,"Duplicate Rule");
+			rule->target_port,"Duplicate Rule\n");
 			return true;
 		}
 	}
@@ -257,7 +260,7 @@ int NatApp::DeleteEntry(const nat_table_entry *rule)
 	IPACMDBG("%s() %d\n", __FUNCTION__, __LINE__);
 
 	log_nat(rule->protocol,rule->private_ip,rule->target_ip,rule->private_port,\
-	rule->target_port,"for deletion");
+	rule->target_port,"for deletion\n");
 
 
 	for(; cnt < max_entries; cnt++)
@@ -295,14 +298,14 @@ int NatApp::DeleteEntry(const nat_table_entry *rule)
 /* Add new entry to the nat table on new connection */
 int NatApp::AddEntry(const nat_table_entry *rule)
 {
-
 	int cnt = 0;
 	ipa_nat_ipv4_rule nat_rule;
+
 	IPACMDBG("%s() %d\n", __FUNCTION__, __LINE__);
 
 	CHK_TBL_HDL();
 	log_nat(rule->protocol,rule->private_ip,rule->target_ip,rule->private_port,\
-	rule->target_port,"for addition");
+	rule->target_port,"for addition\n");
 	if(isAlgPort(rule->protocol, rule->private_port) ||
 		 isAlgPort(rule->protocol, rule->target_port))
 	{
@@ -341,6 +344,7 @@ int NatApp::AddEntry(const nat_table_entry *rule)
 		}
 		else
 		{
+			memset(&nat_rule, 0, sizeof(nat_rule));
 			nat_rule.private_ip = rule->private_ip;
 			nat_rule.target_ip = rule->target_ip;
 			nat_rule.target_port = rule->target_port;
@@ -400,11 +404,16 @@ int NatApp::AddEntry(const nat_table_entry *rule)
 void NatApp::UpdateCTUdpTs(nat_table_entry *rule, uint32_t new_ts)
 {
 	int ret;
+#ifdef FEATURE_IPACM_HAL
+	IOffloadManager::ConntrackTimeoutUpdater::natTimeoutUpdate_t entry;
+	IPACM_OffloadManager* OffloadMng;
+#endif
 
 	iptodot("Private IP:", rule->private_ip);
 	iptodot("Target IP:",  rule->target_ip);
 	IPACMDBG("Private Port: %d, Target Port: %d\n", rule->private_port, rule->target_port);
 
+#ifndef FEATURE_IPACM_HAL
 	if(!ct_hdl)
 	{
 		ct_hdl = nfct_open(CONNTRACK, 0);
@@ -477,7 +486,47 @@ void NatApp::UpdateCTUdpTs(nat_table_entry *rule, uint32_t new_ts)
 		rule->timestamp = new_ts;
 		IPACMDBG("Updated time stamp successfully\n");
 	}
+#else
+	if(rule->protocol == IPPROTO_UDP)
+	{
+		entry.proto = IOffloadManager::ConntrackTimeoutUpdater::UDP;;
+	}
+	else
+	{
+		entry.proto = IOffloadManager::ConntrackTimeoutUpdater::TCP;
+	}
 
+	if(rule->dst_nat == false)
+	{
+		entry.src.ipAddr = htonl(rule->private_ip);
+		entry.src.port = rule->private_port;
+		entry.dst.ipAddr = htonl(rule->target_ip);
+		entry.dst.port = rule->target_port;
+		IPACMDBG("dst nat is not set\n");
+	}
+	else
+	{
+		entry.src.ipAddr = htonl(rule->target_ip);
+		entry.src.port = rule->target_port;
+		entry.dst.ipAddr = htonl(pub_ip_addr);
+		entry.dst.port = rule->public_port;
+		IPACMDBG("dst nat is set\n");
+	}
+
+	iptodot("Source IP:", entry.src.ipAddr);
+	iptodot("Destination IP:",  entry.dst.ipAddr);
+	IPACMDBG("Source Port: %d, Destination Port: %d\n",
+					entry.src.port, entry.dst.port);
+
+	OffloadMng = IPACM_OffloadManager::GetInstance();
+	if (OffloadMng->touInstance == NULL) {
+		IPACMERR("OffloadMng->touInstance is NULL, can't forward to framework!\n");
+	} else {
+		OffloadMng->touInstance->updateTimeout(entry);
+		IPACMDBG("Updated time stamp successfully\n");
+		rule->timestamp = new_ts;
+	}
+#endif
 	return;
 }
 
@@ -490,7 +539,8 @@ void NatApp::UpdateUDPTimeStamp()
 	for(cnt = 0; cnt < max_entries; cnt++)
 	{
 		ts = 0;
-		if(cache[cnt].enabled == true)
+		if(cache[cnt].enabled == true &&
+		   (cache[cnt].private_ip != cache[cnt].public_ip))
 		{
 			IPACMDBG("\n");
 			if(ipa_nat_query_timestamp(nat_table_hdl, cache[cnt].rule_hdl, &ts) < 0)
@@ -724,8 +774,8 @@ void NatApp::DeleteTempEntry(const nat_table_entry *entry)
 	IPACMDBG("Received below nat entry\n");
 	iptodot("Private IP", entry->private_ip);
 	iptodot("Target IP", entry->target_ip);
-	IPACMDBG("Private Port: %d\t Target Port: %d\t", entry->private_port, entry->target_port);
-	IPACMDBG("protocolcol: %d\n", entry->protocol);
+	IPACMDBG("Private Port: %d\t Target Port: %d\n", entry->private_port, entry->target_port);
+	IPACMDBG("protocol: %d\n", entry->protocol);
 
 	for(cnt=0; cnt<MAX_TEMP_ENTRIES; cnt++)
 	{
@@ -745,13 +795,14 @@ void NatApp::DeleteTempEntry(const nat_table_entry *entry)
 	return;
 }
 
-void NatApp::FlushTempEntries(uint32_t ip_addr, bool isAdd)
+void NatApp::FlushTempEntries(uint32_t ip_addr, bool isAdd,
+		bool isDummy)
 {
 	int cnt;
 	int ret;
 
 	IPACMDBG_H("Received below with isAdd:%d ", isAdd);
-	IPACMDBG_H("IP Address: (ox%x)\n", ip_addr);
+	iptodot("IP Address: ", ip_addr);
 
 	for(cnt=0; cnt<MAX_TEMP_ENTRIES; cnt++)
 	{
@@ -762,6 +813,14 @@ void NatApp::FlushTempEntries(uint32_t ip_addr, bool isAdd)
 			{
 				if(temp[cnt].public_ip == pub_ip_addr)
 				{
+					if (isDummy) {
+						/* To avoild DL expections for non IPA path */
+						temp[cnt].private_ip = temp[cnt].public_ip;
+						temp[cnt].private_port = temp[cnt].public_port;
+						IPACMDBG("Flushing dummy temp rule");
+						iptodot("Private IP", temp[cnt].private_ip);
+					}
+
 					ret = AddEntry(&temp[cnt]);
 					if(ret)
 					{
@@ -861,6 +920,7 @@ int NatApp::DelEntriesOnSTAClntDiscon(uint32_t ip_addr)
 void NatApp::CacheEntry(const nat_table_entry *rule)
 {
 	int cnt;
+
 	if(rule->private_ip == 0 ||
 		 rule->target_ip == 0 ||
 		 rule->private_port == 0  ||
@@ -873,7 +933,7 @@ void NatApp::CacheEntry(const nat_table_entry *rule)
 
 	if(!ChkForDup(rule))
 	{
-		for(; cnt < max_entries; cnt++)
+		for(cnt=0; cnt < max_entries; cnt++)
 		{
 			if(cache[cnt].private_ip == 0 &&
 				 cache[cnt].target_ip == 0 &&

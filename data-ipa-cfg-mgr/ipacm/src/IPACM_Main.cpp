@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2017, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -57,9 +57,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <signal.h>
 #include "linux/ipa_qmi_service_v01.h"
 
-#define __stringify_1(x...)	#x
-#define __stringify(x...)	__stringify_1(x)
-
 #include "IPACM_CmdQueue.h"
 #include "IPACM_EvtDispatcher.h"
 #include "IPACM_Defs.h"
@@ -71,64 +68,22 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "IPACM_ConntrackClient.h"
 #include "IPACM_Netlink.h"
 
+#ifdef FEATURE_IPACM_HAL
+#include "IPACM_OffloadManager.h"
+#include <HAL.h>
+#endif
+
 /* not defined(FEATURE_IPA_ANDROID)*/
 #ifndef FEATURE_IPA_ANDROID
 #include "IPACM_LanToLan.h"
 #endif
-
-
-const char *ipacm_event_name[] = {
-	__stringify(IPA_CFG_CHANGE_EVENT),                     /* 1 NULL */
-	__stringify(IPA_LINK_UP_EVENT),                        /* 2 ipacm_event_data_fid */
-	__stringify(IPA_LINK_DOWN_EVENT),                      /* 3 ipacm_event_data_fid */
-	__stringify(IPA_ADDR_ADD_EVENT),                       /* 4 ipacm_event_data_addr */
-	__stringify(IPA_ADDR_DEL_EVENT),                       /* 5 no use */
-	__stringify(IPA_ROUTE_ADD_EVENT),                      /* 6 ipacm_event_data_addr */
-	__stringify(IPA_ROUTE_DEL_EVENT),                      /* 7 ipacm_event_data_addr */
-	__stringify(IPA_FIREWALL_CHANGE_EVENT),                /* 8 NULL */
-	__stringify(IPA_WLAN_AP_LINK_UP_EVENT),                /* 9 ipacm_event_data_mac */
-	__stringify(IPA_WLAN_STA_LINK_UP_EVENT),               /* 10 ipacm_event_data_mac */
-	__stringify(IPA_WLAN_CLIENT_ADD_EVENT),                /* 11 ipacm_event_data_mac */
-	__stringify(IPA_WLAN_CLIENT_DEL_EVENT),                /* 12 ipacm_event_data_mac */
-	__stringify(IPA_WLAN_CLIENT_POWER_SAVE_EVENT),         /* 13 ipacm_event_data_mac */
-	__stringify(IPA_WLAN_CLIENT_RECOVER_EVENT),            /* 14 ipacm_event_data_mac */
-	__stringify(IPA_NEW_NEIGH_EVENT),                      /* 15 ipacm_event_data_all */
-	__stringify(IPA_DEL_NEIGH_EVENT),                      /* 16 ipacm_event_data_all */
-	__stringify(IPA_NEIGH_CLIENT_IP_ADDR_ADD_EVENT),       /* 17 ipacm_event_data_all */
-	__stringify(IPA_NEIGH_CLIENT_IP_ADDR_DEL_EVENT),       /* 18 ipacm_event_data_all */
-	__stringify(IPA_SW_ROUTING_ENABLE),                    /* 19 NULL */
-	__stringify(IPA_SW_ROUTING_DISABLE),                   /* 20 NULL */
-	__stringify(IPA_PROCESS_CT_MESSAGE),                   /* 21 ipacm_ct_evt_data */
-	__stringify(IPA_HANDLE_WAN_UP),                        /* 22 ipacm_event_iface_up  */
-	__stringify(IPA_HANDLE_WAN_DOWN),                      /* 23 ipacm_event_iface_up  */
-	__stringify(IPA_HANDLE_WLAN_UP),                       /* 24 ipacm_event_iface_up */
-	__stringify(IPA_HANDLE_LAN_UP),                        /* 25 ipacm_event_iface_up */
-	__stringify(IPA_WLAN_CLIENT_ADD_EVENT_EX),             /* 26 ipacm_event_data_wlan_ex */
-	__stringify(IPA_HANDLE_WAN_UP_V6),					   /* 27 NULL */
-	__stringify(IPA_HANDLE_WAN_DOWN_V6),				   /* 28 NULL */
-	__stringify(IPA_LAN_CLIENT_ACTIVE),					   /* 29 ipacm_event_lan_client*/
-	__stringify(IPA_LAN_CLIENT_INACTIVE),				   /* 30 ipacm_event_lan_client*/
-	__stringify(IPA_LAN_CLIENT_DISCONNECT),				   /* 31 ipacm_event_lan_client*/
-	__stringify(IPA_LAN_CLIENT_POWER_SAVE),				   /* 32 ipacm_event_lan_client*/
-	__stringify(IPA_LAN_CLIENT_POWER_RECOVER),			   /* 33 ipacm_event_lan_client*/
-	__stringify(IPA_LAN_TO_LAN_NEW_CONNECTION),			   /* 34 ipacm_event_connection */
-	__stringify(IPA_LAN_TO_LAN_DEL_CONNECTION),			   /* 35 ipacm_event_connection */
-	__stringify(IPA_LAN_DELETE_SELF),                          /* 36 ipacm_event_data_fid */
-	__stringify(IPA_WLAN_LINK_DOWN_EVENT),                     /* 37 ipacm_event_data_mac */
-	__stringify(IPA_USB_LINK_UP_EVENT),                        /* 38 ipacm_event_data_fid */
-	__stringify(IPA_PROCESS_CT_MESSAGE_V6),                    /* 39 ipacm_ct_evt_data */
-	__stringify(IPA_PRIVATE_SUBNET_CHANGE_EVENT),		   /* 40 ipacm_event_data_fid */
-	__stringify(IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT),		   /* 41 ipacm_event_data_fid */
-	__stringify(IPA_WAN_UPSTREAM_ROUTE_DEL_EVENT),		   /* 42 ipacm_event_data_fid */
-	__stringify(IPA_WAN_XLAT_CONNECT_EVENT),                   /* 43 ipacm_event_data_fid */
-};
 
 #define IPA_DRIVER  "/dev/ipa"
 
 #define IPACM_FIREWALL_FILE_NAME    "mobileap_firewall.xml"
 #define IPACM_CFG_FILE_NAME    "IPACM_cfg.xml"
 #ifdef FEATURE_IPA_ANDROID
-#define IPACM_PID_FILE "/data/misc/ipa/ipacm.pid"
+#define IPACM_PID_FILE "/data/vendor/ipa/ipacm.pid"
 #define IPACM_DIR_NAME     "/data"
 #else/* defined(FEATURE_IPA_ANDROID) */
 #define IPACM_PID_FILE "/etc/ipacm.pid"
@@ -268,6 +223,7 @@ void* ipa_driver_msg_notifier(void *param)
 	struct ipa_wlan_msg_ex *event_ex= NULL;
 	struct ipa_get_data_stats_resp_msg_v01 event_data_stats;
 	struct ipa_get_apn_data_stats_resp_msg_v01 event_network_stats;
+	IPACM_OffloadManager* OffloadMng;
 
 	ipacm_cmd_q_data evt_data;
 	ipacm_event_data_mac *data = NULL;
@@ -276,6 +232,8 @@ void* ipa_driver_msg_notifier(void *param)
 	ipacm_event_data_wlan_ex *data_ex;
 	ipa_get_data_stats_resp_msg_v01 *data_tethering_stats = NULL;
 	ipa_get_apn_data_stats_resp_msg_v01 *data_network_stats = NULL;
+	ipa_ioc_vlan_iface_info *vlan_info = NULL;
+	ipa_ioc_l2tp_vlan_mapping_info *mapping = NULL;
 
 	ipacm_cmd_q_data new_neigh_evt;
 	ipacm_event_data_all* new_neigh_data;
@@ -583,6 +541,16 @@ void* ipa_driver_msg_notifier(void *param)
 			ipa_get_if_index(event_wan.upstream_ifname, &(data_iptype->if_index));
 			ipa_get_if_index(event_wan.tethered_ifname, &(data_iptype->if_index_tether));
 			data_iptype->iptype = event_wan.ip;
+#ifdef IPA_WAN_MSG_IPv6_ADDR_GW_LEN
+			data_iptype->ipv4_addr_gw = event_wan.ipv4_addr_gw;
+			data_iptype->ipv6_addr_gw[0] = event_wan.ipv6_addr_gw[0];
+			data_iptype->ipv6_addr_gw[1] = event_wan.ipv6_addr_gw[1];
+			data_iptype->ipv6_addr_gw[2] = event_wan.ipv6_addr_gw[2];
+			data_iptype->ipv6_addr_gw[3] = event_wan.ipv6_addr_gw[3];
+			IPACMDBG_H("default gw ipv4 (%x)\n", data_iptype->ipv4_addr_gw);
+			IPACMDBG_H("IPV6 gateway: %08x:%08x:%08x:%08x \n",
+							data_iptype->ipv6_addr_gw[0], data_iptype->ipv6_addr_gw[1], data_iptype->ipv6_addr_gw[2], data_iptype->ipv6_addr_gw[3]);
+#endif
 			IPACMDBG_H("Received WAN_UPSTREAM_ROUTE_ADD: fid(%d) tether_fid(%d) ip-type(%d)\n", data_iptype->if_index,
 					data_iptype->if_index_tether, data_iptype->iptype);
 			evt_data.event = IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT;
@@ -712,6 +680,84 @@ void* ipa_driver_msg_notifier(void *param)
 			evt_data.evt_data = data_network_stats;
 			break;
 
+#ifdef FEATURE_IPACM_HAL
+		case IPA_QUOTA_REACH:
+			IPACMDBG_H("Received IPA_QUOTA_REACH\n");
+			OffloadMng = IPACM_OffloadManager::GetInstance();
+			if (OffloadMng->elrInstance == NULL) {
+				IPACMERR("OffloadMng->elrInstance is NULL, can't forward to framework!\n");
+			} else {
+				OffloadMng->elrInstance->onLimitReached();
+			}
+			break;
+		case IPA_SSR_BEFORE_SHUTDOWN:
+			IPACMDBG_H("Received IPA_SSR_BEFORE_SHUTDOWN\n");
+			OffloadMng = IPACM_OffloadManager::GetInstance();
+			if (OffloadMng->elrInstance == NULL) {
+				IPACMERR("OffloadMng->elrInstance is NULL, can't forward to framework!\n");
+			} else {
+				OffloadMng->elrInstance->onOffloadStopped(IpaEventRelay::ERROR);
+			}
+			break;
+		case IPA_SSR_AFTER_POWERUP:
+			IPACMDBG_H("Received IPA_SSR_AFTER_POWERUP\n");
+			OffloadMng = IPACM_OffloadManager::GetInstance();
+			if (OffloadMng->elrInstance == NULL) {
+				IPACMERR("OffloadMng->elrInstance is NULL, can't forward to framework!\n");
+			} else {
+				OffloadMng->elrInstance->onOffloadSupportAvailable();
+			}
+			break;
+#endif
+#ifdef FEATURE_L2TP
+		case ADD_VLAN_IFACE:
+			vlan_info = (ipa_ioc_vlan_iface_info *)malloc(sizeof(*vlan_info));
+			if(vlan_info == NULL)
+			{
+				IPACMERR("Failed to allocate memory.\n");
+				return NULL;
+			}
+			memcpy(vlan_info, buffer + sizeof(struct ipa_msg_meta), sizeof(*vlan_info));
+			evt_data.event = IPA_ADD_VLAN_IFACE;
+			evt_data.evt_data = vlan_info;
+			break;
+
+		case DEL_VLAN_IFACE:
+			vlan_info = (ipa_ioc_vlan_iface_info *)malloc(sizeof(*vlan_info));
+			if(vlan_info == NULL)
+			{
+				IPACMERR("Failed to allocate memory.\n");
+				return NULL;
+			}
+			memcpy(vlan_info, buffer + sizeof(struct ipa_msg_meta), sizeof(*vlan_info));
+			evt_data.event = IPA_DEL_VLAN_IFACE;
+			evt_data.evt_data = vlan_info;
+			break;
+
+		case ADD_L2TP_VLAN_MAPPING:
+			mapping = (ipa_ioc_l2tp_vlan_mapping_info *)malloc(sizeof(*mapping));
+			if(mapping == NULL)
+			{
+				IPACMERR("Failed to allocate memory.\n");
+				return NULL;
+			}
+			memcpy(mapping, buffer + sizeof(struct ipa_msg_meta), sizeof(*mapping));
+			evt_data.event = IPA_ADD_L2TP_VLAN_MAPPING;
+			evt_data.evt_data = mapping;
+			break;
+
+		case DEL_L2TP_VLAN_MAPPING:
+			mapping = (ipa_ioc_l2tp_vlan_mapping_info *)malloc(sizeof(*mapping));
+			if(mapping == NULL)
+			{
+				IPACMERR("Failed to allocate memory.\n");
+				return NULL;
+			}
+			memcpy(mapping, buffer + sizeof(struct ipa_msg_meta), sizeof(*mapping));
+			evt_data.event = IPA_DEL_L2TP_VLAN_MAPPING;
+			evt_data.evt_data = mapping;
+			break;
+#endif
 		default:
 			IPACMDBG_H("Unhandled message type: %d\n", event_hdr.msg_type);
 			continue;
@@ -773,6 +819,7 @@ int main(int argc, char **argv)
 	int ret;
 	pthread_t netlink_thread = 0, monitor_thread = 0, ipa_driver_thread = 0;
 	pthread_t cmd_queue_thread = 0;
+	IPACM_OffloadManager* OffloadMng;
 
 	/* check if ipacm is already running or not */
 	ipa_is_ipacm_running();
@@ -780,12 +827,16 @@ int main(int argc, char **argv)
 	IPACMDBG_H("In main()\n");
 	IPACM_Neighbor *neigh = new IPACM_Neighbor();
 	IPACM_IfaceManager *ifacemgr = new IPACM_IfaceManager();
-#ifndef FEATURE_ETH_BRIDGE_LE
-#ifndef FEATURE_IPA_ANDROID
-	IPACM_LanToLan* lan2lan = new IPACM_LanToLan();
-#endif /* defined(FEATURE_IPA_ANDROID)*/
+#ifdef FEATURE_IPACM_HAL
+	OffloadMng = IPACM_OffloadManager::GetInstance();
+	HAL *hal = HAL::makeIPAHAL(1, OffloadMng);
+	IPACMDBG_H(" START IPACM_OffloadManager and link to android framework\n");
 #endif
-	IPACM_ConntrackClient *cc = IPACM_ConntrackClient::GetInstance();
+
+#ifdef FEATURE_ETH_BRIDGE_LE
+	IPACM_LanToLan* lan2lan = IPACM_LanToLan::get_instance();
+#endif
+
 	CtList = new IPACM_ConntrackListener();
 
 	IPACMDBG_H("Staring IPA main\n");
@@ -963,7 +1014,7 @@ int ipa_get_if_index
 
 	memset(&ifr, 0, sizeof(struct ifreq));
 
-	(void)strncpy(ifr.ifr_name, if_name, sizeof(ifr.ifr_name));
+	(void)strlcpy(ifr.ifr_name, if_name, sizeof(ifr.ifr_name));
 
 	if (ioctl(fd, SIOCGIFINDEX, &ifr) < 0)
 	{

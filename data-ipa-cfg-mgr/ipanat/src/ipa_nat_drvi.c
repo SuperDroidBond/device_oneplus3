@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013, The Linux Foundation. All rights reserved.
+Copyright (c) 2013 - 2017, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -33,9 +33,20 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef USE_GLIB
 #include <glib.h>
 #define strlcpy g_strlcpy
+#else
+static size_t strlcpy(char * dst, const char * src, size_t size) {
+	if (size < 1)
+		return 0;
+	strncpy(dst, src, size - 1);
+	dst[size - 1] = 0;
+	return strlen(dst);
+}
 #endif
 
 struct ipa_nat_cache ipv4_nat_cache;
+pthread_mutex_t nat_mutex    = PTHREAD_MUTEX_INITIALIZER;
+
+static ipa_nat_pdn_entry pdns[IPA_MAX_PDN_NUM];
 
 /* ------------------------------------------
 		UTILITY FUNCTIONS START
@@ -152,6 +163,26 @@ uint32_t Read32BitFieldValue(uint32_t param,
 	}
 }
 
+/**
+* GetIPAVer(void) - store IPA HW ver in cache
+*
+*
+* Returns: 0 on success, negative on failure
+*/
+int GetIPAVer(void)
+{
+	int ret;
+
+	ret = ioctl(ipv4_nat_cache.ipa_fd, IPA_IOC_GET_HW_VERSION, &ipv4_nat_cache.ver);
+	if (ret != 0) {
+		perror("GetIPAVer(): ioctl error value");
+		IPAERR("unable to get IPA version. Error ;%d\n", ret);
+		IPADBG("ipa fd %d\n", ipv4_nat_cache.ipa_fd);
+		return -EINVAL;
+	}
+	IPADBG("IPA version is %d\n", ipv4_nat_cache.ver);
+	return 0;
+}
 
 /**
  * CreateNatDevice() - Create nat devices
@@ -247,6 +278,7 @@ void GetNearestEven(uint16_t num, uint16_t *ret)
 
 /**
  * dst_hash() - Find the index into ipv4 base table
+ * @public_ip: [in] public_ip
  * @trgt_ip: [in] Target IP address
  * @trgt_port: [in]  Target port
  * @public_port: [in]  Public port
@@ -260,13 +292,18 @@ void GetNearestEven(uint16_t num, uint16_t *ret)
  *
  * Returns: >0 index into ipv4 base table, negative on failure
  */
-static uint16_t dst_hash(uint32_t trgt_ip, uint16_t trgt_port,
-				uint16_t public_port, uint8_t proto,
-				uint16_t size)
+static uint16_t dst_hash(uint32_t public_ip, uint32_t trgt_ip,
+			uint16_t trgt_port, uint16_t public_port,
+			uint8_t proto, uint16_t size)
 {
 	uint16_t hash = ((uint16_t)(trgt_ip)) ^ ((uint16_t)(trgt_ip >> 16)) ^
 		 (trgt_port) ^ (public_port) ^ (proto);
 
+	if (ipv4_nat_cache.ver >= IPA_HW_v4_0)
+		hash ^= ((uint16_t)(public_ip)) ^
+		((uint16_t)(public_ip >> 16));
+
+	IPADBG("public ip 0x%X\n", public_ip);
 	IPADBG("trgt_ip: 0x%x trgt_port: 0x%x\n", trgt_ip, trgt_port);
 	IPADBG("public_port: 0x%x\n", public_port);
 	IPADBG("proto: 0x%x size: 0x%x\n", proto, size);
@@ -681,6 +718,12 @@ int ipa_nati_add_ipv4_tbl(uint32_t public_ip_addr,
 		return -EINVAL;
 	}
 
+	/* store the initial public ip address in the cached pdn table
+		this is backward compatible for pre IPAv4 versions, we will always
+		use this ip as the single PDN address
+	*/
+	pdns[0].public_ip = public_ip_addr;
+
 	/* Return table handle */
 	ipv4_nat_cache.table_cnt++;
 	*tbl_hdl = ipv4_nat_cache.table_cnt;
@@ -731,6 +774,11 @@ int ipa_nati_alloc_table(uint16_t number_of_entries,
 			return -EIO;
 		}
 		ipv4_nat_cache.ipa_fd = fd;
+	}
+
+	if (GetIPAVer()) {
+		IPAERR("unable to get ipa ver\n");
+		return -EIO;
 	}
 
 	ret = CreateNatDevice(mem);
@@ -904,7 +952,13 @@ int ipa_nati_del_ipv4_table(uint32_t tbl_hdl)
 
 	if (!ipv4_nat_cache.ip4_tbl[index].valid) {
 		IPAERR("invalid table handle passed\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		goto fail;
+	}
+
+	if (pthread_mutex_lock(&nat_mutex) != 0) {
+		ret = -1;
+		goto lock_mutex_fail;
 	}
 
 	/* unmap the device memory from user space */
@@ -918,7 +972,10 @@ int ipa_nati_del_ipv4_table(uint32_t tbl_hdl)
 	/* close the file descriptor of nat device */
 	if (close(ipv4_nat_cache.ip4_tbl[index].nat_fd)) {
 		IPAERR("unable to close the file descriptor\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		if (pthread_mutex_unlock(&nat_mutex) != 0)
+			goto unlock_mutex_fail;
+		goto fail;
 	}
 
 	del_cmd.table_index = index;
@@ -928,9 +985,12 @@ int ipa_nati_del_ipv4_table(uint32_t tbl_hdl)
 		perror("ipa_nati_del_ipv4_table(): ioctl error value");
 		IPAERR("unable to post nat del command init Error: %d\n", ret);
 		IPADBG("ipa fd %d\n", ipv4_nat_cache.ipa_fd);
-		return -EINVAL;
+		ret = -EINVAL;
+		if (pthread_mutex_unlock(&nat_mutex) != 0)
+			goto unlock_mutex_fail;
+		goto fail;
 	}
-	IPADBG("posted IPA_IOC_V4_DEL_NAT to kernel successfully\n");
+	IPAERR("posted IPA_IOC_V4_DEL_NAT to kernel successfully\n");
 
 	free(ipv4_nat_cache.ip4_tbl[index].index_expn_table_meta);
 	free(ipv4_nat_cache.ip4_tbl[index].rule_id_array);
@@ -942,7 +1002,22 @@ int ipa_nati_del_ipv4_table(uint32_t tbl_hdl)
 	/* Decrease the table count by 1*/
 	ipv4_nat_cache.table_cnt--;
 
+	if (pthread_mutex_unlock(&nat_mutex) != 0) {
+		ret = -1;
+		goto unlock_mutex_fail;
+	}
+
 	return 0;
+
+lock_mutex_fail:
+	IPAERR("unable to lock the nat mutex\n");
+	return ret;
+
+unlock_mutex_fail:
+	IPAERR("unable to unlock the nat mutex\n");
+
+fail:
+	return ret;
 }
 
 int ipa_nati_query_timestamp(uint32_t  tbl_hdl,
@@ -959,6 +1034,11 @@ int ipa_nati_query_timestamp(uint32_t  tbl_hdl,
 		return -EINVAL;
 	}
 
+	if (pthread_mutex_lock(&nat_mutex) != 0) {
+		IPAERR("unable to lock the nat mutex\n");
+		return -1;
+	}
+
 	ipa_nati_parse_ipv4_rule_hdl(tbl_index, (uint16_t)rule_hdl,
 															 &expn_tbl, &tbl_entry);
 
@@ -969,8 +1049,39 @@ int ipa_nati_query_timestamp(uint32_t  tbl_hdl,
 			 (struct ipa_nat_rule *)ipv4_nat_cache.ip4_tbl[tbl_index].ipv4_expn_rules_addr;
 	}
 
-	*time_stamp = Read32BitFieldValue(tbl_ptr[tbl_entry].ts_proto,
-																		TIME_STAMP_FIELD);
+	if (tbl_ptr)
+		*time_stamp = Read32BitFieldValue(tbl_ptr[tbl_entry].ts_proto,
+					TIME_STAMP_FIELD);
+
+	if (pthread_mutex_unlock(&nat_mutex) != 0) {
+		IPAERR("unable to unlock the nat mutex\n");
+		return -1;
+	}
+
+	return 0;
+}
+
+int ipa_nati_modify_pdn(struct ipa_ioc_nat_pdn_entry *entry)
+{
+	if (entry->public_ip == 0)
+		IPADBG("PDN %d public ip will be set  to 0\n", entry->pdn_index);
+
+	if (ioctl(ipv4_nat_cache.ipa_fd, IPA_IOC_NAT_MODIFY_PDN, entry)) {
+		perror("ipa_nati_modify_pdn(): ioctl error value");
+		IPAERR("unable to call modify pdn icotl\n");
+		IPAERR("index %d, ip 0x%X, src_metdata 0x%X, dst_metadata 0x%X\n",
+			entry->pdn_index, entry->public_ip, entry->src_metadata, entry->dst_metadata);
+		IPADBG("ipa fd %d\n", ipv4_nat_cache.ipa_fd);
+		return -EIO;
+	}
+
+	pdns[entry->pdn_index].public_ip = entry->public_ip;
+	pdns[entry->pdn_index].dst_metadata = entry->dst_metadata;
+	pdns[entry->pdn_index].src_metadata = entry->src_metadata;
+
+	IPADBG("posted IPA_IOC_NAT_MODIFY_PDN to kernel successfully and stored in cache\n index %d, ip 0x%X, src_metdata 0x%X, dst_metadata 0x%X\n",
+		entry->pdn_index, entry->public_ip, entry->src_metadata, entry->dst_metadata);
+
 	return 0;
 }
 
@@ -982,6 +1093,14 @@ int ipa_nati_add_ipv4_rule(uint32_t tbl_hdl,
 	struct ipa_nat_sw_rule sw_rule;
 	struct ipa_nat_indx_tbl_sw_rule index_sw_rule;
 	uint16_t new_entry, new_index_tbl_entry;
+
+	/* verify that the rule's PDN is valid */
+	if (clnt_rule->pdn_index >= IPA_MAX_PDN_NUM ||
+		pdns[clnt_rule->pdn_index].public_ip == 0) {
+		IPAERR("invalid parameters, pdn index %d, public ip = 0x%X\n",
+			clnt_rule->pdn_index, pdns[clnt_rule->pdn_index].public_ip);
+		return -EINVAL;
+	}
 
 	memset(&sw_rule, 0, sizeof(sw_rule));
 	memset(&index_sw_rule, 0, sizeof(index_sw_rule));
@@ -1074,7 +1193,7 @@ uint16_t ipa_nati_generate_tbl_rule(const ipa_nat_ipv4_rule *clnt_rule,
 	uint16_t prev = 0, nxt_indx = 0, new_entry;
 	struct ipa_nat_rule *tbl = NULL, *expn_tbl = NULL;
 
-	pub_ip_addr = tbl_ptr->public_addr;
+	pub_ip_addr = pdns[clnt_rule->pdn_index].public_ip;
 
 	tbl = (struct ipa_nat_rule *)tbl_ptr->ipv4_rules_addr;
 	expn_tbl = (struct ipa_nat_rule *)tbl_ptr->ipv4_expn_rules_addr;
@@ -1086,6 +1205,7 @@ uint16_t ipa_nati_generate_tbl_rule(const ipa_nat_ipv4_rule *clnt_rule,
 	sw_rule->public_port = clnt_rule->public_port;
 	sw_rule->target_ip = clnt_rule->target_ip;
 	sw_rule->target_port = clnt_rule->target_port;
+	sw_rule->pdn_index = clnt_rule->pdn_index;
 
 	/* consider only public and private ip fields */
 	sw_rule->ip_chksum = ipa_nati_calc_ip_cksum(pub_ip_addr,
@@ -1112,10 +1232,11 @@ uint16_t ipa_nati_generate_tbl_rule(const ipa_nat_ipv4_rule *clnt_rule,
 	*/
 	sw_rule->time_stamp = 0;
 	sw_rule->rsvd2 = 0;
+	sw_rule->rsvd3 = 0;
 	sw_rule->prev_index = 0;
 	sw_rule->indx_tbl_entry = 0;
 
-	new_entry = dst_hash(clnt_rule->target_ip,
+	new_entry = dst_hash(pub_ip_addr, clnt_rule->target_ip,
 											 clnt_rule->target_port,
 											 clnt_rule->public_port,
 											 clnt_rule->protocol,
@@ -1487,13 +1608,20 @@ int ipa_nati_del_ipv4_rule(uint32_t tbl_hdl,
 	struct ipa_nat_ip4_table_cache *tbl_ptr;
 	del_type rule_pos;
 	uint8_t tbl_indx = (uint8_t)(tbl_hdl - 1);
+	int ret;
 
 	/* Parse the rule handle */
 	ipa_nati_parse_ipv4_rule_hdl(tbl_indx, (uint16_t)rule_hdl,
 															 &expn_tbl, &tbl_entry);
 	if (IPA_NAT_INVALID_NAT_ENTRY == tbl_entry) {
 		IPAERR("Invalid Rule Entry\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		goto fail;
+	}
+
+	if (pthread_mutex_lock(&nat_mutex) != 0) {
+		ret = -1;
+		goto mutex_lock_error;
 	}
 
 	IPADBG("Delete below rule\n");
@@ -1502,7 +1630,10 @@ int ipa_nati_del_ipv4_rule(uint32_t tbl_hdl,
 	tbl_ptr = &ipv4_nat_cache.ip4_tbl[tbl_indx];
 	if (!tbl_ptr->valid) {
 		IPAERR("invalid table handle\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		if (pthread_mutex_unlock(&nat_mutex) != 0)
+			goto mutex_unlock_error;
+		goto fail;
 	}
 
 	ipa_nati_find_rule_pos(tbl_ptr, expn_tbl,
@@ -1511,7 +1642,10 @@ int ipa_nati_del_ipv4_rule(uint32_t tbl_hdl,
 
 	if (ipa_nati_post_del_dma_cmd(tbl_indx, tbl_entry,
 					expn_tbl, rule_pos)) {
-		return -EINVAL;
+		ret = -EINVAL;
+		if (pthread_mutex_unlock(&nat_mutex) != 0)
+			goto mutex_unlock_error;
+		goto fail;
 	}
 
 	ipa_nati_del_dead_ipv4_head_nodes(tbl_indx);
@@ -1525,7 +1659,22 @@ int ipa_nati_del_ipv4_rule(uint32_t tbl_hdl,
 	ipa_nat_dump_ipv4_table(tbl_hdl);
 #endif
 
+	if (pthread_mutex_unlock(&nat_mutex) != 0) {
+		ret = -1;
+		goto mutex_unlock_error;
+	}
+
 	return 0;
+
+mutex_lock_error:
+	IPAERR("unable to lock the nat mutex\n");
+	return ret;
+
+mutex_unlock_error:
+	IPAERR("unable to unlock the nat mutex\n");
+
+fail:
+	return ret;
 }
 
 void ReorderCmds(struct ipa_ioc_nat_dma_cmd *cmd, int size)
