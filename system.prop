@@ -69,7 +69,6 @@ persist.data.iwlan.enable=true
 
 # NFC
 ro.nfc.port=I2C
-ro.hardware.nfc_nci=nqx.default
 
 # Perf
 ro.am.reschedule_service=true

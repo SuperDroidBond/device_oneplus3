@@ -185,22 +185,18 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/vendor/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/vendor/etc/media_codecs_google_video.xml
 
-# NFC
 PRODUCT_PACKAGES += \
+    android.hardware.nfc@1.0-impl \
     com.android.nfc_extras \
-    com.nxp.nfc.nq \
-    nfc_nci.nqx.default \
-    libnqnfc-nci \
-    libnqnfc_nci_jnia \
-    NQNfcNci \
-    nqnfcinfo \
-    nqnfcee_access.xml \
-    nqnfcse_access.xml \
+    nfc_nci.msm8996 \
+    NfcNci \
     Tag
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    $(LOCAL_PATH)/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
+    $(LOCAL_PATH)/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
+    $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml \
+    $(LOCAL_PATH)/nfc/nfcse_access.xml:system/etc/nfcse_access.xml
 
 # OMX
 PRODUCT_PACKAGES += \
