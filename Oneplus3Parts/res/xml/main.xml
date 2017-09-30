@@ -32,7 +32,7 @@
             android:summary="@string/vib_strength_summary_head" />
     </PreferenceCategory>
 
-    <!--<PreferenceCategory
+    <PreferenceCategory
         android:title="@string/category_slider">
         <ListPreference
             android:key="slider_mode_top"
@@ -54,7 +54,7 @@
             android:persistent="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <!--<PreferenceCategory
         android:title="@string/buttons_title">
         <CheckBoxPreference
             android:key="swap_back_recents"
