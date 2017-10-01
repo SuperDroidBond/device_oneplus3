@@ -260,12 +260,12 @@ static int process_activity_launch_hint(void *data)
         return HINT_HANDLED;
     }
 
-    ALOGD("LAUNCH HINT: %s", data ? "ON" : "OFF");
+    ALOGV("LAUNCH HINT: %s", data ? "ON" : "OFF");
     if (data && launch_mode == 0) {
         launch_handle = process_boost(launch_handle, duration);
         if (launch_handle > 0) {
             launch_mode = 1;
-            ALOGI("Activity launch hint handled");
+            ALOGV("Activity launch hint handled");
             return HINT_HANDLED;
         } else {
             return HINT_NONE;
