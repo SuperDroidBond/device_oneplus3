@@ -389,7 +389,7 @@ public class KeyHandler implements DeviceKeyHandler {
         String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING,
                     UserHandle.USER_CURRENT);
-        final String defaultValue = "5,3,0";
+        final String defaultValue = DeviceSettings.SLIDER_DEFAULT_VALUE;
 
         if (value == null) {
             value = defaultValue;
