@@ -1,9 +1,11 @@
 type fpc_data_file, file_type;
 type fpc_images_file, file_type;
-type sysfs_fpc_irq, fs_type, sysfs_type;
-type sysfs_fpc_proximity, sysfs_type, fs_type;
+type sysfs_fpc, fs_type, sysfs_type;
 type proc_touchpanel, fs_type;
 type nv_data_file, file_type;
-type sysfs_vibrator, fs_type, sysfs_type;
+type sysfs_rmt_storage, fs_type, sysfs_type;
+type sysfs_mdss_mdp_caps, sysfs_type, fs_type;
 type proc_kernel_sched, fs_type;
+type sysfs_perf, sysfs_type, fs_type;
 type sysfs_power_management, sysfs_type, fs_type;
+type perfd_data_file, file_type, data_file_type;

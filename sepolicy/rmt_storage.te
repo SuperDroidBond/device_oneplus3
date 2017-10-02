@@ -1,2 +1,6 @@
-allow rmt_storage self:capability net_raw;
+allow rmt_storage sysfs_rmt_storage:file rw_file_perms;
+allow rmt_storage sysfs_rmt_storage:dir { search open };
+allow rmt_storage sysfs_uio:file r_file_perms;
+allow rmt_storage sysfs_uio:dir { read open search };
+allow rmt_storage sysfs_uio:lnk_file { read };
 

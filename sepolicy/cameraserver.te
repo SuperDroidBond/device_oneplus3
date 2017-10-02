@@ -1,4 +1,4 @@
-# communicate with perfd
+allow cameraserver perfd_data_file:sock_file write;
 allow cameraserver perfd:unix_stream_socket connectto;
-allow cameraserver mpctl_socket:dir search;
-allow cameraserver mpctl_socket:sock_file write;
+allow cameraserver socket_device:sock_file write;
+

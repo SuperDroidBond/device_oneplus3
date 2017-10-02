@@ -1,16 +1,15 @@
-allow system_server persist_file:dir { read write };
+allow system_server qti_debugfs:file r_file_perms;
 allow system_server proc_touchpanel:dir search;
 allow system_server proc_touchpanel:file rw_file_perms;
 allow system_server sensors_persist_file:file r_file_perms;
 allow system_server sensors_persist_file:dir search;
-allow system_server time_daemon:unix_stream_socket connectto;
 allow system_server sysfs_vibrator:file rw_file_perms;
 allow system_server sysfs_vibrator:dir search;
 allow system_server sysfs_graphics:file rw_file_perms;
 allow system_server sysfs_graphics:dir search;
-allow system_server sysfs_fpc_proximity:file rw_file_perms;
-allow system_server shell_prop:property_service set;
-allow system_server remosaic_service:service_manager find;
-allow system_server mpctl_socket:dir search;
-allow system_server mpctl_socket:sock_file write;
-get_prop(system_server, diag_prop);
+allow system_server sysfs_fpc:file rw_file_perms;
+allow system_server perfd_data_file:sock_file write;
+allow system_server perfd:unix_stream_socket connectto;
+set_prop(system_server, diag_prop);
+binder_call(system_server, per_mgr_service_old);
+

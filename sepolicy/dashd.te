@@ -9,7 +9,7 @@ allow dashd kmsg_device:chr_file rw_file_perms;
 
 allow dashd self:capability { net_admin sys_tty_config };
 wakelock_use(dashd)
-allow dashd self:netlink_kobject_uevent_socket create_socket_perms;
+allow dashd self:netlink_kobject_uevent_socket { create bind setopt read };
 binder_use(dashd)
 binder_service(dashd)
 binder_call(dashd, system_server)

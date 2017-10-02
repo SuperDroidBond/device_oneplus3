@@ -1,4 +1,4 @@
-allow mm-pp-daemon diag_device:chr_file rw_file_perms;
-allow mm-pp-daemon self:socket create_socket_perms;
-r_dir_file(mm-pp-daemon, sensors_persist_file);
-set_prop(mm-pp-daemon, diag_prop);
+get_prop(mm-pp-daemon, diag_prop)
+allow mm-pp-daemon self:socket { create write read };
+allowxperm mm-pp-daemon self:socket ioctl msm_sock_ipc_ioctls;
+allow mm-pp-daemon sysfs_mdss_mdp_caps:file r_file_perms;

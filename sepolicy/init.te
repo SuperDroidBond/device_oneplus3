@@ -1,10 +1,15 @@
-allow init vfat:file { read open };
-allow init socket_device:sock_file { create setattr unlink };
-allow init property_socket:sock_file write;
-allow init sysfs:dir rw_file_perms;
-allow init sysfs:file rw_file_perms;
-allow init input_device:chr_file r_file_perms;
-allow init proc_touchpanel:file write;
-allow init proc_kernel_sched:file rw_file_perms;
+allow init perfd_data_file:sock_file write;
+allow init self:rawip_socket { create setopt getopt };
+allow init self:netlink_kobject_uevent_socket { create bind setopt read };
+allow init surfaceflinger:process signull;
+allow init perfd_data_file:file { read append };
+allow init self:netlink_route_socket { read };
+allow init diag_device:chr_file { read open write };
+allow init bt_firmware_file:filesystem { associate };
+#allow init bt_firmware_file:dir { create setattr };
+allow init firmware_file:filesystem { associate };
+#allow init firmware_file:dir { create setattr };
+get_prop(init, vendor_rild_libpath_prop);
 domain_trans(init, rootfs, dashd)
-
+allow init input_device:chr_file getattr;
+allow init pmsg_device:chr_file open;

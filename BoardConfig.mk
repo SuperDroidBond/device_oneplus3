@@ -191,7 +191,9 @@ TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
 include device/qcom/sepolicy/sepolicy.mk
 
 # TODO
-#BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
+
+include vendor/omni/sepolicy/sepolicy.mk
 
 DEVICE_MANIFEST_FILE := $(BOARD_PATH)/configs/manifest.xml
 
