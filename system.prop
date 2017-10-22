@@ -127,5 +127,6 @@ wifi.interface=wlan0
 # omx
 persist.media.treble_omx=false
 
-ro.sys.sdcardfs=false
+# default is already true - just for reference
+ro.sys.sdcardfs=true
 
