@@ -128,7 +128,6 @@ USE_LEGACY_LOCAL_AUDIO_HAL := true
 
 # Camera
 USE_CAMERA_STUB := true
-TARGET_USES_MEDIA_EXTENSIONS := true
 
 # Disable secure discard because it's SLOW
 BOARD_SUPPRESS_SECURE_ERASE := true
