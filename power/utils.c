@@ -43,8 +43,6 @@
 #define LOG_TAG "QCOM PowerHAL"
 #include <utils/Log.h>
 
-#define INTERACTION_BOOST
-
 char scaling_gov_path[4][80] ={
     "sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
     "sys/devices/system/cpu/cpu1/cpufreq/scaling_governor",
