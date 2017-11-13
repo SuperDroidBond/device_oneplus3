@@ -6,11 +6,15 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     camera.device@3.2-impl
+
+#PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-service \
 
 # Display/Graphics
 PRODUCT_PACKAGES += \

@@ -10,6 +10,7 @@ allow system_server sysfs_graphics:dir search;
 allow system_server sysfs_fpc:file rw_file_perms;
 allow system_server perfd_data_file:sock_file write;
 allow system_server perfd:unix_stream_socket connectto;
+allow system_server perfd_data_file:dir search;
 set_prop(system_server, diag_prop);
 binder_call(system_server, per_mgr_service_old);
 

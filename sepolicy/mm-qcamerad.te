@@ -5,3 +5,6 @@ allow mm-qcamerad vendor_camera_data_file:file rw_file_perms;
 allow mm-qcamerad permission_service:service_manager find;
 get_prop(mm-qcamerad, diag_prop)
 binder_call(mm-qcamerad, servicemanager);
+allow servicemanager mm-qcamerad:dir { search };
+allow servicemanager mm-qcamerad:file { read open };
+allow servicemanager mm-qcamerad:process { getattr };

@@ -1,4 +1,5 @@
 allow cameraserver perfd_data_file:sock_file write;
 allow cameraserver perfd:unix_stream_socket connectto;
 allow cameraserver socket_device:sock_file write;
+allow cameraserver perfd_data_file:dir search;
 

@@ -1,0 +1,4 @@
+get_prop(hal_audio_default, diag_prop);
+allow hal_audio_default perfd_data_file:sock_file write;
+allow hal_audio_default perfd_data_file:dir search;
+allow hal_audio_default perfd:unix_stream_socket connectto;

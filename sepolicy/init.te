@@ -5,11 +5,9 @@ allow init surfaceflinger:process signull;
 allow init perfd_data_file:file { read append };
 allow init self:netlink_route_socket { read };
 allow init diag_device:chr_file { read open write };
-allow init bt_firmware_file:filesystem { associate };
-#allow init bt_firmware_file:dir { create setattr };
-allow init firmware_file:filesystem { associate };
-#allow init firmware_file:dir { create setattr };
 get_prop(init, vendor_rild_libpath_prop);
 domain_trans(init, rootfs, dashd)
 allow init input_device:chr_file getattr;
 allow init pmsg_device:chr_file open;
+allow init debugfs:dir mounton;
+allow init self:netlink_socket { create setopt bind getattr write read };

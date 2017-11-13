@@ -60,8 +60,6 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_APPEND_DTB := true
 TARGET_KERNEL_SOURCE := kernel/oneplus/msm8996
 TARGET_KERNEL_CONFIG := omni_oneplus3_defconfig
-#TARGET_KERNEL_SOURCE := kernel/oneplus/msm8996-nick2
-#TARGET_KERNEL_CONFIG := omni_oneplus3_defconfig
 
 # partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
@@ -191,6 +189,8 @@ TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
+
+BOARD_ROOT_EXTRA_FOLDERS := bt_firmware firmware persist
 
 # selinux
 include device/qcom/sepolicy/sepolicy.mk

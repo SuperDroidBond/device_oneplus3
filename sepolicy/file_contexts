@@ -7,13 +7,15 @@
 /sys/devices/virtual/graphics/fb0/DCI_P3                        u:object_r:sysfs_graphics:s0
 /sys/devices/soc/soc:fpc_fpc1020(/.*)?                          u:object_r:sysfs_fpc:s0
 /sys/devices/virtual/timed_output/vibrator/vtg_level            u:object_r:sysfs_vibrator:s0
-/sys/kernel/debug/rmt_storage/rmts                              u:object_r:sysfs_rmt_storage:s0
 /sys/devices/soc/900000\.qcom,mdss_mdp/caps      u:object_r:sysfs_mdss_mdp_caps:s0
 /sys/module/lpm_levels/parameters(/.*)?                u:object_r:sysfs_power_management:s0
 /sys/class/uio(/.*)?                                u:object_r:sysfs_uio:s0
-/sys/devices/soc/0.qcom,rmtfs_sharedmem/uio(/.*)?   u:object_r:sysfs_rmt_storage:s0	
-/sys/devices/soc/70000.qcom,msm-core/uio(/.*)?      u:object_r:sysfs_uio:s0	
-/sys/devices/soc/70000.qcom,msm-thermal/uio(/.*)?   u:object_r:sysfs_thermal:s0	
+/sys/devices/soc/0.qcom,rmtfs_sharedmem/uio(/.*)?   u:object_r:sysfs_rmt_storage:s0
+/sys/devices/soc/70000.qcom,msm-core/uio(/.*)?      u:object_r:sysfs_uio:s0
+/sys/devices/soc/70000.qcom,msm-thermal/uio(/.*)?   u:object_r:sysfs_thermal:s0
+/sys/devices/soc/leds-qpnp-24/leds(/.*)? u:object_r:sysfs_leds:s0
+/sys/devices/soc/leds-qpnp-18/leds(/.*)? u:object_r:sysfs_leds:s0
+/sys/kernel/debug/rmt_storage(/.*)?              u:object_r:debugfs_rmt_storage:s0
 
 # FRP partition
 /dev/block/platform/soc/624000.ufshc/by-name/config             u:object_r:frp_block_device:s0
@@ -27,6 +29,6 @@
 /data/oemnvitems(/.*)?                                          u:object_r:nv_data_file:s0
 /data/misc/iop(/.*)?                                            u:object_r:iop_data_file:s0
 /data/misc/location(/.*)?                                       u:object_r:location_data_file:s0
+/data/misc/display(/.*)?         u:object_r:display_data_file:s0
 
-/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service.widevine          u:object_r:hal_drm_widevine_exec:s0
 /(vendor|system/vendor)/bin/perfd           u:object_r:perfd_exec:s0
