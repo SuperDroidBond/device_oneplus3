@@ -334,6 +334,20 @@ on post-fs-data
     mkdir /data/misc/qvop 0660 system system
     mkdir /data/misc/audio_pp 0771 media audio
 
+    mkdir /data/vendor/misc 01771 system system
+
+    # Create directory used by display clients
+    mkdir /data/vendor/display 0770 system graphics
+
+    # Change lm related dirs
+    mkdir /data/vendor/lm 0700 root root
+
+    # Create directory used by media clients
+    mkdir /data/vendor/media 0770 mediacodec media
+
+    # Create directory used for camera
+    mkdir /data/vendor/camera 0770 camera camera
+
     # NFC
     mkdir /data/nfc
     mkdir /data/oemnvitems 0771 radio radio
@@ -360,8 +374,14 @@ on post-fs-data
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
 
+    # Create directory for apps access via QTEEConnector
+    mkdir /data/vendor/qtee 0770 system system
+
+    # Create directory for voiceprint
+    mkdir /data/misc/qvop 0771 system system
+
     # Create folder for mm-qcamera-daemon
-    mkdir /data/misc/camera 0770 camera camera
+    mkdir /data/vendor/camera 0770 camera camera
 
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
@@ -369,13 +389,11 @@ on post-fs-data
     # Create directory for tftp
     mkdir /data/vendor/tombstones 0771 system system
 
-    mkdir /data/misc/ipa 0700 net_admin net_admin
-
     mkdir /data/vendor/ramdump 0771 root system
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     mkdir /data/vendor/bluetooth 0770 bluetooth bluetooth
     mkdir /data/vendor/ramdump/bluetooth 0770 bluetooth bluetooth
-    
+
     # Create the directories used by the Wireless subsystem
     mkdir /data/vendor/wifi 0770 wifi wifi
     mkdir /data/vendor/wifi/sockets 0770 wifi wifi
@@ -392,13 +410,15 @@ on post-fs-data
     #create port-bridge log dir
     mkdir /data/vendor/port_bridge 0770 radio radio
     chmod 0770 /data/vendor/port_bridge
-    
+
     #create netmgr log dir
     mkdir /data/vendor/netmgr 0770 radio radio
     chmod 0770 /data/vendor/netmgr
 
-    mkdir /data/vendor/radio 0770 radio radio
-    chmod 0770 /data/vendor/radio
+    # create ipacm log dir
+    #mkdir /data/vendor/ipa 0770 radio radio
+    #chmod 0770 /data/vendor/ipa
+    mkdir /data/misc/ipa 0700 net_admin net_admin
 
     # Create the directories used by CnE subsystem
     mkdir /data/connectivity 0771 system system
@@ -412,17 +432,17 @@ on post-fs-data
     chown system system /data/dpm/nsrm
 
     # Create directory used by audio subsystem
-    mkdir /data/misc/audio 0770 audio audio
+    mkdir /data/vendor/misc/audio 0770 audio audio
 
     # Create directory for audio delta files
-    mkdir /data/misc/audio/acdbdata 0770 media audio
-    mkdir /data/misc/audio/acdbdata/delta 0770 media audio
+    mkdir /data/vendor/misc/audio/acdbdata 0770 media audio
+    mkdir /data/vendor/misc/audio/acdbdata/delta 0770 media audio
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
 
-    # Create directory used by display clients
-    mkdir /data/misc/display 0770 system graphics
+    # Create directory for radio
+    mkdir /data/vendor/radio 0770 system radio
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -443,13 +463,10 @@ on post-fs-data
     mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
-    # Create directories for Location services
-    mkdir /data/misc/location 0770 gps gps
-    mkdir /data/misc/location/mq 0770 gps gps
-    mkdir /data/misc/location/xtwifi 0770 gps gps
-    mkdir /data/misc/location/gpsone_d 0770 system gps
-    mkdir /data/misc/location/quipc 0770 gps system
-    mkdir /data/misc/location/gsiff 0770 gps gps
+    #Create directories for Location services
+    mkdir /data/vendor/location 0770 gps gps
+    mkdir /data/vendor/location/mq 0770 gps gps
+    mkdir /data/vendor/location/xtwifi 0770 gps gps
 
     # Create directory from IMS services
     mkdir /data/shared 0755
@@ -459,14 +476,17 @@ on post-fs-data
     mkdir /data/fota 0771
     chown system system /data/fota
 
-    # Create /data/time folder for time-services
-    mkdir /data/time/ 0700 system system
+    #Create directory for hostapd
+    mkdir /data/hostapd 0770 system wifi
 
-    mkdir /data/audio/ 0770 media audio
+    # Create /data/vendor/time folder for time-services
+    mkdir /data/vendor/time/ 0700 system system
+
+    mkdir /data/vendor/audio/ 0770 media audio
 
     # Create a folder for audio delta files
-    mkdir /data/audio/acdbdata 0770 media audio
-    mkdir /data/audio/acdbdata/delta 0770 media audio
+    mkdir /data/vendor/audio/acdbdata 0770 media audio
+    mkdir /data/vendor/audio/acdbdata/delta 0770 media audio
 
     setprop vold.post_fs_data_done 1
 
@@ -495,20 +515,24 @@ on post-fs-data
     mkdir /data/nfc/param 0770 nfc nfc
 
     #Create IOP  deamon related dirs
-    mkdir /data/misc/iop 0770 root system
+    mkdir /data/vendor/iop 0770 root system
 
     # Mark the copy complete flag to not completed
-    write /data/misc/radio/copy_complete 0
-    chown radio radio /data/misc/radio/copy_complete
-    chmod 0660 /data/misc/radio/copy_complete
+    write /data/vendor/radio/copy_complete 0
+    chown radio radio /data/vendor/radio/copy_complete
+    chmod 0660 /data/vendor/radio/copy_complete
 
+    # copy prebuilt qcril.db files always
+    copy /vendor/radio/qcril_database/qcril.db /data/vendor/radio/qcril_prebuilt.db
+    chown radio radio /data/vendor/radio/qcril_prebuilt.db
+    chmod 0660 /data/vendor/radio/qcril_prebuilt.db
     # File flags for prebuilt ril db file
-    write /data/misc/radio/prebuilt_db_support 1
-    chown radio radio /data/misc/radio/prebuilt_db_support
-    chmod 0400 /data/misc/radio/prebuilt_db_support
-    write /data/misc/radio/db_check_done 0
-    chown radio radio /data/misc/radio/db_check_done
-    chmod 0660 /data/misc/radio/db_check_done
+    write /data/vendor/radio/prebuilt_db_support 1
+    chown radio radio /data/vendor/radio/prebuilt_db_support
+    chmod 0400 /data/vendor/radio/prebuilt_db_support
+    write /data/vendor/radio/db_check_done 0
+    chown radio radio /data/vendor/radio/db_check_done
+    chmod 0660 /data/vendor/radio/db_check_done
 
     # dash charger
     chmod 0660 /dev/dash
@@ -521,6 +545,9 @@ on post-fs-data
     write /sys/block/dm-1/queue/read_ahead_kb 2048
     write /sys/block/sda/queue/read_ahead_kb 2048
     write /sys/block/sde/queue/read_ahead_kb 2048
+
+    # Create vpp directory
+    mkdir /data/vendor/vpp 0770 media media
 
 # start camera server as daemon
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
@@ -632,26 +659,26 @@ on property:persist.sys.pd_enable=1
 on property:persist.sys.pd_enable=0
     write /sys/class/service_locator/service_locator_status 0
 
-on property:sys.ims.QMI_DAEMON_STATUS=1
+on property:vendor.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
 service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
     class main
     user system
-    socket ims_rtpd stream 0660 system radio
-    group radio net_raw diag inet log
+    group radio diag inet log
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
-service imscmservice /system/vendor/bin/imscmservice
+service imsrcsservice /system/vendor/bin/imsrcsd
     class main
     user system
-    group radio net_raw diag diag log
-    writepid /dev/cpuset/system-background/tasks
+    group radio diag inet log
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
-on property:sys.ims.DATA_DAEMON_STATUS=1
+on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
-    start imscmservice
+    start imsrcsservice
 
 service dts_configurator /system/vendor/bin/dts_configurator
     class late_start
@@ -779,9 +806,8 @@ on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
     write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
 
-on property:bluetooth.isEnabled=true
-    start btwlancoex
-    write /sys/class/bluetooth/hci0/idle_timeout 7000
+on property:init.svc.wpa_supplicant=stopped
+    stop dhcpcd
 
 on property:bluetooth.sap.status=running
     start bt-sap
@@ -811,16 +837,25 @@ on property:vold.decrypt=trigger_restart_framework
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-#service cnd /system/vendor/bin/cnd
-#    class main
-#    socket cnd stream 660 root inet
-#    writepid /dev/cpuset/system-background/tasks
+service cnd /system/vendor/bin/cnd
+    class main
+    user system
+    group system wifi inet radio wakelock net_admin
+    writepid /dev/cpuset/system-background/tasks
 
-#service dpmd /system/bin/dpmd
-#    class late_start
-#    socket dpmd stream 660 root system
-#    group system readproc
-#    writepid /dev/cpuset/system-background/tasks
+service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
+    class main
+    user system
+    group system
+    writepid /dev/cpuset/system-background/tasks
+
+service dpmd /system/bin/dpmd
+    class late_start
+    socket dpmd stream 660 root system
+    socket tcm  stream 660 root inet
+    socket dpmwrapper stream 660 root inet
+    group system readproc inet radio wakelock
+    writepid /dev/cpuset/system-background/tasks
 
 service irsc_util /system/vendor/bin/irsc_util /system/vendor/etc/sec_config
     class core
@@ -832,12 +867,6 @@ service rmt_storage /system/vendor/bin/rmt_storage
     user root
     group root system wakelock
     writepid /dev/cpuset/system-background/tasks
-
-#service rfs_access /system/vendor/bin/rfs_access
-#   class core
-#   user root
-#   group system net_raw
-#   writepid /dev/cpuset/system-background/tasks
 
 service tftp_server /system/vendor/bin/tftp_server
    class core
@@ -868,37 +897,10 @@ service hci_filter_root /system/vendor/bin/wcnss_filter
     group bluetooth diag system
     disabled
 
-#net_admin capability needed to write rfkill sysfs entry
-service fmhal_service /system/vendor/bin/fmhal_service
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin net_admin
-    disabled
-
 service config_bluetooth /system/vendor/bin/sh /system/vendor/bin/btnvtool -O
     class core
     user bluetooth
     group bluetooth radio
-    oneshot
-
-#service hciattach /system/vendor/bin/sh /system/etc/init.qcom.bt.sh
-#    class late_start
-#    user bluetooth
-#    group bluetooth net_bt_admin diag radio
-#    disabled
-#    oneshot
-
-#on property:bluetooth.hciattach=true
-#    start hciattach
-
-#on property:bluetooth.hciattach=false
-#    setprop bluetooth.status off
-
-service hciattach_ath3k /system/vendor/bin/sh /system/etc/init.ath3k.bt.sh
-    class late_start
-    user bluetooth
-    group system bluetooth net_bt_admin misc
-    disabled
     oneshot
 
 service bt-dun /system/vendor/bin/dun-server /dev/smd7 /dev/rfcomm0
@@ -928,12 +930,6 @@ service ftmd /system/vendor/bin/ftmdaemon
     group bluetooth net_bt_admin misc qcom_diag net_bt
     disabled
     oneshot
-
-service bridgemgrd /system/vendor/bin/bridgemgrd
-    class late_start
-    user radio
-    group radio diag
-    disabled
 
 service port-bridge /system/vendor/bin/port-bridge
     class main
@@ -969,7 +965,7 @@ service ipacm /system/bin/ipacm
 service qti /system/vendor/bin/qti
     class main
     user radio
-    group radio diag usb
+    group radio net_raw diag usb net_admin
     writepid /dev/cpuset/system-background/tasks
 
 service sensors /system/vendor/bin/sensors.qcom
@@ -989,13 +985,6 @@ on property:ro.data.large_tcp_window_size=true
 
 on property:sys.sysctl.tcp_adv_win_scale=*
     write /proc/sys/net/ipv4/tcp_adv_win_scale ${sys.sysctl.tcp_adv_win_scale}
-
-service btwlancoex /system/vendor/bin/sh /system/etc/init.qcom.coex.sh
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin inet net_admin net_raw
-    disabled
-    oneshot
 
 service amp_init /system/vendor/bin/amploader -i
     class late_start
@@ -1241,14 +1230,12 @@ service vm_bms /system/vendor/bin/vm_bms
     group root
     disabled
 
-service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-    socket msm_irqbalance seqpacket 660 root system
-    class main
+service vendor.msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+    class core
     user root
     group root
     # will be started in init.qcom.sh
     disabled
-    writepid /dev/cpuset/system-background/tasks
 
 # Coresight early boot service
 service cs-early-boot /system/vendor/bin/sh /persist/coresight/qdss.agent.sh early-boot /system/etc/init.qcom.debug.sh

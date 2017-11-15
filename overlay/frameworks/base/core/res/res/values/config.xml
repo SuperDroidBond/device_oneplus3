@@ -401,4 +401,6 @@
    <!-- If this is true, device supports Sustained Performance Mode. -->
    <bool name="config_sustainedPerformanceModeSupported">true</bool>
 
+   <bool name="config_dynamic_bind_ims">true</bool>
+   <string name="config_ims_package">org.codeaurora.ims</string>
 </resources>
