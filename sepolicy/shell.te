@@ -1,1 +1,2 @@
 get_prop(shell, vendor_rild_libpath_prop);
+allow shell proc_tty_drivers:file r_file_perms;

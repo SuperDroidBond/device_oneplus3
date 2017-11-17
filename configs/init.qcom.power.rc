@@ -129,4 +129,3 @@ on charger
 on property:dev.bootcomplete=1
     setprop sys.io.scheduler "cfq"
     start perfd
-    #start iop
