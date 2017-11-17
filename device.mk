@@ -22,13 +22,14 @@
 
 $(call inherit-product, device/oneplus/oneplus3/hidl.mk)
 $(call inherit-product, vendor/oneplus/oneplus3/oneplus3-vendor.mk)
-$(call inherit-product, vendor/omni/config/phone-xxhdpi-4096-dalvik-heap.mk)
-$(call inherit-product, vendor/omni/config/phone-xxhdpi-2048-hwui-memory.mk)
+$(call inherit-product, vendor/nitrogen/config/phone-xxhdpi-4096-dalvik-heap.mk)
+$(call inherit-product, vendor/nitrogen/config/phone-xxhdpi-2048-hwui-memory.mk)
+$(call inherit-product, vendor/nitrogen/config/utils.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 PRODUCT_PACKAGES += \
-    omni_charger_res_images
+    charger_res_images
 
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
@@ -132,7 +133,6 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
-    fingerprintd \
     fingerprint.msm8996
 
 # GPS
@@ -258,10 +258,6 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
-# Camera
-PRODUCT_PACKAGES += \
-    libcamera_shim
-
 #PRODUCT_PACKAGES += \
     SnapdragonCamera \
 
@@ -269,8 +265,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.msm8996
 
-PRODUCT_PACKAGES += \
-    Oneplus3Parts
+#PRODUCT_PACKAGES += \
+#    Oneplus3Parts
 
 # bluetooth
 PRODUCT_PACKAGES += \
@@ -288,7 +284,7 @@ PRODUCT_COPY_FILES += \
 #    libantradio
 
 #PRODUCT_COPY_FILES += \
-    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
+#    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
 
 # For android_filesystem_config.h
 PRODUCT_PACKAGES += \

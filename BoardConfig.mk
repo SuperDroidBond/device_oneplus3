@@ -41,7 +41,7 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53
+TARGET_2ND_CPU_VARIANT := kryo
 
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 TARGET_USES_64_BIT_BINDER := true
@@ -180,7 +180,7 @@ BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 #BOARD_ANT_WIRELESS_DEVICE := "qualcomm-uart"
 
 # Crypto
-TARGET_HW_DISK_ENCRYPTION := true
+TARGET_HW_DISK_ENCRYPTION := false
 TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
 
 # CNE and DPM
@@ -193,13 +193,14 @@ USE_DEVICE_SPECIFIC_GPS := true
 
 BOARD_ROOT_EXTRA_FOLDERS := bt_firmware firmware persist
 
+WITH_DEXPREOPT := true
+DONT_DEXPREOPT_PREBUILTS := true
+
 # selinux
 include device/qcom/sepolicy/sepolicy.mk
 
 # TODO
 BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
-
-include vendor/omni/sepolicy/sepolicy.mk
 
 DEVICE_MANIFEST_FILE := $(BOARD_PATH)/configs/manifest.xml
 
