@@ -119,7 +119,7 @@ persist.data.df.iwlan_mux=9
 persist.data.df.dev_name=rmnet_usb0
 
 # Timeservice
-persist.timed.enable=true
+persist.timed.enable=false
 
 # Wifi
 wifi.interface=wlan0
