@@ -35,6 +35,7 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
+    export LD_SHIM_LIBS /system/lib/libcamera_client.so|libcamera_parameters_shim.so
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
 
