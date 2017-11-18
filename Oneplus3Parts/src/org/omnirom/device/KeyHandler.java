@@ -24,7 +24,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.ContentObserver;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
@@ -74,9 +73,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_UP_SWIPE_SCANCODE = 66;
 
     private static final int KEY_DOUBLE_TAP = 143;
-    private static final int KEY_HOME = 102;
-    private static final int KEY_BACK = 158;
-    private static final int KEY_RECENTS = 580;
     private static final int KEY_SLIDER_TOP = 601;
     private static final int KEY_SLIDER_CENTER = 602;
     private static final int KEY_SLIDER_BOTTOM = 603;
@@ -104,27 +100,11 @@ public class KeyHandler implements DeviceKeyHandler {
         KEY_SLIDER_BOTTOM
     };
 
-    private static final int[] sProxiCheckedGestures = new int[]{
-        GESTURE_II_SCANCODE,
-        GESTURE_CIRCLE_SCANCODE,
-        GESTURE_V_SCANCODE,
-        GESTURE_A_SCANCODE,
-        GESTURE_LEFT_V_SCANCODE,
-        GESTURE_RIGHT_V_SCANCODE,
-        GESTURE_DOWN_SWIPE_SCANCODE,
-        GESTURE_UP_SWIPE_SCANCODE,
-        GESTURE_LEFT_SWIPE_SCANCODE,
-        GESTURE_RIGHT_SWIPE_SCANCODE,
-        KEY_DOUBLE_TAP
-    };
-
     protected final Context mContext;
     private final PowerManager mPowerManager;
     private EventHandler mEventHandler;
     private WakeLock mGestureWakeLock;
     private Handler mHandler = new Handler();
-    private SettingsObserver mSettingsObserver;
-    private static boolean mButtonDisabled;
     private final NotificationManager mNoMan;
     private final AudioManager mAudioManager;
     private CameraManager mCameraManager;
@@ -132,50 +112,10 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean mTorchEnabled;
     private SensorManager mSensorManager;
     private Sensor mSensor;
-    private boolean mProxyIsNear;
-    private boolean mUseProxiCheck;
 
-    private SensorEventListener mProximitySensor = new SensorEventListener() {
-        @Override
-        public void onSensorChanged(SensorEvent event) {
-            mProxyIsNear = event.values[0] < mSensor.getMaximumRange();
-            if (DEBUG) Log.d(TAG, "mProxyIsNear = " + mProxyIsNear);
-            if(Utils.fileWritable(FPC_CONTROL_PATH)) {
-                Utils.writeValue(FPC_CONTROL_PATH, mProxyIsNear ? "1" : "0");
-            }
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        }
-    };
-
-    private class SettingsObserver extends ContentObserver {
-        SettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-        void observe() {
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.HARDWARE_KEYS_DISABLE),
-                    false, this);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DEVICE_PROXI_CHECK_ENABLED),
-                    false, this);
-            update();
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            update();
-        }
-
-        public void update() {
-            setButtonDisable(mContext);
-            mUseProxiCheck = Settings.System.getIntForUser(
-                    mContext.getContentResolver(), Settings.System.DEVICE_PROXI_CHECK_ENABLED, 1,
-                    UserHandle.USER_CURRENT) == 1;
-        }
+    @Override
+    public boolean isDisabledKeyEvent(KeyEvent event) {
+        return false;
     }
 
     private class MyTorchCallback extends CameraManager.TorchCallback {
@@ -194,34 +134,18 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     }
 
-    private BroadcastReceiver mScreenStateReceiver = new BroadcastReceiver() {
-         @Override
-         public void onReceive(Context context, Intent intent) {
-             if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-                 onDisplayOn();
-             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-                 onDisplayOff();
-             }
-         }
-    };
-
     public KeyHandler(Context context) {
         mContext = context;
         mEventHandler = new EventHandler();
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mGestureWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "GestureWakeLock");
-        mSettingsObserver = new SettingsObserver(mHandler);
-        mSettingsObserver.observe();
         mNoMan = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
         mCameraManager.registerTorchCallback(new MyTorchCallback(), mEventHandler);
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        IntentFilter screenStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        mContext.registerReceiver(mScreenStateReceiver, screenStateFilter);
     }
 
     private class EventHandler extends Handler {
@@ -260,28 +184,6 @@ public class KeyHandler implements DeviceKeyHandler {
     @Override
     public boolean canHandleKeyEvent(KeyEvent event) {
         return ArrayUtils.contains(sSupportedGestures, event.getScanCode());
-    }
-
-    @Override
-    public boolean isDisabledKeyEvent(KeyEvent event) {
-        boolean isProxyCheckRequired = mUseProxiCheck &&
-                ArrayUtils.contains(sProxiCheckedGestures, event.getScanCode());
-        if (mProxyIsNear && isProxyCheckRequired) {
-            if (DEBUG) Log.i(TAG, "isDisabledKeyEvent: blocked by proxi sensor - scanCode=" + event.getScanCode());
-            return true;
-        }
-        return false;
-    }
-
-    public static void setButtonDisable(Context context) {
-        mButtonDisabled = Settings.System.getIntForUser(
-                context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0,
-                UserHandle.USER_CURRENT) == 1;
-        if (DEBUG) Log.i(TAG, "setButtonDisable=" + mButtonDisabled);
-        if(mButtonDisabled)
-            Utils.writeValue(KEY_CONTROL_PATH, "1");
-        else
-            Utils.writeValue(KEY_CONTROL_PATH, "0");
     }
 
     @Override
@@ -368,21 +270,6 @@ public class KeyHandler implements DeviceKeyHandler {
             }
         }
         return mRearCameraId;
-    }
-
-    private void onDisplayOn() {
-        if (mUseProxiCheck) {
-            if (DEBUG) Log.d(TAG, "Display on");
-            mSensorManager.unregisterListener(mProximitySensor, mSensor);
-        }
-    }
-
-    private void onDisplayOff() {
-        if (mUseProxiCheck) {
-            if (DEBUG) Log.d(TAG, "Display off");
-            mSensorManager.registerListener(mProximitySensor, mSensor,
-                        SensorManager.SENSOR_DELAY_NORMAL);
-        }
     }
 
     private int getSliderAction(int position) {
