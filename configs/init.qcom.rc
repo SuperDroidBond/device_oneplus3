@@ -254,7 +254,7 @@ on boot
 
     # Create directory used for display
     mkdir /persist/display 0770 system graphics
-    
+
     # Create vpp directory
     mkdir /persist/vpp 0770 media media
 
@@ -360,6 +360,7 @@ on post-fs-data
 
     # Create directory used for camera
     mkdir /data/vendor/camera 0770 camera camera
+    mkdir /data/misc/camera 0770 camera camera
 
     # NFC
     mkdir /data/nfc
@@ -489,6 +490,7 @@ on post-fs-data
 
     # Create /data/vendor/time folder for time-services
     mkdir /data/vendor/time/ 0700 system system
+    symlink /data/vendor/time /data/time
 
     mkdir /data/vendor/audio/ 0770 media audio
 
