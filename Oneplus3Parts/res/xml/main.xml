@@ -57,15 +57,15 @@
     <PreferenceCategory
         android:key="graphics"
         android:title="@string/graphics_title">
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="srgb"
             android:summary="@string/srgb_mode_summary"
             android:title="@string/srgb_mode_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="hbm"
             android:summary="@string/hbm_mode_summary"
             android:title="@string/hbm_mode_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="dci"
             android:summary="@string/dci_mode_summary"
             android:title="@string/dci_mode_title" />
