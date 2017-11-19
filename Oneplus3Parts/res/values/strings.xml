@@ -66,4 +66,7 @@
     <string name="category_up_swipe_gesture">Up swipe</string>
     <string name="category_left_swipe_gesture">Left swipe</string>
     <string name="category_right_swipe_gesture">Right swipe</string>
+
+    <string name="display_title">Display</string>
+    <string name="doze_always_on_title">Always on display</string>
 </resources>

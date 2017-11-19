@@ -70,4 +70,11 @@
             android:summary="@string/dci_mode_summary"
             android:title="@string/dci_mode_title" />
     </PreferenceCategory>
+    <PreferenceCategory
+        android:key="display"
+        android:title="@string/display_title">
+        <SwitchPreference
+            android:key="doze_always_on"
+            android:title="@string/doze_always_on_title" />
+    </PreferenceCategory>
 </PreferenceScreen>
