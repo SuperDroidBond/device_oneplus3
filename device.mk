@@ -262,10 +262,6 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
     SnapdragonCamera \
 
-# power
-PRODUCT_PACKAGES += \
-    power.msm8996
-
 PRODUCT_PACKAGES += \
     Oneplus3Parts
 
