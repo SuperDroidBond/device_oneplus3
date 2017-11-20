@@ -1225,11 +1225,11 @@ service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     group system
     writepid /dev/cpuset/system-background/tasks
 
-service ifaadaemon /system/vendor/bin/sh /system/bin/ifaadaemon
-    class late_start
-    user system
-    group system
-    writepid /dev/cpuset/system-background/tasks
+#service ifaadaemon /system/vendor/bin/sh /system/bin/ifaadaemon
+#    class late_start
+#    user system
+#    group system
+#    writepid /dev/cpuset/system-background/tasks
 
 service remosaic_daemon /system/vendor/bin/sh /system/vendor/bin/remosaic_daemon
     class late_start
