@@ -132,6 +132,7 @@ on charger
     start dashd
 
 on property:dev.bootcomplete=1
+    start perfd
     setprop sys.io.scheduler "maple"
     write /proc/sys/kernel/sched_boost 0
     # update cpusets now that boot is complete and we want better load balancing
