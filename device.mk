@@ -132,10 +132,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/vendor/etc/sound_trigger_mixer_paths.xml \
     $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/vendor/etc/sound_trigger_platform_info.xml
 
-# Fingerprint sensor
-PRODUCT_PACKAGES += \
-    fingerprint.msm8996
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.conf \
