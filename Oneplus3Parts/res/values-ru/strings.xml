@@ -28,6 +28,8 @@
     <string name="srgb_mode_title">режим sRGB</string>
     <string name="hbm_mode_summary"></string>
     <string name="hbm_mode_title">Повышенная яркость</string>
+    <string name="proxi_summary_head">Проверять датчик приближения при использовании жестов и сканера отпечатков</string>
+    <string name="proxi_title_head">Датчик приближения</string>
     <string name="slider_mode_off">Выкл</string>
     <string name="slider_mode_vibrate">Вибрация</string>
     <string name="slider_mode_silent">Тихий</string>
