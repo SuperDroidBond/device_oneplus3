@@ -21,6 +21,11 @@
         android:title="@string/proxi_title_head"
         android:persistent="false" />
 
+    <SwitchPreference
+        android:key="taptowake"
+        android:summary="@string/taptowake_summary"
+        android:title="@string/taptowake_title" />
+
     <PreferenceCategory
         android:title="@string/category_circle_gesture">
 

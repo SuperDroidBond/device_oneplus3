@@ -33,6 +33,8 @@
     <string name="hbm_mode_title">High brightness mode</string>
     <string name="proxi_summary_head">Check proximity sensor for handling gesture and fingerprint sensor</string>
     <string name="proxi_title_head">Proximity check</string>
+    <string name="taptowake_summary">Double tap to wake device</string>
+    <string name="taptowake_title">Tap to wake</string>
     <string name="slider_mode_off">Off</string>
     <string name="slider_mode_vibrate">Vibrate</string>
     <string name="slider_mode_silent">Silent</string>
