@@ -359,7 +359,8 @@ on post-fs-data
 
     # Create directory used for camera
     mkdir /data/vendor/camera 0770 camera camera
-    mkdir /data/misc/camera 0770 camera camera
+    # backward comp
+    symlink /data/vendor/camera /data/misc/camera
 
     # NFC
     mkdir /data/nfc
