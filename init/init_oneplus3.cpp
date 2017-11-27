@@ -138,7 +138,7 @@ void vendor_load_properties() {
         load_op3("ONEPLUS A3000");
         property_override("ro.telephony.default_network", "22");
         property_override("telephony.lteOnCdmaDevice", "1");
-        property_override("persist.radio.force_on_dc", "true");
+        property_override("persist.vendor.radio.force_on_dc", "true");
         /*property_override("ro.rf_version", "TD-SCDMA");
         property_override("ro.build.display.full_id", "ONEPLUS A3000");
         property_override("ro.build.display.id", "ONEPLUS A3000");*/
@@ -154,7 +154,7 @@ void vendor_load_properties() {
         load_op3("ONEPLUS A3000");
         property_override("ro.telephony.default_network", "22");
         property_override("telephony.lteOnCdmaDevice", "1");
-        property_override("persist.radio.force_on_dc", "true");
+        property_override("persist.vendor.radio.force_on_dc", "true");
         /*property_override("ro.rf_version", "TDD_FDD_Am");
         property_override("ro.build.display.full_id", "ONEPLUS A3000");
         property_override("ro.build.display.id", "ONEPLUS A3000");*/
@@ -163,7 +163,7 @@ void vendor_load_properties() {
         load_op3t("ONEPLUS A3010");
         property_override("ro.telephony.default_network", "22");
         property_override("telephony.lteOnCdmaDevice", "1");
-        property_override("persist.radio.force_on_dc", "true");
+        property_override("persist.vendor.radio.force_on_dc", "true");
         /*property_override("ro.rf_version", "TD-SCDMA");
         property_override("ro.build.display.full_id", "ONEPLUS A3010");
         property_override("ro.build.display.id", "ONEPLUS A3010");*/
@@ -179,7 +179,7 @@ void vendor_load_properties() {
         load_op3t("ONEPLUS A3000");
         property_override("ro.telephony.default_network", "22");
         property_override("telephony.lteOnCdmaDevice", "1");
-        property_override("persist.radio.force_on_dc", "true");
+        property_override("persist.vendor.radio.force_on_dc", "true");
         /*property_override("ro.rf_version", "TDD_FDD_Am");
         property_override("ro.build.display.full_id", "ONEPLUS A3000");
         property_override("ro.build.display.id", "ONEPLUS A3000");*/
