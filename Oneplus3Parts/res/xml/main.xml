@@ -76,5 +76,13 @@
         <SwitchPreference
             android:key="doze_always_on"
             android:title="@string/doze_always_on_title" />
+        <Preference
+            android:key="device_doze"
+            android:persistent="false"
+            android:title="@string/device_doze_title" >
+            <intent android:action="android.intent.action.MAIN"
+                 android:targetPackage="org.lineageos.settings.doze"
+                 android:targetClass="org.lineageos.settings.doze.DozeSettingsActivity"/>
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

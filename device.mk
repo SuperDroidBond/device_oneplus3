@@ -272,6 +272,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Oneplus3Parts
 
+# Doze mode
+PRODUCT_PACKAGES += \
+    OneplusDoze
+
 # bluetooth
 PRODUCT_PACKAGES += \
     libbt-vendor

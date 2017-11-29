@@ -21,6 +21,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.res.Resources;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -46,12 +48,15 @@ public class DeviceSettings extends PreferenceActivity implements
     private static final String KEY_SLIDER_MODE_CENTER = "slider_mode_center";
     private static final String KEY_SLIDER_MODE_BOTTOM = "slider_mode_bottom";
     private static final String KEY_CATEGORY_GRAPHICS = "graphics";
+    private static final String KEY_CATEGORY_DISPLAY = "display";
 
     public static final String KEY_SRGB_SWITCH = "srgb";
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_PROXI_SWITCH = "proxi";
     public static final String KEY_DCI_SWITCH = "dci";
     private static final String KEY_ALWAYS_ON_SWITCH = "doze_always_on";
+    final String KEY_DEVICE_DOZE = "device_doze";
+    final String KEY_DEVICE_DOZE_PACKAGE_NAME = "org.lineageos.settings.doze";
 
     public static final String SLIDER_DEFAULT_VALUE = "4,2,0";
 
@@ -121,6 +126,12 @@ public class DeviceSettings extends PreferenceActivity implements
         mAlwaysOnSwitch = (TwoStatePreference) findPreference(KEY_ALWAYS_ON_SWITCH);
         mAlwaysOnSwitch.setChecked(Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.DOZE_ALWAYS_ON, 0) != 0);
+
+        if (!isAppInstalled(KEY_DEVICE_DOZE_PACKAGE_NAME)) {
+            PreferenceCategory displayCategory = (PreferenceCategory) findPreference(KEY_CATEGORY_DISPLAY);
+            displayCategory.removePreference(findPreference(KEY_DEVICE_DOZE));
+        }
+
     }
 
     @Override
@@ -167,6 +178,17 @@ public class DeviceSettings extends PreferenceActivity implements
             mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
         }
         return true;
+    }
+
+    private boolean isAppInstalled(String uri) {
+        PackageManager pm = getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+
+        return false;
     }
 
     private int getSliderAction(int position) {

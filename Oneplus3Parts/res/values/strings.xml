@@ -71,4 +71,5 @@
 
     <string name="display_title">Display</string>
     <string name="doze_always_on_title">Always on display</string>
+    <string name="device_doze_title">Ambient display</string>
 </resources>
