@@ -57,8 +57,8 @@
     <string name="disabled_entry">Отключено</string>
     <string name="camera_entry">Камера</string>
     <string name="music_play_entry">Проигрывание / пауза музыки</string>
-    <string name="music_prev_entry">Следующий трек</string>
-    <string name="music_next_entry">Предыдущий трек</string>
+    <string name="music_prev_entry">Предыдущий трек</string>
+    <string name="music_next_entry">Следующий трек</string>
     <string name="not_ready_summary">Поиск...</string>
     <string name="resolve_failed_summary">Поиск программы не удался</string>
     <string name="category_down_swipe_gesture">Свайп вниз</string>
