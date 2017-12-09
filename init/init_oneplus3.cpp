@@ -37,7 +37,7 @@
 #include "vendor_init.h"
 #include "property_service.h"
 #include "util.h"
-#include "log.h"
+#include "android-base/logging.h"
 
 void property_override(char const prop[], char const value[])
 {
@@ -117,7 +117,7 @@ void load_op3t(const char *model) {
     property_override("ro.product.device", "OnePlus3T");
     property_override("ro.build.description", "OnePlus3-user 8.0.0 OPR6.170623.013 83 release-keys");
     property_override("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3T:8.0.0/OPR6.170623.013/10250816:user/release-keys");
-    property_set("ro.power_profile.override", "power_profile_3t");
+    android::init::property_set("ro.power_profile.override", "power_profile_3t");
 }
 
 static void import_panel_prop(const std::string& key, const std::string& value, bool for_emulator) {
@@ -190,5 +190,5 @@ void vendor_load_properties() {
 
     init_alarm_boot_properties();
 
-    import_kernel_cmdline(false, import_panel_prop);
+    android::init::import_kernel_cmdline(false, import_panel_prop);
 }
