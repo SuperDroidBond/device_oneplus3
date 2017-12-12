@@ -26,6 +26,7 @@ allow perfd sysfs_ssr:file write;
 allow perfd sysfs_devices_system_cpu:file write;
 allow perfd sysfs_power_management:file write;
 allow perfd sysfs_devfreq:file write;
+allow perfd sysfs_lib:file write;
 
 allow perfd proc_kernel_sched:file w_file_perms;
 allow perfd gpu_device:chr_file rw_file_perms;

@@ -12,5 +12,5 @@ allow system_server perfd_data_file:sock_file write;
 allow system_server perfd:unix_stream_socket connectto;
 allow system_server perfd_data_file:dir search;
 set_prop(system_server, diag_prop);
+set_prop(system_server, qti_telephony_prop);
 binder_call(system_server, per_mgr_service_old);
-

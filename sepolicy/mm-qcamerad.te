@@ -3,6 +3,7 @@ allow mm-qcamerad system_server:unix_stream_socket rw_socket_perms;
 allow mm-qcamerad sensorservice_service:service_manager find;
 allow mm-qcamerad vendor_camera_data_file:file rw_file_perms;
 allow mm-qcamerad permission_service:service_manager find;
+set_prop(mm-qcamerad, camera_prop);
 get_prop(mm-qcamerad, diag_prop)
 binder_call(mm-qcamerad, servicemanager);
 allow servicemanager mm-qcamerad:dir { search };

@@ -1,4 +1,9 @@
+attribute priv_app_property_placeholder;
 get_prop(priv_app, diag_prop);
 allow priv_app proc_interrupts:file r_file_perms;
 get_prop(priv_app, camera_prop);
 get_prop(priv_app, wifi_prop);
+get_prop(priv_app, net_dns_prop);
+allow priv_app device:dir { open read };
+allow priv_app block_device:dir { search };
+binder_call(priv_app, hal_memtrack_default);

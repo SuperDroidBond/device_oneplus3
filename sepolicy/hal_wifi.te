@@ -1,0 +1,14 @@
+# Allow wifi hal access to LOWI
+allow hal_wifi location:unix_stream_socket connectto;
+allow hal_wifi location_socket:sock_file write;
+
+# write to files owned by location daemon
+allow hal_wifi location_data_file:dir create_dir_perms;
+allow hal_wifi location_data_file:{ file fifo_file } create_file_perms;
+
+userdebug_or_eng(`
+# debugfs entries are only needed in user-debug or eng builds
+
+# Allow wifi hal to access wlan debugfs files and directories
+allow hal_wifi debugfs_wlan:dir r_dir_perms;
+')

@@ -12,3 +12,5 @@ allow init pmsg_device:chr_file open;
 allow init debugfs:dir mounton;
 allow init self:netlink_socket { create setopt bind getattr write read };
 allow init perfd:unix_stream_socket connectto;
+allow init proc_touchpanel:file write;
+allow init proc_kernel_sched:file write;

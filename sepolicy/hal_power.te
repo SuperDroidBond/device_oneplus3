@@ -1,0 +1,17 @@
+allow hal_power perfd:unix_stream_socket connectto;
+allow hal_power perfd_data_file:dir search;
+allow hal_power perfd_data_file:sock_file write;
+
+allow hal_power sysfs_socinfo:dir search;
+allow hal_power sysfs_socinfo:file { open read };
+allow hal_power proc_touchpanel:file rw_file_perms;
+allow hal_power proc_touchpanel:dir search;
+
+userdebug_or_eng(`
+# debugfs entries are only needed in user-debug or eng builds
+allow hal_power debugfs_rpm:file r_file_perms;
+
+allow hal_power debugfs_wlan:dir r_dir_perms;
+allow hal_power debugfs_wlan:file r_file_perms;
+')
+
