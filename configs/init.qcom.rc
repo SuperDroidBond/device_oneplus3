@@ -505,14 +505,6 @@ on post-fs-data
     mkdir /data/misc/fm 0770 system system
     chmod 0770 /data/misc/fm
 
-    # RIDL data
-    mkdir /data/misc/SelfHost/ 0710 system shell
-    mkdir /data/misc/SelfHost/QCLogs/ 2750 system shell
-    mkdir /data/misc/SelfHost/QCLogs/temp/ 0700 system shell
-    mkdir /data/misc/SelfHost/storage/ 0700 system shell
-    mkdir /data/misc/SelfHost/Running/ 2750 system shell
-    mkdir /data/misc/SelfHost/socket/ 2770 system system
-
     # Create PERFD deamon related dirs
     setprop ro.min_freq_0 384000
     mkdir /data/misc/perfd 0755 root system
@@ -827,7 +819,6 @@ on property:bluetooth.startbtsnoop=false
 
 on property:vold.decrypt=trigger_restart_framework
     start config_bluetooth
-    start cnss_diag
 
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
@@ -892,7 +883,7 @@ service hci_filter_root /system/vendor/bin/wcnss_filter
     group bluetooth diag system
     disabled
 
-service config_bluetooth /system/vendor/bin/btnvtool -O
+service config_bluetooth /system/vendor/bin/sh /system/vendor/bin/btnvtool -O
     class core
     user bluetooth
     group bluetooth radio
@@ -1039,27 +1030,11 @@ service wifi_ftmd /system/vendor/bin/wifi_ftmd
 on property:wifi.ftmd.load=true
     insmod /system/lib/modules/pronto/pronto_wlan.ko con_mode=5
 
-service cnss-daemon /system/bin/cnss-daemon -n -l
-    class late_start
-    user system
-    oneshot
-    group system inet net_admin wifi
-
-on property:sys.shutdown.requested=*
-    stop cnss-daemon
-
 service loc_launcher /system/vendor/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet diag wifi
     writepid /dev/cpuset/system-background/tasks
-
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user system
-    group system
-    disabled
-    oneshot
 
 on property:crypto.driver.load=1
     insmod /system/lib/modules/qce.ko
@@ -1077,7 +1052,7 @@ on property:drmdiag.load=1
 on property:drmdiag.load=0
     stop drmdiag
 
-service qcom-sh /system/bin/sh /init.qcom.sh
+service qcom-sh /system/vendor/bin/sh /init.qcom.sh
     class late_start
     user root
     oneshot
@@ -1126,36 +1101,11 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
     group radio cache inet misc audio log readproc wakelock diag net_raw
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
-service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service usb_uicc_daemon /system/vendor/bin/usb_uicc_client
-    class main
-    user system
-    group system log net_raw
-    oneshot
-    disabled
-
-on property:sys.usb_uicc.enabled=1
-    start usb_uicc_enable
-
-on property:sys.usb_uicc.enabled=0
-    start usb_uicc_enable
-
 service profiler_daemon /system/vendor/bin/profiler_daemon
     class late_start
     user root
     group root
     disabled
-
-service hcidump /system/bin/sh /system/etc/hcidump.sh
-    user bluetooth
-    group bluetooth system net_bt_admin net_admin
-    disabled
-    oneshot
 
 service charger /charger
     class charger
@@ -1232,8 +1182,3 @@ service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
 #    user system
 #    group system
 #    writepid /dev/cpuset/system-background/tasks
-
-service remosaic_daemon /system/vendor/bin/remosaic_daemon
-    class late_start
-    user camera
-    writepid /dev/cpuset/camera-daemon/tasks
