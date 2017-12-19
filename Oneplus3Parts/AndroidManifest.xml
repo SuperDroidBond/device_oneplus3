@@ -19,8 +19,7 @@
         <activity
             android:name="org.omnirom.device.DeviceSettings"
             android:exported="true"
-            android:label="@string/advanced_settings"
-            android:launchMode="singleTask" >
+            android:label="@string/advanced_settings" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
@@ -29,8 +28,7 @@
         </activity>
         <activity
             android:name="org.omnirom.device.GestureSettings"
-            android:label="@string/category_gestures_title"
-            android:launchMode="singleTask" >
+            android:label="@string/category_gestures_title" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
