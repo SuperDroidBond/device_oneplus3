@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceScreen
+    <Preference
         android:key="gesture_category"
         android:title="@string/category_gestures_title"
         android:summary="@string/category_gestures_summary"
@@ -22,12 +22,13 @@
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="org.omnirom.device"
                 android:targetClass="org.omnirom.device.GestureSettings" />
-    </PreferenceScreen>
+    </Preference>
 
     <PreferenceCategory
         android:title="@string/category_vibrator">
         <org.omnirom.device.VibratorStrengthPreference
             android:key="vib_strength"
+            android:iconSpaceReserved="true"
             android:title="@string/vib_strength_title_head"
             android:summary="@string/vib_strength_summary_head" />
     </PreferenceCategory>
