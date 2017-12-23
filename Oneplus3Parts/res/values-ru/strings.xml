@@ -65,8 +65,6 @@
     <string name="category_up_swipe_gesture">Свайп вверх</string>
     <string name="category_left_swipe_gesture">Свайп справа налево</string>
     <string name="category_right_swipe_gesture">Свайп слева направо</string>
-
     <string name="display_title">Экран</string>
-    <string name="doze_always_on_title">Всегда включенный экран</string>
     <string name="device_doze_title">Индикация событий</string>
 </resources>

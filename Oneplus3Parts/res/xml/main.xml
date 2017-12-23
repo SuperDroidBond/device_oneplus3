@@ -74,9 +74,6 @@
     <PreferenceCategory
         android:key="display"
         android:title="@string/display_title">
-        <SwitchPreference
-            android:key="doze_always_on"
-            android:title="@string/doze_always_on_title" />
         <Preference
             android:key="device_doze"
             android:persistent="false"
