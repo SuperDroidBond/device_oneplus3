@@ -20,7 +20,6 @@
   <string name="category_vibrator">Vibrovanie</string>
   <string name="vib_strength_title_head">Sila</string>
   <string name="vib_strength_summary_head">Určenie sily vibrovania</string>
-  <string name="vib_test">Skúška</string>
   <string name="advanced_settings">Rozšírené</string>
   <string name="category_slider">Posuvník</string>
   <string name="slider_mode_title">Režim posuvníka</string>

@@ -20,7 +20,6 @@
   <string name="category_vibrator">Vibração</string>
   <string name="vib_strength_title_head">Intensidade</string>
   <string name="vib_strength_summary_head">Definir a intensidade da vibração</string>
-  <string name="vib_test">Testar</string>
   <string name="advanced_settings">Avançado</string>
   <string name="category_slider">Interruptor</string>
   <string name="slider_mode_title">Modo do interruptor</string>

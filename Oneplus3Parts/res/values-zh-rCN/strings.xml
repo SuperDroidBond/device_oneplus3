@@ -19,7 +19,6 @@
     <string name="category_vibrator">振动</string>
     <string name="vib_strength_title_head">强度</string>
     <string name="vib_strength_summary_head">自定义振动器的强度</string>
-    <string name="vib_test">测试</string>
     <string name="advanced_settings">高级</string>
     <string name="category_slider">三段式滑块</string>
     <string name="slider_mode_title">滑块模式</string>

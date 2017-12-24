@@ -19,7 +19,6 @@
     <string name="category_vibrator">Вибрация</string>
     <string name="vib_strength_title_head">Сила</string>
     <string name="vib_strength_summary_head">Установить силу вибрации</string>
-    <string name="vib_test">Тест</string>
     <string name="advanced_settings">Настройки устройства</string>
     <string name="category_slider">Слайдер</string>
     <string name="slider_mode_title">Режим слайдера</string>

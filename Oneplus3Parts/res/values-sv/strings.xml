@@ -19,7 +19,6 @@
   <string name="category_vibrator">Vibrator</string>
   <string name="vib_strength_title_head">Styrka</string>
   <string name="vib_strength_summary_head">Definiera styrkan på vibratorn</string>
-  <string name="vib_test">Test</string>
   <string name="advanced_settings">Avancerad</string>
   <string name="buttons_title">Knappar</string>
   <string name="swap_back_recents_title">Växla tillbaka och senaste-knappar</string>
