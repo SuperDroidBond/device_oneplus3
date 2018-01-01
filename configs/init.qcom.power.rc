@@ -124,6 +124,9 @@ on enable-low-power
     write /sys/module/wakeup/parameters/enable_wlan_ws 0
     write /sys/module/wakeup/parameters/enable_timerfd_ws 0
     write /sys/module/wakeup/parameters/enable_netlink_ws 0
+    write /sys/module/wakeup/parameters/enable_netmgr_wl_ws 0
+    write /sys/module/wakeup/parameters/enable_wlan_pno_wl_ws 0
+    write /sys/module/wakeup/parameters/enable_wcnss_filter_lock_ws 0
 
 on charger
     write /sys/devices/system/cpu/cpu1/online 0
