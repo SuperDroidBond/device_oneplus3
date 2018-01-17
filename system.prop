@@ -24,6 +24,9 @@ audio.deep_buffer.media=true
 audio.offload.video=true
 af.fast_track_multiplier=1
 
+# AoD
+persist.debug.force_burn_in=true
+
 # Battery
 ro.cutoff_voltage_mv=3250
 
