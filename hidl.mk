@@ -29,8 +29,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -51,6 +49,10 @@ PRODUCT_PACKAGES += \
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl
+
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-service.oneplus3
 
 #Nfc
 PRODUCT_PACKAGES += \
