@@ -28,14 +28,14 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 85
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 22000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 36666
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 30000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 1286400
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack -1
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "85 902400:34 1056000:31 1209600:75 1363200:66 1440000:95 1516800:99 1593600:100 2188800:100"
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "85 1056000:57 1209600:75 1363200:66 1440000:95 1516800:99 1593600:100 2188800:100"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down 1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 1
@@ -55,7 +55,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 36666
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 1056000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack -1
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "65 460800:47 691200:55 979200:48 1209600:58 1440000:64 1593600:80 1747200:89 1900800:95 2150400:100 2342400:100"
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "75 460800:57 691200:55 979200:48 1286400:78 1440000:64 1593600:80 1747200:89 1900800:95 2150400:100 2342400:100"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 45000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 1
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost 0
@@ -71,7 +71,7 @@ on enable-low-power
     write /sys/module/msm_thermal/core_control/enabled 1
 
     # Input boost configuration
-    write /sys/kernel/cpu_input_boost/ib_freqs "1286400 307400"
+    write /sys/kernel/cpu_input_boost/ib_freqs "1056000 307400"
     write /sys/kernel/cpu_input_boost/ib_duration_ms 400
     write /sys/kernel/cpu_input_boost/enabled 1
 
