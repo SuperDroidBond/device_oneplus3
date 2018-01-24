@@ -3,4 +3,4 @@ allow cameraserver perfd:unix_stream_socket connectto;
 allow cameraserver socket_device:sock_file write;
 allow cameraserver perfd_data_file:dir search;
 allow cameraserver camera_data_file:lnk_file rw_file_perms;
-
+allow cameraserver system_data_file:lnk_file rw_file_perms;
