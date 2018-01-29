@@ -62,7 +62,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows 0
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 1
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 1
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 0
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 1
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 100000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 80000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2246400
@@ -71,7 +71,7 @@ on enable-low-power
     write /sys/module/msm_thermal/core_control/enabled 1
 
     # Input boost configuration
-    write /sys/kernel/cpu_input_boost/ib_freqs "1056000 307400"
+    write /sys/kernel/cpu_input_boost/ib_freqs "1286400 307400"
     write /sys/kernel/cpu_input_boost/ib_duration_ms 400
     write /sys/kernel/cpu_input_boost/enabled 1
 
@@ -140,7 +140,7 @@ on charger
 
 on property:sys.boot_completed=1
     trigger enable-low-power
-    setprop sys.io.scheduler zen
+    setprop sys.io.scheduler cfq
     write /sys/block/sda/queue/read_ahead_kb 128
 
 on property:init.svc.recovery=running
