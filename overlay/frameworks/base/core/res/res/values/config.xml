@@ -44,12 +44,12 @@
          Zone N + 1     array[N] <= LUX < infinity
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>1</item>
-        <item>4</item>
+        <item>20</item>
         <item>45</item>
         <item>1025</item>
         <item>1480</item>
-        <item>2940</item>
+        <item>2250</item>
+        <item>3300</item>
         <item>10000</item>
     </integer-array>
 
@@ -58,13 +58,13 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>3</item>
-        <item>7</item>
-        <item>11</item>
-        <item>26</item>
-        <item>60</item>
-        <item>108</item>
-        <item>175</item>
+        <item>6</item>
+        <item>10</item>
+        <item>20</item>
+        <item>46</item>
+        <item>78</item>
+        <item>128</item>
+        <item>220</item>
         <item>255</item>
     </integer-array>
 
