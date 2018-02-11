@@ -21,9 +21,6 @@
 # definition file).
 #
 
-# Inherit from oppo-common
--include device/oppo/common/BoardConfigCommon.mk
-
 PLATFORM_PATH := device/oneplus/oneplus3
 
 TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
@@ -171,9 +168,6 @@ TARGET_PROVIDES_KEYMASTER := true
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
-
-# Lineage Hardware
-BOARD_HARDWARE_CLASS += $(PLATFORM_PATH)/lineagehw
 
 # Mainfest
 DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/configs/manifest.xml
