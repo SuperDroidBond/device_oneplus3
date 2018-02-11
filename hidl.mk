@@ -104,5 +104,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.media.omx@1.0
 
-# TODO
-#PRODUCT_PACKAGES += android.hidl.manager@1.0-java
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.manager@1.0
