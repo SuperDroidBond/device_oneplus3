@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          android:sharedUserId="android.uid.system"
+          package="com.oneplus.shit"
+          android:versionCode="1"
+          android:versionName="1" >
+
+    <uses-permission android:name="android.permission.INJECT_EVENTS"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-sdk
+            android:minSdkVersion="18"
+            android:targetSdkVersion="19" />
+
+    <application
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:label="@string/device_extras"
+        android:theme="@android:style/Theme.DeviceDefault.Settings"
+        android:supportsRtl="true" >
+        <activity
+            android:name="com.oneplus.shit.settings.ShitPanelSettings"
+            android:exported="true"
+            android:label="@string/device_extras" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+              
+        <!-- stub to ensure its loaded - DO NOT REMOVE -->
+        <activity android:name=".KeyHandler" />
+
+        <activity
+            android:name=".settings.ScreenOffGestureSettings"
+            android:label="@string/screen_off_gesture_title"
+            android:theme="@android:style/Theme.DeviceDefault.Settings">
+          <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+          </intent-filter>
+        </activity>
+
+       <!-- <activity
+            android:name=".settings.ScreenOffGesture"
+            android:label="@string/screen_off_gesture_title"
+            android:theme="@android:style/Theme.DeviceDefault.Settings">
+          <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+          </intent-filter>
+        </activity>-->
+
+        <activity
+            android:name=".settings.SliderSettings"
+            android:theme="@android:style/Theme.DeviceDefault.Settings"
+            android:label="@string/notification_slider">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".BootReceiver" >
+          <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+          </intent-filter>
+        </receiver>
+
+        <receiver android:name=".Startup" >
+          <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+          </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
