@@ -427,10 +427,10 @@
     </string-array>
 
     <!-- If enabled, capacitive keys will only light up when pressed.
-         Otherwise, the buttons will light up whenever the user interacts with the device
-    <bool name="config_buttonLightOnKeypressOnly">true</bool> -->
+         Otherwise, the buttons will light up whenever the user interacts with the device-->
+    <bool name="config_buttonLightOnKeypressOnly">true</bool>
 
-    <!-- <bool name="config_deviceHasVariableButtonBrightness">true</bool> -->
+    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
 
     <!-- Whether notify fingerprint client of successful cancelled authentication
     <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool> -->
@@ -446,8 +446,8 @@
             32 - Camera
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
-         config to 7.
-    <integer name="config_deviceHardwareKeys">83</integer> -->
+         config to 7. -->
+    <integer name="config_deviceHardwareKeys">83</integer>
 
     <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -479,5 +479,16 @@
 
     <!-- Flag specifying whether or not IMS will use the ImsResolver dynamically -->
     <bool name="config_dynamic_bind_ims">true</bool>
+
+    <!-- The list absolute paths of jar/apk files containing the device specific handlers,
+        delimited by File.pathSeparator, which defaults to ":" on Android -->
+    <string name="config_deviceKeyHandlerLib" translatable="false">/system/priv-app/OneplusShit/OneplusShit.apk</string>
+
+    <!-- Full qualified name of the class that implements
+        com.android.internal.os.DeviceKeyHandler interface. -->
+    <string name="config_deviceKeyHandlerClass" translatable="false">com.oneplus.shit.KeyHandler</string>
+
+    <!-- Whether device has dash charging support -->
+    <bool name="config_hasDashCharger">true</bool>
 
 </resources>
