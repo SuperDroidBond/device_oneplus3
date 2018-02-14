@@ -104,27 +104,39 @@ on boot
     chown system radio /proc/touchpanel/double_tap_enable
     chmod 0660 /proc/touchpanel/double_tap_enable
 
-    chown root system /proc/touchpanel/up_swipe_enable
-    chmod 0660 /proc/touchpanel/up_swipe_enable
-    chown root system /proc/touchpanel/down_swipe_enable
-    chmod 0660 /proc/touchpanel/down_swipe_enable
-    chown root system /proc/touchpanel/left_swipe_enable
-    chmod 0660 /proc/touchpanel/left_swipe_enable
-    chown root system /proc/touchpanel/right_swipe_enable
-    chmod 0660 /proc/touchpanel/right_swipe_enable
-    chown root system /proc/touchpanel/double_swipe_enable
-    chmod 0660 /proc/touchpanel/double_swipe_enable
-    chown root system /proc/touchpanel/up_arrow_enable
-    chmod 0660 /proc/touchpanel/up_arrow_enable
-    chown root system /proc/touchpanel/down_arrow_enable
-    chmod 0660 /proc/touchpanel/down_arrow_enable
-    chown root system /proc/touchpanel/left_arrow_enable
-    chmod 0660 /proc/touchpanel/left_arrow_enable
-    chown root system /proc/touchpanel/right_arrow_enable
-    chmod 0660 /proc/touchpanel/right_arrow_enable
     chown root system /proc/touchpanel/letter_o_enable
     chmod 0660 /proc/touchpanel/letter_o_enable
 
+    chown root system /proc/touchpanel/music_enable
+    chmod 0660 /proc/touchpanel/music_enable
+
+    chown root system /proc/touchpanel/double_swipe_enable
+    chmod 0660 /proc/touchpanel/double_swipe_enable
+
+    chown root system /proc/touchpanel/up_arrow_enable
+    chmod 0660 /proc/touchpanel/up_arrow_enable
+
+    chown root system /proc/touchpanel/down_arrow_enable
+    chmod 0660 /proc/touchpanel/down_arrow_enable
+
+    chown root system /proc/touchpanel/left_arrow_enable
+    chmod 0660 /proc/touchpanel/left_arrow_enable
+
+    chown root system /proc/touchpanel/right_arrow_enable
+    chmod 0660 /proc/touchpanel/right_arrow_enable
+
+    chown root system /proc/touchpanel/left_swipe_enable
+    chmod 0660 /proc/touchpanel/left_swipe_enable
+
+    chown root system /proc/touchpanel/right_swipe_enable
+    chmod 0660 /proc/touchpanel/right_swipe_enable
+
+    chown root system /proc/touchpanel/up_swipe_enable
+    chmod 0660 /proc/touchpanel/up_swipe_enable
+
+    chown root system /proc/touchpanel/down_swipe_enable
+    chmod 0660 /proc/touchpanel/down_swipe_enable
+    
     # Buttons
     chown root system /proc/s1302/key_rep
     chmod 0660 /proc/s1302/key_rep
@@ -141,6 +153,10 @@ on boot
     chown root system /proc/tri-state-key/keyCode_bottom
     chmod 0660 /proc/tri-state-key/keyCode_bottom
 
+    # Vibrator permissions
+    chown root system /sys/devices/virtual/timed_output/vibrator/vtg_level
+    chmod 0660 /sys/devices/virtual/timed_output/vibrator/vtg_level
+    
     # Graphics
     chown system graphics /sys/class/graphics/fb0/dyn_pu
     chmod 0664 /sys/class/graphics/fb0/dyn_pu
@@ -152,10 +168,14 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/modes
     chown system graphics /sys/class/graphics/fb0/hbm
     chmod 0664 /sys/class/graphics/fb0/hbm
-    chown system graphics /sys/class/graphics/fb0/srgb
-    chmod 0664 /sys/class/graphics/fb0/srgb
-    chown system graphics /sys/class/graphics/fb0/dci_p3
-    chmod 0664 /sys/class/graphics/fb0/dci_p3
+    chown system graphics /sys/class/graphics/fb0/SRGB
+    chmod 0664 /sys/class/graphics/fb0/SRGB
+    chown system graphics /sys/class/graphics/fb0/DCI_P3
+    chmod 0664 /sys/class/graphics/fb0/DCI_P3
+    chown system graphics /sys/class/graphics/fb0/oneplus_mode
+    chmod 0664 /sys/class/graphics/fb0/oneplus_mode
+    chown system graphics /sys/class/graphics/fb0/night_mode
+    chmod 0664 /sys/class/graphics/fb0/night_mode
 
     # Fingerprint
     chmod 0664 /sys/devices/soc/soc:fpc_fpc1020/irq
