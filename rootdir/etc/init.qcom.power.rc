@@ -49,7 +49,6 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 80000
 
-
     # Configure governor settings for big cluster
     write   /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 90
@@ -70,6 +69,8 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 0
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 80000
 
+    # Re-enable thermal hotplug
+    write /sys/module/msm_thermal/core_control/enabled 1
 
     # Setting b.L scheduler parameters
     write /proc/sys/kernel/sched_boost 0
