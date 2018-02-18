@@ -248,6 +248,11 @@ PRODUCT_PACKAGES += \
     qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml \
     qdcm_calib_data_samsung_s6e3fa5_1080p_cmd_mode_dsi_panel.xml
 
+# Spectrum
+PRODUCT_PACKAGES += \
+   init.spectrum.rc \
+   init.spectrum.sh
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
