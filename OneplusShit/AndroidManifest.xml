@@ -64,6 +64,12 @@
           </intent-filter>
         </receiver>
 
+        <receiver android:name=".Startup" >
+            <intent-filter android:priority="100" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

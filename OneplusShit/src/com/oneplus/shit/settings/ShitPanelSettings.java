@@ -67,25 +67,17 @@ public class ShitPanelSettings extends NodePreferenceActivity {
         }
 
         mTapToWakeSwitch = (TwoStatePreference) findPreference(KEY_TAPTOWAKE_SWITCH);
-        mTapToWakeSwitch.setEnabled(TapToWakeSwitch.isSupported());
-        mTapToWakeSwitch.setChecked(TapToWakeSwitch.isCurrentlyEnabled(this));
         mTapToWakeSwitch.setOnPreferenceChangeListener(new TapToWakeSwitch());
 
         mSRGBModeSwitch = (TwoStatePreference) findPreference(KEY_SRGB_SWITCH);
-        mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
-        mSRGBModeSwitch.setChecked(SRGBModeSwitch.isCurrentlyEnabled(this));
         mSRGBModeSwitch.setOnPreferenceChangeListener(new SRGBModeSwitch());
 
         mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
-        mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
-        mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled(this));
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
 
         mDCIModeSwitch = (TwoStatePreference) findPreference(KEY_DCI_SWITCH);
         boolean isPanelSupported = DCIModeSwitch.isSupportedPanel();
         if (isPanelSupported) {
-            mDCIModeSwitch.setEnabled(DCIModeSwitch.isSupported());
-            mDCIModeSwitch.setChecked(DCIModeSwitch.isCurrentlyEnabled(this));
             mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
         }
     }
