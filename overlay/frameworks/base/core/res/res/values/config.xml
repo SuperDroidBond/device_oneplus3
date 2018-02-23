@@ -339,7 +339,7 @@
         This needs to match the constants in
         policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
     -->
-    <integer name="config_longPressOnHomeBehavior">3</integer>
+    <integer name="config_longPressOnHomeBehavior">0</integer>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
@@ -490,5 +490,8 @@
 
     <!-- Whether device has dash charging support -->
     <bool name="config_hasDashCharger">true</bool>
+
+   <!-- doze always on -->
+   <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
 
 </resources>
