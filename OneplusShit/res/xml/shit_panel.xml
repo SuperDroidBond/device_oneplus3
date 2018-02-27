@@ -42,11 +42,6 @@
         android:title="@string/taptowake_title"
         android:defaultValue="false" />
 
-    <SwitchPreference
-        android:key="button_swap"
-        android:title="@string/button_swap_title"
-        android:summary="@string/button_swap_summary" />
-
     <PreferenceCategory
         android:title="@string/category_vibrator">
         <com.oneplus.shit.settings.VibratorStrengthPreference
@@ -77,6 +72,7 @@
             android:defaultValue="false" />
     </PreferenceCategory>
 
+    <!-- Let's Hide it For Now
     <PreferenceCategory
         android:title="@string/display_category">
         <Preference
@@ -89,5 +85,6 @@
                   android:targetClass="com.custom.ambient.display.DozeSettings"/>
         </Preference>
     </PreferenceCategory>
+    -->
 
 </PreferenceScreen>
