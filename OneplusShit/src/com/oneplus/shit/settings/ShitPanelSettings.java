@@ -49,12 +49,16 @@ public class ShitPanelSettings extends NodePreferenceActivity {
     public static final String KEY_SRGB_SWITCH = "srgb";
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_DCI_SWITCH = "dci";
+    public static final String KEY_NIGHT_SWITCH = "night";
+    public static final String KEY_ONEPLUS_SWITCH = "oneplus";
 
     private VibratorStrengthPreference mVibratorStrength;
     private TwoStatePreference mTapToWakeSwitch;
     private TwoStatePreference mSRGBModeSwitch;
     private TwoStatePreference mHBMModeSwitch;
     private TwoStatePreference mDCIModeSwitch;
+    private TwoStatePreference mOneplusModeSwitch;
+    private TwoStatePreference mNightModeSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,13 @@ public class ShitPanelSettings extends NodePreferenceActivity {
 
         mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
+
+        mOneplusModeSwitch = (TwoStatePreference) findPreference(KEY_ONEPLUS_SWITCH);
+        mOneplusModeSwitch.setOnPreferenceChangeListener(new OneplusModeSwitch());
+        
+        mNightModeSwitch = (TwoStatePreference) findPreference(KEY_NIGHT_SWITCH);
+        mNightModeSwitch.setOnPreferenceChangeListener(new NightModeSwitch());
+
 
         mDCIModeSwitch = (TwoStatePreference) findPreference(KEY_DCI_SWITCH);
         boolean isPanelSupported = DCIModeSwitch.isSupportedPanel();
