@@ -40,7 +40,7 @@
         android:key="taptowake"
         android:summary="@string/taptowake_summary"
         android:title="@string/taptowake_title"
-        android:defaultValue="false" />
+        android:defaultValue="true" />
 
     <PreferenceCategory
         android:title="@string/category_vibrator">

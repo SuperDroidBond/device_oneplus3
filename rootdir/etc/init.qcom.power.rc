@@ -29,6 +29,30 @@ on enable-low-power
     # Re-enable thermal hotplug
     write /sys/module/msm_thermal/core_control/enabled 1
 
+    #Update the cpu profiles to default interactive
+    write   /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 20000
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate  20000
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 960000
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 1
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 1
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 80
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
+    write   /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 20000
+
+    # Configure governor settings for big cluster
+    write   /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay  "20000 1200000:40000 1400000:20000 1900000:80000"
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 90
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate  20000
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 1228800
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/io_is_busy 1
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows 1
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "85 1500000:90 1800000:70 2100000:95"
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 40000
+    write   /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack 20000
+
     # Setting b.L scheduler parameters
     write /proc/sys/kernel/sched_boost 0
     write /proc/sys/kernel/sched_downmigrate 90

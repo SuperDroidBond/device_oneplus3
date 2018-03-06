@@ -29,6 +29,7 @@ import com.oneplus.shit.settings.DCIModeSwitch;
 import com.oneplus.shit.settings.HBMModeSwitch;
 import com.oneplus.shit.settings.SRGBModeSwitch;
 import com.oneplus.shit.settings.TapToWakeSwitch;
+import com.oneplus.shit.settings.OneplusModeSwitch;
 import com.oneplus.shit.settings.VibratorStrengthPreference ;
 import com.oneplus.shit.settings.ShitPanelSettings;
 import com.oneplus.shit.util.Utils;
@@ -70,7 +71,7 @@ public class Startup extends BroadcastReceiver {
         restore(DCIModeSwitch.getFile(), enabled);
 
         enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_ONEPLUS_SWITCH, false);
-        restore(mOneplusModeSwitch.getFile(), enabled);
+        restore(OneplusModeSwitch.getFile(), enabled);
 
         VibratorStrengthPreference.restore(context);
     }
