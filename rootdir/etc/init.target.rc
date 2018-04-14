@@ -168,6 +168,10 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/modes
     chown system graphics /sys/class/graphics/fb0/hbm
     chmod 0664 /sys/class/graphics/fb0/hbm
+    chown system graphics /sys/class/graphics/fb0/HBM
+    chmod 0664 /sys/class/graphics/fb0/HBM
+    chown system graphics /sys/class/graphics/fb1/hbm
+    chmod 0664 /sys/class/graphics/fb1/hbm
     chown system graphics /sys/class/graphics/fb0/SRGB
     chmod 0664 /sys/class/graphics/fb0/SRGB
     chown system graphics /sys/class/graphics/fb0/DCI_P3
@@ -176,14 +180,6 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/oneplus_mode
     chown system graphics /sys/class/graphics/fb0/night_mode
     chmod 0664 /sys/class/graphics/fb0/night_mode
-
-    # Torch
-    chown system system /sys/class/leds/led:torch_0/brightness
-    chmod 666 /sys/class/leds/led:torch_0/brightness
-    chown system system /sys/class/leds/led:torch_1/brightness
-    chmod 666 /sys/class/leds/led:torch_1/brightness
-    chown system system /sys/class/leds/led:switch/brightness
-    chmod 666 /sys/class/leds/led:switch/brightness
 
     # Fingerprint
     chmod 0664 /sys/devices/soc/soc:fpc_fpc1020/irq
@@ -316,6 +312,8 @@ service mdm_helper /system/bin/mdm_helper
 #
 #on property:sys.boot_completed=1
 #    start qrngp
+    stop cameraserver
+    start cameraserver
 
 service qseecomd /vendor/bin/qseecomd
    class core
