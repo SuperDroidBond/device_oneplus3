@@ -130,11 +130,12 @@ on enable-low-power
     setprop sys.post_boot.parsed 1
 
     setprop sys.io.scheduler "maple"
+    Write /proc/sys/net/ipv4/tcp_congestion_control westwood
     
     # Input boost configuration
-    write /sys/module/cpu_boost/parameters/input_boost_freq 0:1036800 2:1036800
-    write /sys/module/cpu_boost/parameters/input_boost_ms 100
-    write /sys/module/msm_performance/parameters/touchboost 1
+    #write /sys/module/cpu_boost/parameters/input_boost_freq 0:1036800 2:1036800
+   # write /sys/module/cpu_boost/parameters/input_boost_ms 100
+   # write /sys/module/msm_performance/parameters/touchboost 1
 
     # update cpusets now that boot is complete and we want better load balancing
     write /dev/cpuset/top-app/cpus 0-3
