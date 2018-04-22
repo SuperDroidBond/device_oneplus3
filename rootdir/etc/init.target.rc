@@ -310,7 +310,8 @@ service mdm_helper /system/bin/mdm_helper
 #    oneshot
 #    disabled
 #
-#on property:sys.boot_completed=1
+
+on property:sys.boot_completed=1
 #    start qrngp
     stop cameraserver
     start cameraserver

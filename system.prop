@@ -218,4 +218,13 @@ persist.radio.data_ltd_sys_ind=1
 persist.radio.data_con_rprt=1
 persist.radio.rat_on=combine
 persist.volte_enabled_by_hw=1
+
+#Tweaks
+wifi.supplicant_scan_interval=180
+persist.service.lgospd.enable=0
+persist.service.pcsync.enable=0
+touch.pressure.scale=0.003
+ro.media.enc.jpeg.quality=100
+persist.cust.tel.eons=1
+ro.config.hw_fast_dormancy=1
 #end
