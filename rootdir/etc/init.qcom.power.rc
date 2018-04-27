@@ -144,3 +144,6 @@ on property:init.svc.recovery=running
 
 on property:sys.boot_completed=1
     trigger enable-low-power
+    
+    # disable msm_zen_decision by default
+    write /sys/kernel/zen_decision/enabled 0
