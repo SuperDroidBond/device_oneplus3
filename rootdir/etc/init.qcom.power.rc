@@ -41,7 +41,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 19000 960000:40000 1228800:40000 1478400:40000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 960000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 1036800
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 20000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 80 556000:75 652000:80 729600:85 940000:90 103600:95
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
@@ -61,7 +61,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay 20000 1200000:40000 1400000:20000 1900000:80000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 1036800
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 0
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack 20000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 85 1036000:90 1401000:70 1824000:95
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 40000
