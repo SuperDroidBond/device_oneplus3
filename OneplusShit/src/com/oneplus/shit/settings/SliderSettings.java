@@ -30,7 +30,6 @@ import com.oneplus.shit.util.FileUtils;
 public class SliderSettings extends PreferenceActivity
         implements OnPreferenceChangeListener {
 
-    private SwitchPreference mSliderSwap;
     private ListPreference mSliderTop;
     private ListPreference mSliderMiddle;
     private ListPreference mSliderBottom;
@@ -39,9 +38,6 @@ public class SliderSettings extends PreferenceActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.slider_panel);
-
-        mSliderSwap = (SwitchPreference) findPreference("button_swap");
-        mSliderSwap.setOnPreferenceChangeListener(this);
 
         mSliderTop = (ListPreference) findPreference("keycode_top_position");
         mSliderTop.setOnPreferenceChangeListener(this);
@@ -70,10 +66,6 @@ public class SliderSettings extends PreferenceActivity
             file = KernelControl.KEYCODE_SLIDER_MIDDLE;
         } else if (preference == mSliderBottom) {
             file = KernelControl.KEYCODE_SLIDER_BOTTOM;
-        } else if (preference == mSliderSwap) {
-            Boolean value = (Boolean) newValue;
-            FileUtils.writeLine(KernelControl.SLIDER_SWAP_NODE, value ? "1" : "0");
-            return true;
         } else {
             return false;
         }

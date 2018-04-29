@@ -425,14 +425,14 @@
         <item>SUPL_ES=0</item>
     </string-array>
 
-    <!-- If enabled, capacitive keys will only light up when pressed.
+    If enabled, capacitive keys will only light up when pressed.
          Otherwise, the buttons will light up whenever the user interacts with the devic
     <bool name="config_buttonLightOnKeypressOnly">true</bool>
 
-    <bool name="config_deviceHasVariableButtonBrightness">true</bool> -->
+    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
 
-    <!-- Whether notify fingerprint client of successful cancelled authentication
-    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool> -->
+    Whether notify fingerprint client of successful cancelled authentication
+    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool>
 
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each

@@ -102,6 +102,8 @@ on enable-low-power
     write /sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval 10
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
+    write /sys/kernel/zen_decision/enabled 0
+
     # Enable all LPMs by default
     # This will enable C4, D4, D3, E4 and M3 LPMs
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
