@@ -33,7 +33,7 @@ debug.gralloc.enable_fb_ubwc=1
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 sdm.debug.disable_skip_validate=1
-ro.sf.lcd_density=480
+ro.sf.lcd_density=421
 
 #ifdef VENDOR_EDIT
 #liuhuisheng@OnePlus 20171016 for input
@@ -220,7 +220,7 @@ persist.radio.rat_on=combine
 persist.volte_enabled_by_hw=1
 
 #Tweaks
-wifi.supplicant_scan_interval=180
+wifi.supplicant_scan_interval=2400
 persist.service.lgospd.enable=0
 persist.service.pcsync.enable=0
 touch.pressure.scale=0.003
