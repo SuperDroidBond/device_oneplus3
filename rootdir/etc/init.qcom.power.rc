@@ -118,7 +118,7 @@ on enable-low-power
     # Set perfd properties
     setprop sys.post_boot.parsed 1
 
-    setprop sys.io.scheduler "maple"
+    setprop sys.io.scheduler "noop"
     
     # Input boost configuration
     write /sys/module/cpu_boost/parameters/input_boost_freq 0:1036800 2:1036800
