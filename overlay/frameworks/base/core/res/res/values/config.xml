@@ -496,4 +496,7 @@
     <!-- Whether the device supports Smart Pixels -->
     <bool name="config_enableSmartPixels">true</bool>
 
+    <!-- Whether to enable doze always on -->
+    <bool name="config_enableDozeAlwaysOn">true</bool>
+
 </resources>
