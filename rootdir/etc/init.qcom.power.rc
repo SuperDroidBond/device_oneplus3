@@ -31,12 +31,12 @@ on enable-low-power
 
     #Update the cpu profiles to default interactive
     write   /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 19000 960000:40000 1228800:40000 1478400:40000
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 80
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "19000 960000:40000 1228800:40000 1478400:40000"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 1036800
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 20000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 80 556000:75 652000:80 729600:85 940000:90 103600:95
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "80 556000:75 652000:80 729600:85 940000:90 103600:95"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/powersave_bias 0
@@ -53,11 +53,11 @@ on enable-low-power
     # Configure governor settings for big cluster
     write   /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay 20000 1200000:40000 1400000:20000 1900000:80000
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "20000 1200000:40000 1400000:20000 1900000:80000"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 20000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 0
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack 20000
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 85 1036000:90 1401000:70 1824000:95
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "85 1036000:90 1401000:70 1824000:95"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 0
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/powersave_bias 0
@@ -118,7 +118,7 @@ on enable-low-power
     # Set perfd properties
     setprop sys.post_boot.parsed 1
 
-    setprop sys.io.scheduler "noop"
+    write  /sys/block/sda/queue/scheduler "noop"
     
     # Input boost configuration
     write /sys/module/cpu_boost/parameters/input_boost_freq 0:1036800 2:1036800
