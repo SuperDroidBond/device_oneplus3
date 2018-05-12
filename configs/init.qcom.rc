@@ -883,7 +883,7 @@ service hci_filter_root /system/vendor/bin/wcnss_filter
     group bluetooth diag system
     disabled
 
-service config_bluetooth /system/vendor/bin/sh /system/vendor/bin/btnvtool -O
+service config_bluetooth /system/vendor/bin/btnvtool -O
     class core
     user bluetooth
     group bluetooth radio
