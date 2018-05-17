@@ -27,7 +27,7 @@ import com.oneplus.shit.util.Utils;
 
 public class DCIModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/devices/virtual/graphics/fb0/DCI_P3";
+    private static final String FILE = "/sys/class/graphics/fb0/dci_p3";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {

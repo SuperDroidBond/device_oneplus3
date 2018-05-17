@@ -168,13 +168,9 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/modes
     chown system graphics /sys/class/graphics/fb0/hbm
     chmod 0664 /sys/class/graphics/fb0/hbm
-    chown system graphics /sys/class/graphics/fb0/HBM
-    chmod 0664 /sys/class/graphics/fb0/HBM
-    chown system graphics /sys/class/graphics/fb1/hbm
-    chmod 0664 /sys/class/graphics/fb1/hbm
-    chown system graphics /sys/class/graphics/fb0/SRGB
+    chown system graphics /sys/class/graphics/fb0/srgb
     chmod 0664 /sys/class/graphics/fb0/SRGB
-    chown system graphics /sys/class/graphics/fb0/DCI_P3
+    chown system graphics /sys/class/graphics/fb0/dci_p3
     chmod 0664 /sys/class/graphics/fb0/DCI_P3
     chown system graphics /sys/class/graphics/fb0/oneplus_mode
     chmod 0664 /sys/class/graphics/fb0/oneplus_mode

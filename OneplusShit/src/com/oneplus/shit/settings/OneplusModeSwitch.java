@@ -27,7 +27,7 @@ import com.oneplus.shit.util.Utils;
 
 public class OneplusModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/devices/virtual/graphics/fb0/oneplus_mode";
+    private static final String FILE = "/sys/class/graphics/fb0/oneplus_mode";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {
