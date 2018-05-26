@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Project MSM-Xtended
+-->
+
+<resources>
+
+    <!-- Xtended Rounded Corner Overlay -->
+    <color name="notification_action_list">#00000000</color>	
+    <color name="notification_action_list_dark">#ffe0e0e0</color>
+	
+</resources>
+
+

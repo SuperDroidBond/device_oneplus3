@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Project MSM-Xtended
+-->
+
+<resources>
+
+    <!-- Xtended Rounded Corner Overlay -->
+    <dimen name="notification_shadow_radius">15.0dip</dimen>
+    <dimen name="rounded_corner_fuckedup_radius">8.0dip</dimen>
+	
+</resources>
+
