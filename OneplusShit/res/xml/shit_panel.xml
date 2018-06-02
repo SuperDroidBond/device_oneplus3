@@ -71,11 +71,12 @@
             android:title="@string/dci_mode_title"
             android:defaultValue="false" />
 
+     <!--
         <SwitchPreference
             android:key="oneplus"
             android:summary="@string/oneplus_mode_summary"
             android:title="@string/oneplus_mode_title"
-            android:defaultValue="false" />
+	    android:defaultValue="false" /> -->
 
     </PreferenceCategory>
 
