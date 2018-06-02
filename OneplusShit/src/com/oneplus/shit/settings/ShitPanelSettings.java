@@ -56,7 +56,6 @@ public class ShitPanelSettings extends NodePreferenceActivity {
     private TwoStatePreference mSRGBModeSwitch;
     private TwoStatePreference mHBMModeSwitch;
     private TwoStatePreference mDCIModeSwitch;
-    private TwoStatePreference mOneplusModeSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,9 +76,6 @@ public class ShitPanelSettings extends NodePreferenceActivity {
         mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
 
-        mOneplusModeSwitch = (TwoStatePreference) findPreference(KEY_ONEPLUS_SWITCH);
-        mOneplusModeSwitch.setOnPreferenceChangeListener(new OneplusModeSwitch());
-        
         mDCIModeSwitch = (TwoStatePreference) findPreference(KEY_DCI_SWITCH);
         boolean isPanelSupported = DCIModeSwitch.isSupportedPanel();
         if (isPanelSupported) {
