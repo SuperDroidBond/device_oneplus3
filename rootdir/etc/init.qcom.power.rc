@@ -122,7 +122,7 @@ on enable-low-power
     write  /sys/block/sda/queue/scheduler "noop"
     
     # Input boost configuration
-    write /sys/module/cpu_boost/parameters/input_boost_freq 0:1036800 2:1036800
+    write /sys/module/cpu_boost/parameters/input_boost_freq 0:1036800 1:1036800
     write /sys/module/cpu_boost/parameters/input_boost_ms 100
     write /sys/module/msm_performance/parameters/touchboost 1
 
