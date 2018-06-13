@@ -81,7 +81,7 @@
     <string name="taptowake_title">D2TW</string>
     <string name="taptowake_summary">Double Tap To Wake</string>
     <string name="slider_op_title">Alert Slider</string>
-    <string name="tile_hbm_mode">Highbrithness</string>
+    <string name="tile_hbm_mode">High Brithness Mode</string>
     <string name="slider_op_summary">Notification Slider Settings</string>
 
     <!-- Shortcut actions -->
