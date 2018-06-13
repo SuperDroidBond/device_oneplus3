@@ -18,31 +18,17 @@
 -->
 
 <!-- These resources are around just to allow their values to be customized
-<<<<<<< HEAD
-     for different hardware and product builds. -->
-<resources>
-    <!-- String containing the apn value for tethering.  May be overriden by secure settings
-         TETHER_DUN_APN.  Value is a comma separated series of strings:
-         "name,apn,proxy,port,username,password,server,mmsc,mmsproxy,mmsport,mcc,mnc,auth,type",
-         Or string format of ApnSettingV3.
-         note that empty fields can be ommitted: "name,apn,,,,,,,,,310,260,,DUN" -->
-    <string-array translatable="false" name="config_tether_apndata">
-        <item>[ApnSettingV3]Rogers Tethering,ltedata.apn,,,,,,,,,302,720,,DUN,IPV4V6,IPV4V6,true,,,,,,,,,</item>
-    </string-array>
-</resources>
-
-=======
      for different hardware and product builds.  Do not translate. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Values for GPS configuration (Rogers) -->
+    <!-- Values for GPS configuration (Telus) -->
     <string-array translatable="false" name="config_gpsParameters">
-        <item>SUPL_HOST=supl.google.com</item>
+        <item>SUPL_HOST=supl.telusmobility.com</item>
         <item>SUPL_PORT=7275</item>
         <item>SUPL_VER=0x20000</item>
         <item>SUPL_MODE=1</item>
         <item>SUPL_ES=0</item>
-        <item>LPP_PROFILE=2</item>
+        <item>LPP_PROFILE=3</item>
         <item>USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL=1</item>
         <item>A_GLONASS_POS_PROTOCOL_SELECT=0</item>
         <item>GPS_LOCK=0</item>
@@ -52,4 +38,3 @@
     </string-array>
 
 </resources>
->>>>>>> 468741a... op3: gps: Move XTRA_SERVER entries to overlays
