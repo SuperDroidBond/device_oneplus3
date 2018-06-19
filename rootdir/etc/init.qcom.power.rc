@@ -23,11 +23,7 @@ on enable-low-power
     # Set sync wakee policy tunable
     write /proc/sys/kernel/sched_prefer_sync_wakee_to_waker 1
 
-    # Re-enable thermal hotplug
-    write /sys/module/msm_thermal/core_control/enabled 1
 
-    # Enable MSM-Thermal
-    write /sys/module/msm_thermal/parameters/enabled Y
 
 #Update the cpu profiles to default interactive
 	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
@@ -68,21 +64,20 @@ on enable-low-power
 	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 0
 	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 0
 	write /proc/sys/kernel/sched_boost 1
-	write  /sys/block/sda/queue/scheduler "noop"
+	write  /sys/block/sda/queue/scheduler "maple"
 	write /sys/module/cpu_boost/parameters/input_boost 1
-    write /sys/module/cpu_boost/parameters/input_boost_freq "0:729600 2:940800"
-    write /sys/module/cpu_boost/parameters/input_boost_ms 50
-
-
-    # Setting b.L scheduler parameters
-    write /proc/sys/kernel/sched_boost 0
-    write /proc/sys/kernel/sched_downmigrate 90
-    write /proc/sys/kernel/sched_upmigrate 95
-    write /proc/sys/kernel/sched_freq_inc_notify 400000
-    write /proc/sys/kernel/sched_freq_dec_notify 400000
-    write /proc/sys/kernel/sched_spill_nr_run 3
-    write /proc/sys/kernel/sched_init_task_load 100
-
+    	write /sys/module/cpu_boost/parameters/input_boost_freq "0:729600 2:940800"
+   	write /sys/module/cpu_boost/parameters/input_boost_ms 50
+# Re-enable thermal hotplug
+    	write /sys/module/msm_thermal/core_control/enabled 1
+# Enable MSM-Thermal
+   	write /sys/module/msm_thermal/parameters/enabled Y
+#Enable dynamic sched tune boost
+   	write /sys/module/cpu_boost/parameters/sched_boost_on_input Y
+#Disable hotplugs by default
+	write /sys/kernel/zen_decision/enabled 0
+	write /sys/kernel/alucard_hotplug/enabled 0
+	
     # Enable bus-dcvs
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
     write /sys/class/devfreq/soc:qcom,cpubw/polling_interval 50
@@ -105,10 +100,6 @@ on enable-low-power
     write /sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval 10
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
-    write /sys/kernel/zen_decision/enabled 0
-
-    write /sys/module/msm_thermal/parameters/enabled Y
-
     # Enable all LPMs by default
     # This will enable C4, D4, D3, E4 and M3 LPMs
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
@@ -122,14 +113,7 @@ on enable-low-power
 
     # Set perfd properties
     setprop sys.post_boot.parsed 1
-
-    write  /sys/block/sda/queue/scheduler "noop"
     
-    # Input boost configuration
-    write /sys/module/cpu_boost/parameters/input_boost_freq 0:1036800 1:1036800
-    write /sys/module/cpu_boost/parameters/input_boost_ms 100
-    write /sys/module/msm_performance/parameters/touchboost 1
-
     # update cpusets now that boot is complete and we want better load balancing
     write /dev/cpuset/top-app/cpus 0-3
     write /dev/cpuset/foreground/boost/cpus 0-2
