@@ -309,8 +309,6 @@ service mdm_helper /system/bin/mdm_helper
 
 on property:sys.boot_completed=1
 #    start qrngp
-    stop cameraserver
-    start cameraserver
 
 service qseecomd /vendor/bin/qseecomd
    class core
