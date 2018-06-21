@@ -68,12 +68,42 @@ on enable-low-power
 	write /sys/module/cpu_boost/parameters/input_boost 1
     	write /sys/module/cpu_boost/parameters/input_boost_freq "0:729600 2:940800"
    	write /sys/module/cpu_boost/parameters/input_boost_ms 50
-# Re-enable thermal hotplug
-    	write /sys/module/msm_thermal/core_control/enabled 1
-# Enable MSM-Thermal
-   	write /sys/module/msm_thermal/parameters/enabled Y
-#Enable dynamic sched tune boost
-   	write /sys/module/cpu_boost/parameters/sched_boost_on_input Y
+	
+	# Enable sultans thermal
+	write /sys/kernel/msm_thermal/enabled 0
+	write /sys/kernel/msm_thermal/zone0 "1401600 1824000 46 43"
+	write /sys/kernel/msm_thermal/zone1 "1324800 1824000 49 46"
+	write /sys/kernel/msm_thermal/zone2 "1324800 1632000 52 49"
+	write /sys/kernel/msm_thermal/zone3 "1324800 1555200 54 52"
+	write /sys/kernel/msm_thermal/zone4 "1324800 1478400 56 54"
+	write /sys/kernel/msm_thermal/zone5 "1324800 1401600 58 56"
+	write /sys/kernel/msm_thermal/zone6 "1324800 1324800 60 58"
+	write /sys/kernel/msm_thermal/zone7 "1190400 1248000 63 60"
+	write /sys/kernel/msm_thermal/zone8 "1036000 1036000 70 63"
+	write /sys/kernel/msm_thermal/sampling_ms 8000
+
+	# Configure sched tweaks
+	write /proc/sys/kernel/sched_latency_ns 10000000
+	write /proc/sys/kernel/sched_migration_cost_ns 500000
+	write /proc/sys/kernel/sched_min_granularity_ns 900000
+	write /proc/sys/kernel/sched_nr_migrate 48
+	write /proc/sys/kernel/sched_rr_timeslice_ms 10
+	write /proc/sys/kernel/sched_rt_period_us 1000000
+	write /proc/sys/kernel/sched_rt_runtime_us 950000
+	
+	write /proc/sys/kernel/sched_boost 1
+   	write /proc/sys/kernel/sched_upmigrate 95
+   	write /proc/sys/kernel/sched_downmigrate 90
+   	write /proc/sys/kernel/sched_freq_inc_notify 400000
+  	write /proc/sys/kernel/sched_freq_dec_notify 400000
+ 	write /proc/sys/kernel/sched_spill_nr_run 3
+ 	write /proc/sys/kernel/sched_init_task_load 100
+	write /proc/sys/kernel/sched_downmigrate 70
+	write /proc/sys/kernel/sched_upmigrate 95
+	write /proc/sys/kernel/sched_freq_inc_notify 400000
+	write /proc/sys/kernel/sched_freq_dec_notify 400000
+	write /proc/sys/kernel/sched_select_prev_cpu_us 0
+	
 #Disable hotplugs by default
 	write /sys/kernel/zen_decision/enabled 0
 	write /sys/kernel/alucard_hotplug/enabled 0
