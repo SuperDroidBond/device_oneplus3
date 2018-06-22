@@ -15,6 +15,20 @@ on boot
     chown system system /dev/cpuset/camera-daemon
     chown system system /dev/cpuset/camera-daemon/tasks
     chmod 0664 /dev/cpuset/camera-daemon/tasks
+    
+    # Enable sultans thermal
+	write /sys/kernel/msm_thermal/enabled 0
+	write /sys/kernel/msm_thermal/zone0 "1401600 1824000 46 43"
+	write /sys/kernel/msm_thermal/zone1 "1324800 1824000 49 46"
+	write /sys/kernel/msm_thermal/zone2 "1324800 1632000 52 49"
+	write /sys/kernel/msm_thermal/zone3 "1324800 1555200 54 52"
+	write /sys/kernel/msm_thermal/zone4 "1324800 1478400 56 54"
+	write /sys/kernel/msm_thermal/zone5 "1324800 1401600 58 56"
+	write /sys/kernel/msm_thermal/zone6 "1324800 1324800 60 58"
+	write /sys/kernel/msm_thermal/zone7 "1190400 1248000 63 60"
+	write /sys/kernel/msm_thermal/zone8 "1036000 1036000 70 63"
+	write /sys/kernel/msm_thermal/sampling_ms 8000
+	write /sys/kernel/msm_thermal/enabled 1
 
     # Enable sched boost
     write /proc/sys/kernel/sched_boost 1
@@ -81,6 +95,7 @@ on enable-low-power
 	write /sys/kernel/msm_thermal/zone7 "1190400 1248000 63 60"
 	write /sys/kernel/msm_thermal/zone8 "1036000 1036000 70 63"
 	write /sys/kernel/msm_thermal/sampling_ms 8000
+	write /sys/kernel/msm_thermal/enabled 1
 
 	# Configure sched tweaks
 	write /proc/sys/kernel/sched_latency_ns 10000000
