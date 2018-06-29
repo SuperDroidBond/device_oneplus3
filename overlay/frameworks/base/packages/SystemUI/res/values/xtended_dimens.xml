@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Project MSM-Xtended
+-->
+
+<resources>
+
+    <!-- Big clock dozing -->
+    <dimen name="dozing_big_clock_padding" format="float">0.55</dimen>
+	
+</resources>
+
+
