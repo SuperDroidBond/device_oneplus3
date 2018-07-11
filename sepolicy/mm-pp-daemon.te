@@ -1,0 +1,3 @@
+set_prop(mm-pp-daemon, diag_prop)
+
+allow mm-pp-daemon sysfs_graphics:lnk_file { read };
