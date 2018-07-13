@@ -28,12 +28,12 @@ on enable-low-power
 #Update the cpu profiles to default interactive
 write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 99
-write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "0 729600:20000 1036800:37000 1228800:55000"
-write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 66666
-write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 307200
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 19000
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 3333
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 1228800
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 480000
-write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "70 480000:68 556800:82 652800:72 729600:94 960000:83 1228800:95 1478400:80 1593600:100"
-write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 0
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 65 460000:75 960000:80
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 0
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/powersave_bias 1
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost 0
@@ -42,18 +42,19 @@ write /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 1
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 0
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 0
-write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 0
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 80000
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 0
+
 	
 	
 # Configure governor settings for big cluster
 write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
 write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 300
-write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "40000 940800:55000 1248000:33000 1632000:32000"
-write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 40000
-write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 307200
-write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack 1431649098
-write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "35 729600:30 940800:32 1113600:35 1248000:37 1401600:65 1632000:72 1708800:85 1824000:99 1996800:99 2150400:100"
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay 19000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 20000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 1248000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack 1431650000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 70 960000:80 1248000:85
 write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 40000
 write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 1
 write /sys/devices/system/cpu/cpu2/cpufreq/interactive/powersave_bias 1
@@ -63,15 +64,20 @@ write /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows 0
 write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 1
 write /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 1
 write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 0
-write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 0
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 80000
 write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 0
 
 	write /proc/sys/kernel/sched_boost 1
 	write  /sys/block/sda/queue/scheduler "noop"
 	write /sys/module/cpu_boost/parameters/input_boost 1
-    	write /sys/module/cpu_boost/parameters/input_boost_freq "0:1036000 1:1036000"
+    	write /sys/module/cpu_boost/parameters/input_boost_freq "0:1228800 1:1228800"
    	write /sys/module/cpu_boost/parameters/input_boost_ms 4000
 	
+    write /sys/module/adreno_idler/parameters/adreno_idler_active 1
+    write /sys/module/adreno_idler/parameters/adreno_idler_downdifferential 20
+    write /sys/module/adreno_idler/parameters/adreno_idler_idlewait 20
+    write /sys/module/adreno_idler/parameters/adreno_idler_idleworkload 6000
+    
     write /proc/sys/kernel/sched_boost 0
     write /proc/sys/kernel/sched_downmigrate 90
     write /proc/sys/kernel/sched_upmigrate 95
