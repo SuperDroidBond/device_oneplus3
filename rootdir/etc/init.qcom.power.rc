@@ -70,7 +70,7 @@ write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 0
 	write  /sys/block/sda/queue/scheduler "noop"
 	write /sys/module/cpu_boost/parameters/input_boost 1
     	write /sys/module/cpu_boost/parameters/input_boost_freq "0:1036000 1:1036000"
-   	write /sys/module/cpu_boost/parameters/input_boost_ms 50
+   	write /sys/module/cpu_boost/parameters/input_boost_ms 4000
 	
     write /proc/sys/kernel/sched_boost 0
     write /proc/sys/kernel/sched_downmigrate 90
