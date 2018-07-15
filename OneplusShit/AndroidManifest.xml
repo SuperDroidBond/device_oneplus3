@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          android:sharedUserId="android.uid.system"
-          package="com.oneplus.shit"
-          android:versionCode="1"
-          android:versionName="1" >
+<!--
+     Copyright (C) 2017 The MoKee Open Source Project
 
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sharedUserId="android.uid.system"
+          package="com.oneplus.shit.settings"
+          android:versionCode="2"
+          android:versionName="2.0" >
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INJECT_EVENTS"/>
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-sdk
-            android:minSdkVersion="18"
-            android:targetSdkVersion="19" />
+	
+    <protected-broadcast android:name="com.oneplus.shit.settings.UPDATE_SLIDER_SETTINGS" />
 
     <application
-        android:icon="@android:drawable/sym_def_app_icon"
+        android:icon="@mipmap/ic_launcher_settings"
         android:label="@string/device_extras"
-        android:theme="@android:style/Theme.DeviceDefault.Settings"
-        android:supportsRtl="true" >
+	android:theme="@style/Theme.Settings"
+        android:supportsRtl="true"
+        android:defaultToDeviceProtectedStorage="true"
+        android:directBootAware="true">
         <activity
             android:name="com.oneplus.shit.settings.ShitPanelSettings"
             android:exported="true"
@@ -27,49 +43,28 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-              
-        <!-- stub to ensure its loaded - DO NOT REMOVE -->
-        <activity android:name=".KeyHandler" />
 
+        <!-- Additional button settings (Button settings) -->
         <activity
-            android:name=".settings.ScreenOffGestureSettings"
-            android:label="@string/screen_off_gesture_title"
-            android:theme="@android:style/Theme.DeviceDefault.Settings">
-          <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-          </intent-filter>
-        </activity>
-
-       <!-- <activity
-            android:name=".settings.ScreenOffGesture"
-            android:label="@string/screen_off_gesture_title"
-            android:theme="@android:style/Theme.DeviceDefault.Settings">
-          <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-          </intent-filter>
-        </activity>-->
-
-        <activity
-            android:name=".settings.SliderSettings"
-            android:theme="@android:style/Theme.DeviceDefault.Settings"
-            android:label="@string/notification_slider">
+            android:name="com.oneplus.shit.settings.ButtonSettingsActivity"
+	    android:label="@string/slider_op_title"
+	    android:theme="@style/Theme.Settings">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <receiver android:name=".BootReceiver" >
+        <activity android:name="com.oneplus.shit.settings.KeyHandler" />
+		
+        <!-- Gestures Settings -->
+		<activity
+            android:name="com.oneplus.shit.settings.ScreenOffGestureSettings"
+            android:label="@string/screen_off_gesture_title">
           <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MAIN" />
           </intent-filter>
-        </receiver>
-
-        <receiver android:name=".Startup" >
-            <intent-filter android:priority="100" >
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
+        </activity>
+		
         <service
             android:name="com.oneplus.shit.settings.HBMModeTileService"
             android:icon="@drawable/ic_hbm_tile"
@@ -80,6 +75,18 @@
                     android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
         </service>
+		
+        <receiver android:name="com.oneplus.shit.settings.Startup" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.oneplus.shit.settings.BootReceiver" >
+          <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+          </intent-filter>
+        </receiver>
 
     </application>
 

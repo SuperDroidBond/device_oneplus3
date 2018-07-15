@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.oneplus.shit;
+package com.oneplus.shit.settings;
 
-import com.oneplus.shit.util.FileUtils;
-
+import com.oneplus.shit.settings.utils.FileUtils;
 import java.io.File;
+
+import com.oneplus.shit.settings.R;
 
 /*
  * Very ugly class which enables or disables for now
@@ -38,11 +39,6 @@ public final class KernelControl {
     private static String GESTURE_MEDIA_PREVIOUS	= GESTURE_PATH + "right_arrow_enable";
     private static String GESTURE_MEDIA_NEXT		= GESTURE_PATH + "left_arrow_enable";
     private static String GESTURE_SILENT_VIB_SOUND = GESTURE_PATH + "down_arrow_enable";
-
-    // Notification slider
-    public static final String KEYCODE_SLIDER_TOP = "/proc/tri-state-key/keyCode_top";
-    public static final String KEYCODE_SLIDER_MIDDLE = "/proc/tri-state-key/keyCode_middle";
-    public static final String KEYCODE_SLIDER_BOTTOM = "/proc/tri-state-key/keyCode_bottom";
 
     private static String[] GESTURE_CONTROL_NODES = {
             GESTURE_CAMERA,
@@ -76,11 +72,4 @@ public final class KernelControl {
                 && new File(GESTURE_FLASHLIGHT).exists()
                 && new File(GESTURE_MEDIA).exists();
     }
-
-    public static boolean hasSlider() {
-        return new File(KEYCODE_SLIDER_TOP).exists() &&
-            new File(KEYCODE_SLIDER_MIDDLE).exists() &&
-            new File(KEYCODE_SLIDER_BOTTOM).exists();
-    }
-
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.oneplus.shit.util;
+package com.oneplus.shit.settings.utils;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -28,7 +28,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 
-import com.oneplus.shit.R;
+import com.oneplus.shit.settings.R;
 
 import com.android.internal.util.gzosp.AppHelper;
 

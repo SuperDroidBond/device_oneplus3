@@ -23,14 +23,15 @@ import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
-import com.oneplus.shit.util.Utils;
+import com.oneplus.shit.settings.utils.FileUtils;
+import com.oneplus.shit.settings.R;
 
 public class DCIModeSwitch implements OnPreferenceChangeListener {
 
     private static final String FILE = "/sys/class/graphics/fb0/dci_p3";
 
     public static String getFile() {
-        if (Utils.fileWritable(FILE)) {
+        if (FileUtils.fileWritable(FILE)) {
             return FILE;
         }
         return null;
@@ -43,17 +44,17 @@ public class DCIModeSwitch implements OnPreferenceChangeListener {
     }
 
     public static boolean isSupported() {
-        return Utils.fileWritable(getFile());
+        return FileUtils.fileWritable(getFile());
     }
 
     public static boolean isCurrentlyEnabled(Context context) {
-        return Utils.getFileValueAsBoolean(getFile(), false);
+        return FileUtils.getFileValueAsBoolean(getFile(), false);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
-        Utils.writeValue(getFile(), enabled ? "1" : "0");
+        FileUtils.writeValue(getFile(), enabled ? "1" : "0");
         return true;
     }
 }

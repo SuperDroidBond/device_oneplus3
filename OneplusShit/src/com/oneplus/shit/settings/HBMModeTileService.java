@@ -21,7 +21,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.service.quicksettings.TileService;
-import com.oneplus.shit.util.Utils;
+import com.oneplus.shit.settings.utils.FileUtils;
 import com.oneplus.shit.settings.HBMModeSwitch;
 import android.preference.PreferenceManager;
 
@@ -57,7 +57,7 @@ public class HBMModeTileService extends TileService {
         super.onClick();
 	SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         final boolean enabled = HBMModeSwitch.isCurrentlyEnabled(this);
-        Utils.writeValue(HBMModeSwitch.getFile(), enabled ? "0" : "1");
+        FileUtils.writeValue(HBMModeSwitch.getFile(), enabled ? "0" : "1");
         sharedPrefs.edit().putBoolean(ShitPanelSettings.KEY_HBM_SWITCH, enabled ? false : true).commit();
     }
 }

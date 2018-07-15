@@ -30,8 +30,8 @@ import android.widget.TextView;
 import android.os.Bundle;
 import android.util.Log;
 import android.os.Vibrator;
-import com.oneplus.shit.util.Utils;
-import com.oneplus.shit.R;
+import com.oneplus.shit.settings.utils.FileUtils;
+import com.oneplus.shit.settings.R;
 
 import java.util.List;
 
@@ -81,15 +81,15 @@ public class VibratorStrengthPreference extends SeekBarDialogPreference implemen
     }
 
     public static boolean isSupported() {
-        return Utils.fileWritable(FILE_LEVEL);
+        return FileUtils.fileWritable(FILE_LEVEL);
     }
 
     public static String getValue(Context context) {
-        return Utils.getFileValue(FILE_LEVEL, "2700");
+        return FileUtils.getFileValue(FILE_LEVEL, "2700");
     }
 
     private void setValue(String newValue) {
-        Utils.writeValue(FILE_LEVEL, newValue);
+        FileUtils.writeValue(FILE_LEVEL, newValue);
     }
 
     public static void restore(Context context) {
@@ -98,7 +98,7 @@ public class VibratorStrengthPreference extends SeekBarDialogPreference implemen
         }
 
         String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(ShitPanelSettings.KEY_VIBSTRENGTH, "2700"); 
-        Utils.writeValue(FILE_LEVEL, storedValue);
+        FileUtils.writeValue(FILE_LEVEL, storedValue);
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress,

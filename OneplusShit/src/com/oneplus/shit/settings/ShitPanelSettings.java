@@ -16,8 +16,7 @@
 
 package com.oneplus.shit.settings;
 
-import com.oneplus.shit.util.NodePreferenceActivity;
-
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.res.Resources;
@@ -39,9 +38,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.util.Log;
-import com.oneplus.shit.R;
 
-public class ShitPanelSettings extends NodePreferenceActivity {
+import com.oneplus.shit.settings.R;
+
+public class ShitPanelSettings extends PreferenceActivity {
     public static final String KEY_VIBSTRENGTH = "vib_strength";
 
     public static final String KEY_TAPTOWAKE_SWITCH = "taptowake";
@@ -49,7 +49,6 @@ public class ShitPanelSettings extends NodePreferenceActivity {
     public static final String KEY_SRGB_SWITCH = "srgb";
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_DCI_SWITCH = "dci";
-    public static final String KEY_ONEPLUS_SWITCH = "oneplus";
 
     private VibratorStrengthPreference mVibratorStrength;
     private TwoStatePreference mTapToWakeSwitch;

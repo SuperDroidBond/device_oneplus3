@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The CyanogenMod Project
+ * Copyright (C) 2017 The MoKee Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,46 +14,31 @@
  * limitations under the License.
  */
 
-package com.oneplus.shit.util;
+package com.oneplus.shit.settings;
 
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceActivity;
-import android.preference.ListPreference;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.PreferenceFragment;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
-import java.io.File;
+import com.oneplus.shit.settings.utils.FileUtils;
 
-public class NodePreferenceActivity extends PreferenceActivity
-        implements OnPreferenceChangeListener {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Remove padding around the listview from all devices
-        getListView().setPadding(0, 0, 0, 0);
-    }
+public abstract class NodePreferenceFragment extends PreferenceFragment
+        implements Preference.OnPreferenceChangeListener {
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String node = Constants.sBooleanNodePreferenceMap.get(preference.getKey());
-        if (!TextUtils.isEmpty(node)) {
+        if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
             Boolean value = (Boolean) newValue;
             FileUtils.writeLine(node, value ? "1" : "0");
             return true;
         }
         node = Constants.sStringNodePreferenceMap.get(preference.getKey());
-        if (!TextUtils.isEmpty(node)) {
+        if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
             FileUtils.writeLine(node, (String) newValue);
             return true;
         }
@@ -69,7 +54,7 @@ public class NodePreferenceActivity extends PreferenceActivity
             if (b == null) continue;
             b.setOnPreferenceChangeListener(this);
             String node = Constants.sBooleanNodePreferenceMap.get(pref);
-            if (new File(node).exists()) {
+            if (FileUtils.isFileReadable(node)) {
                 String curNodeValue = FileUtils.readOneLine(node);
                 b.setChecked(curNodeValue.equals("1"));
             } else {
@@ -81,7 +66,7 @@ public class NodePreferenceActivity extends PreferenceActivity
             if (l == null) continue;
             l.setOnPreferenceChangeListener(this);
             String node = Constants.sStringNodePreferenceMap.get(pref);
-            if (new File(node).exists()) {
+            if (FileUtils.isFileReadable(node)) {
                 l.setValue(FileUtils.readOneLine(node));
             } else {
                 l.setEnabled(false);
@@ -89,14 +74,4 @@ public class NodePreferenceActivity extends PreferenceActivity
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        // Respond to the action bar's Up/Home button
-        case android.R.id.home:
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

@@ -42,9 +42,9 @@ import com.android.internal.util.gzosp.ActionConstants;
 import com.android.internal.util.gzosp.DeviceUtils;
 import com.android.internal.util.gzosp.DeviceUtils.FilteredDeviceFeaturesArray;
 
-import com.oneplus.shit.KernelControl;
-import com.oneplus.shit.R;
-import com.oneplus.shit.util.ShortcutPickerHelper;
+import com.oneplus.shit.settings.KernelControl;
+import com.oneplus.shit.settings.R;
+import com.oneplus.shit.settings.utils.ShortcutPickerHelper;
 
 public class ScreenOffGesture extends PreferenceFragment implements
         OnPreferenceChangeListener, OnPreferenceClickListener,

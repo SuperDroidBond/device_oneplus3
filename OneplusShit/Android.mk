@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 SlimRoms Project
+# Copyright (C) 2017 The MoKee Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,13 +15,29 @@
 #
 
 LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 LOCAL_CERTIFICATE := platform
-LOCAL_PACKAGE_NAME := OneplusShit
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_PACKAGE_NAME := OneplusShit
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 LOCAL_DEX_PREOPT := false
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_USE_AAPT2 := true
+
+LOCAL_STATIC_ANDROID_LIBRARIES := \
+    android-support-v4 \
+    android-support-v7-appcompat \
+    android-support-v7-preference \
+    android-support-v7-recyclerview \
+    android-support-v13 \
+    android-support-v14-preference
+
+LOCAL_RESOURCE_DIR := \
+    $(LOCAL_PATH)/res \
+    $(TOP)/packages/resources/devicesettings/res
 
 include $(BUILD_PACKAGE)

@@ -17,23 +17,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
-        android:key="gestures"
-        android:title="@string/enable_gestures_title"
-        android:summary="@string/enable_gestures_summary"
-        android:persistent="false" >
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.oneplus.shit"
-                android:targetClass="com.oneplus.shit.settings.ScreenOffGestureSettings" />
-    </Preference>
-	
-    <Preference
         android:key="slider"
         android:title="@string/slider_op_title"
         android:summary="@string/slider_op_summary"
         android:persistent="false" >
         <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.oneplus.shit"
-                android:targetClass="com.oneplus.shit.settings.SliderSettings" />
+                android:targetPackage="com.oneplus.shit.settings"
+                android:targetClass="com.oneplus.shit.settings.ButtonSettingsActivity" />
     </Preference>
 
     <SwitchPreference
@@ -71,28 +61,5 @@
             android:title="@string/dci_mode_title"
             android:defaultValue="false" />
 
-     <!--
-        <SwitchPreference
-            android:key="oneplus"
-            android:summary="@string/oneplus_mode_summary"
-            android:title="@string/oneplus_mode_title"
-	    android:defaultValue="false" /> -->
-
     </PreferenceCategory>
-
-    <!-- Let's Hide it For Now
-    <PreferenceCategory
-        android:title="@string/display_category">
-        <Preference
-             android:key="device_doze"
-             android:persistent="false"
-             android:title="@string/device_doze_title"
-             android:summary="@string/device_doze_summary">
-             <intent android:action="android.intent.action.MAIN"
-                  android:targetPackage="com.custom.ambient.display"
-                  android:targetClass="com.custom.ambient.display.DozeSettings"/>
-        </Preference>
-    </PreferenceCategory>
-    -->
-
 </PreferenceScreen>

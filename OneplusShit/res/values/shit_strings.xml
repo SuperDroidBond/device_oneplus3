@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 SlimRoms Project
+<!--
+     Copyright (C) 2017 The MoKee Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +16,52 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <string name="button_panel_summary">Swap buttons, notification slider</string>
+
+    <!-- Notification slider -->
+    <string name="notification_slider_category_title">Notification slider</string>
+
+    <string name="notification_slider_selection_dialog_title">Action</string>
+    <string name="notification_slider_top_position">Top position</string>
+    <string name="notification_slider_middle_position">Middle position</string>
+    <string name="notification_slider_bottom_position">Bottom position</string>
+
+    <string name="notification_slider_usage_title">Use slider for</string>
+    <string name="notification_slider_for_notification">Notification</string>
+    <string name="notification_slider_for_flashlight">Flashlight</string>
+    <string name="notification_slider_for_brightness">Brightness</string>
+    <string name="notification_slider_for_rotation">Rotation</string>
+    <string name="notification_slider_for_ringer">Ringer</string>
+    <string name="notification_slider_for_caffeine">Caffeine</string>
+
+    <string name="notification_slider_mode_total_silence">Total silence</string>
+    <string name="notification_slider_mode_alarms_only">Alarms only</string>
+    <string name="notification_slider_mode_priority_only">Priority only</string>
+    <string name="notification_slider_mode_none">All</string>
+
+    <string name="notification_slider_flashlight_off">Off</string>
+    <string name="notification_slider_flashlight_on">On</string>
+    <string name="notification_slider_flashlight_blink">Blink</string>
+
+    <string name="notification_slider_brightness_auto">Auto</string>
+    <string name="notification_slider_brightness_brightest">Brightest</string>
+    <string name="notification_slider_brightness_darkest">Darkest</string>
+
+    <string name="notification_slider_rotation_auto">Auto</string>
+    <string name="notification_slider_rotation_portrait">Portrait</string>
+    <string name="notification_slider_rotation_landscape_90">Landscape (90°)</string>
+    <string name="notification_slider_rotation_landscape_270">Landscape (270°)</string>
+
+    <string name="notification_slider_ringer_normal">Normal</string>
+    <string name="notification_slider_ringer_vibrate">Vibrate</string>
+    <string name="notification_slider_ringer_silent">Silent</string>
+
+    <string name="notification_slider_caffeine_off">Off</string>
+    <string name="notification_slider_caffeine_5min">5 mins</string>
+    <string name="notification_slider_caffeine_10min">10 mins</string>
+    <string name="notification_slider_caffeine_30min">30 mins</string>
+    <string name="notification_slider_caffeine_infinity">Forever</string>
+
     <!-- General strings -->
     <string name="dlg_ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -24,7 +71,6 @@
     <string name="screen_off_gesture_title">Screen off gestures</string>
     <string name="group_applications">Applications</string>
     <string name="select_custom_app_title">Select custom application</string>
-
 
     <string name="enable_gestures_title">Enable gestures</string>
     <string name="enable_gestures_summary">Enable screen off gestures</string>
@@ -36,20 +82,6 @@
     <string name="gesture_circle_title">Circle</string>
     <string name="gesture_double_swipe_title">Double finger swipe down</string>
     <string name="gesture_double_tap_title">Double tap</string>
-
-     <!-- Notification slider -->
-    <string name="notification_slider">Notification slider</string>
-    <string name="action">Action</string>
-
-    <string name="top_position">Top position</string>
-    <string name="middle_position">Middle position</string>
-    <string name="bottom_position">Bottom position</string>
-    <string name="total_silence">Total silence</string>
-    <string name="alarms_only">Alarms only</string>
-    <string name="priority_only">Priority only</string>
-    <string name="none">All notifications</string>
-    <string name="vibrate">Vibrate</string>
-    <string name="ring">Ring</string>
 
     <string name="button_swap_title">Swap Buttons</string>
     <string name="button_swap_summary">Swap the order of recents and back buttons</string>
@@ -80,7 +112,7 @@
     <string name="device_doze_summary">Ambient Display Options</string>
     <string name="taptowake_title">D2TW</string>
     <string name="taptowake_summary">Double Tap To Wake</string>
-    <string name="slider_op_title">Alert Slider</string>
+    <string name="slider_op_title">Shitty Slider</string>
     <string name="tile_hbm_mode">High Brithness Mode</string>
     <string name="slider_op_summary">Notification Slider Settings</string>
 
