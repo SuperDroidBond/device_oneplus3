@@ -29,7 +29,7 @@ import com.oneplus.shit.settings.SliderControllerBase;
 
 public final class CaffeineController extends SliderControllerBase {
 
-    public static final int ID = 6;
+    public static final int ID = 7;
 
     private static final String TAG = "CaffeineController";
 

@@ -22,6 +22,7 @@
         <item>@string/notification_slider_for_brightness</item>
         <item>@string/notification_slider_for_rotation</item>
         <item>@string/notification_slider_for_ringer</item>
+        <item>@string/notification_slider_for_notification_ringer</item>
         <item>@string/notification_slider_for_caffeine</item>
     </string-array>
 
@@ -32,6 +33,7 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+        <item>7</item>
     </string-array>
 
     <string-array name="notification_slider_mode_entries" translatable="false">
@@ -112,6 +114,24 @@
         <item>62</item>
         <item>63</item>
         <item>64</item>
+    </string-array>
+
+    <string-array name="notification_ringer_slider_mode_entries" translatable="false">
+        <item>@string/notification_slider_mode_total_silence</item>
+        <item>@string/notification_slider_ringer_silent</item>
+        <item>@string/notification_slider_mode_alarms_only</item>
+        <item>@string/notification_slider_mode_priority_only</item>
+        <item>@string/notification_slider_ringer_vibrate</item>
+        <item>@string/notification_slider_mode_none</item>
+    </string-array>
+
+    <string-array name="notification_ringer_slider_mode_entry_values" translatable="false">
+        <item>70</item>
+        <item>75</item>
+        <item>71</item>
+        <item>72</item>
+        <item>74</item>
+        <item>73</item>
     </string-array>
 
     <!-- Arrays for Screen off gestures -->

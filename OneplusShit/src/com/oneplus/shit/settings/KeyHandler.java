@@ -35,6 +35,7 @@ import com.oneplus.shit.settings.slider.BrightnessController;
 import com.oneplus.shit.settings.slider.RotationController;
 import com.oneplus.shit.settings.slider.RingerController;
 import com.oneplus.shit.settings.slider.CaffeineController;
+import com.oneplus.shit.settings.slider.NotificationRingerController;
 
 public class KeyHandler implements DeviceKeyHandler {
 
@@ -48,6 +49,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private final RotationController mRotationController;
     private final RingerController mRingerController;
     private final CaffeineController mCaffeineController;
+    private final NotificationRingerController mNotificationRingerController;
 
     private SliderControllerBase mSliderController;
 
@@ -69,6 +71,7 @@ public class KeyHandler implements DeviceKeyHandler {
         mRotationController = new RotationController(context);
         mRingerController = new RingerController(context);
         mCaffeineController = new CaffeineController(context);
+        mNotificationRingerController = new NotificationRingerController(context);
 
         mContext.registerReceiver(mUpdateReceiver,
                 new IntentFilter(ButtonConstants.ACTION_UPDATE_SLIDER_SETTINGS));
@@ -105,6 +108,9 @@ public class KeyHandler implements DeviceKeyHandler {
                 break;
             case CaffeineController.ID:
                 mSliderController = mCaffeineController;
+                break;
+            case NotificationRingerController.ID:
+                mSliderController = mNotificationRingerController;
                 break;
         }
 

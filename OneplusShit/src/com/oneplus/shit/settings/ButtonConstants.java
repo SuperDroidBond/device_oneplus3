@@ -37,7 +37,8 @@ public class ButtonConstants {
     static final String SLIDER_FOR_BRIGHTNESS = "3";
     static final String SLIDER_FOR_ROTATION = "4";
     static final String SLIDER_FOR_RINGER = "5";
-    static final String SLIDER_FOR_CAFFEINE = "6";
+    static final String NOTIF_SLIDER_FOR_NOTIFICATION_RINGER = "6";
+    static final String SLIDER_FOR_CAFFEINE = "7";
 
     public static final int KEY_SLIDER_TOP = 601;
     public static final int KEY_SLIDER_MIDDLE = 602;

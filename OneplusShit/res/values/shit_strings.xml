@@ -33,6 +33,7 @@
     <string name="notification_slider_for_rotation">Rotation</string>
     <string name="notification_slider_for_ringer">Ringer</string>
     <string name="notification_slider_for_caffeine">Caffeine</string>
+    <string name="notification_slider_for_notification_ringer">Notification and ringer</string>
 
     <string name="notification_slider_mode_total_silence">Total silence</string>
     <string name="notification_slider_mode_alarms_only">Alarms only</string>
