@@ -24,13 +24,71 @@ on enable-low-power
     write /proc/sys/kernel/sched_prefer_sync_wakee_to_waker 1
 
 
-
-#Update the cpu profiles to default interactive
+# Configure governor settings for little cluster
 write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 99
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 19000
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 3333
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 1228800
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 480000
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 65 460000:75 960000:80
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 0
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/powersave_bias 1
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost 0
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down 0
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 1
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 0
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 0
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 80000
+write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 0
+
 	
 	
 # Configure governor settings for big cluster
-write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 300
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay 19000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 20000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 1248000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack 1431650000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 70 960000:80 1248000:85
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 40000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 1
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/powersave_bias 1
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost 0
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/fast_ramp_down 1
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows 0
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 1
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 1
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 0
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 80000
+write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 0
+	
+	write  /sys/block/sda/queue/scheduler "noop"
+	write /sys/module/cpu_boost/parameters/input_boost 1
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1228800 1:1228800"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 4000
+	
+	write /sys/module/adreno_idler/parameters/adreno_idler_active 1
+    write /sys/module/adreno_idler/parameters/adreno_idler_downdifferential 20
+    write /sys/module/adreno_idler/parameters/adreno_idler_idlewait 20
+    write /sys/module/adreno_idler/parameters/adreno_idler_idleworkload 6000
+		
+    # Setting b.L scheduler parameters
+    write /proc/sys/kernel/sched_boost 0
+    write /proc/sys/kernel/sched_downmigrate 90
+    write /proc/sys/kernel/sched_upmigrate 95
+    write /proc/sys/kernel/sched_freq_inc_notify 400000
+    write /proc/sys/kernel/sched_freq_dec_notify 400000
+    write /proc/sys/kernel/sched_spill_nr_run 3
+    write /proc/sys/kernel/sched_init_task_load 100
+	
+	write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us "500"
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us "10000"
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us "600"
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us "10000"
 
 	
     # Enable bus-dcvs
