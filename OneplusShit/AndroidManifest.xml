@@ -57,7 +57,7 @@
         <activity android:name="com.oneplus.shit.settings.KeyHandler" />
 		
         <!-- Gestures Settings -->
-		<activity
+	<activity
             android:name="com.oneplus.shit.settings.ScreenOffGestureSettings"
             android:label="@string/screen_off_gesture_title">
           <intent-filter>
