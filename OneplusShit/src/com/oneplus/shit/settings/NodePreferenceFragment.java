@@ -31,13 +31,7 @@ public abstract class NodePreferenceFragment extends PreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String node = Constants.sBooleanNodePreferenceMap.get(preference.getKey());
-        if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
-            Boolean value = (Boolean) newValue;
-            FileUtils.writeLine(node, value ? "1" : "0");
-            return true;
-        }
-        node = Constants.sStringNodePreferenceMap.get(preference.getKey());
+        String node = Constants.sStringNodePreferenceMap.get(preference.getKey());
         if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
             FileUtils.writeLine(node, (String) newValue);
             return true;
@@ -49,18 +43,6 @@ public abstract class NodePreferenceFragment extends PreferenceFragment
     public void addPreferencesFromResource(int preferencesResId) {
         super.addPreferencesFromResource(preferencesResId);
         // Initialize node preferences
-        for (String pref : Constants.sBooleanNodePreferenceMap.keySet()) {
-            SwitchPreference b = (SwitchPreference) findPreference(pref);
-            if (b == null) continue;
-            b.setOnPreferenceChangeListener(this);
-            String node = Constants.sBooleanNodePreferenceMap.get(pref);
-            if (FileUtils.isFileReadable(node)) {
-                String curNodeValue = FileUtils.readOneLine(node);
-                b.setChecked(curNodeValue.equals("1"));
-            } else {
-                b.setEnabled(false);
-            }
-        }
         for (String pref : Constants.sStringNodePreferenceMap.keySet()) {
             ListPreference l = (ListPreference) findPreference(pref);
             if (l == null) continue;

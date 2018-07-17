@@ -20,10 +20,6 @@ import com.oneplus.shit.settings.utils.FileUtils;
 
 class ButtonUtils {
 
-    static boolean isHardwareKeysSupported() {
-        return FileUtils.fileExists(ButtonConstants.BUTTON_SWAP_NODE);
-    }
-
     static boolean isSliderSupported() {
         return FileUtils.fileExists(ButtonConstants.SLIDER_STATE_NODE);
     }

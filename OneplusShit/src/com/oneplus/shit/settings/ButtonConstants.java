@@ -19,16 +19,13 @@ package com.oneplus.shit.settings;
 public class ButtonConstants {
 
     // Preference keys
-    static final String BUTTON_SWAP_KEY = "button_swap";
-
     static final String SLIDER_PANEL_KEY = "notification_slider";
     static final String SLIDER_USAGE_KEY = "slider_usage";
     static final String SLIDER_ACTION_TOP_KEY = "action_top_position";
     static final String SLIDER_ACTION_MIDDLE_KEY = "action_middle_position";
     static final String SLIDER_ACTION_BOTTOM_KEY = "action_bottom_position";
 
-    // Button nodes
-    static final String BUTTON_SWAP_NODE = "/proc/s1302/key_rep";
+    // Slider nodes
     public static final String SLIDER_STATE_NODE
             = "/sys/class/switch/tri-state-key/state";
 

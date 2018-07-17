@@ -26,6 +26,5 @@ public class Startup extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
         final String action = intent.getAction();
             ButtonSettingsActivity.restoreState(context);
-            Utils.restoreNodePrefs(context);
     }
 }

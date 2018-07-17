@@ -48,34 +48,9 @@ class Utils {
         }
     }
 
-    static boolean isPreferenceEnabled(Context context, String key) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getBoolean(key, (Boolean) Constants.sNodeDefaultMap.get(key));
-    }
-
     static String getPreferenceString(Context context, String key) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, (String) Constants.sNodeDefaultMap.get(key));
-    }
-
-    static void restoreNodePrefs(Context context) {
-        String value, node;
-        for (String pref : Constants.sButtonPrefKeys) {
-            if (Constants.sStringNodePreferenceMap.containsKey(pref)) {
-                value = getPreferenceString(context, pref);
-                node = Constants.sStringNodePreferenceMap.get(pref);
-            } else if (Constants.sBooleanNodePreferenceMap.containsKey(pref)) {
-                value = isPreferenceEnabled(context, pref) ? "1" : "0";
-                node = Constants.sBooleanNodePreferenceMap.get(pref);
-            } else {
-                continue;
-            }
-
-            if (!FileUtils.writeLine(node, value)) {
-                Log.w(TAG, "Write to node " + node +
-                    " failed while restoring saved preference values");
-            }
-        }
     }
 
 }

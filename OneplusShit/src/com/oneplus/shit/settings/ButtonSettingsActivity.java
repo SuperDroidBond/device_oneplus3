@@ -25,8 +25,7 @@ import com.oneplus.shit.settings.Utils;
 public class ButtonSettingsActivity extends PreferenceActivity {
 
     static boolean isSupported() {
-        return ButtonUtils.isHardwareKeysSupported() ||
-                ButtonUtils.isSliderSupported();
+        return ButtonUtils.isSliderSupported();
     }
 
     static void restoreState(Context context) {

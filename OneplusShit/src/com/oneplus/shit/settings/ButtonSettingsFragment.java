@@ -44,10 +44,6 @@ public class ButtonSettingsFragment extends NodePreferenceFragment {
             getPreferenceScreen().removePreference(findPreference(
                     ButtonConstants.SLIDER_PANEL_KEY));
         }
-        if (!ButtonUtils.isHardwareKeysSupported()) {
-            getPreferenceScreen().removePreference(findPreference(
-                    ButtonConstants.BUTTON_SWAP_KEY));
-        }
     }
 
     private void initNotificationSliderPreference() {

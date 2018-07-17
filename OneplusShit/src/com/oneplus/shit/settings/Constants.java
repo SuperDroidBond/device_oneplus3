@@ -22,22 +22,9 @@ import java.util.Map;
 class Constants {
 
     // Holds <preference_key> -> <proc_node> mapping
-    static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
     static final Map<String, String> sStringNodePreferenceMap = new HashMap<>();
 
     // Holds <preference_key> -> <default_values> mapping
     static final Map<String, Object> sNodeDefaultMap = new HashMap<>();
-
-    static final String[] sButtonPrefKeys = {
-        ButtonConstants.BUTTON_SWAP_KEY,
-    };
-
-    static {
-        sBooleanNodePreferenceMap.put(
-                ButtonConstants.BUTTON_SWAP_KEY,
-                ButtonConstants.BUTTON_SWAP_NODE);
-
-        sNodeDefaultMap.put(ButtonConstants.BUTTON_SWAP_KEY, false);
-    }
 
 }
