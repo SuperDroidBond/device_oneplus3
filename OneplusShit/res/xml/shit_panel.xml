@@ -26,7 +26,7 @@
                 android:targetClass="com.oneplus.shit.settings.ButtonSettingsActivity" />
     </Preference>
 
-    <!--<Preference
+    <Preference
         android:key="gestures"
         android:title="@string/enable_gestures_title"
         android:summary="@string/enable_gestures_summary"
@@ -34,7 +34,7 @@
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.oneplus.shit.settings"
                 android:targetClass="com.oneplus.shit.settings.ScreenOffGestureSettings" />
-    </Preference>-->
+    </Preference>
 
     <!--<SwitchPreference
         android:key="taptowake"
@@ -72,4 +72,5 @@
             android:defaultValue="false" />
 
     </PreferenceCategory>
+
 </PreferenceScreen>
