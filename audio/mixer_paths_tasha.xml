@@ -2297,7 +2297,8 @@
     </path>
 
     <path name="voice-handset">
-        <path name="handset" />
+	<path name="handset" />
+        <ctl name="RX0 Digital Volume" value="90" /> 
     </path>
 
     <path name="voice-handset-tmus">
