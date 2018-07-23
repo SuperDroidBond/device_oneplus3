@@ -15,6 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
+/*
 package com.oneplus.shit.settings;
 
 import android.content.Context;
@@ -50,4 +51,4 @@ public class TapToWakeSwitch implements OnPreferenceChangeListener {
         return true;
     }
 }
-
+*/

@@ -73,7 +73,7 @@
     <string name="group_applications">Applications</string>
     <string name="select_custom_app_title">Select custom application</string>
 
-    <string name="enable_gestures_title">Enable gestures</string>
+    <string name="enable_gestures_title">OnePlus Gestures</string>
     <string name="enable_gestures_summary">Enable screen off gestures</string>
     <string name="gestures_title">Gestures</string>
     <string name="gesture_arrow_down_title">Arrow down</string>

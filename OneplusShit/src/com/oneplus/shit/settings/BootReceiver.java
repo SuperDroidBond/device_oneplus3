@@ -29,7 +29,7 @@ import com.oneplus.shit.settings.DCIModeSwitch;
 import com.oneplus.shit.settings.HBMModeSwitch;
 import com.oneplus.shit.settings.SRGBModeSwitch;
 import com.oneplus.shit.settings.VibratorStrengthPreference ;
-import com.oneplus.shit.settings.TapToWakeSwitch;
+/*import com.oneplus.shit.settings.TapToWakeSwitch;*/
 import com.oneplus.shit.settings.ShitPanelSettings;
 import com.oneplus.shit.settings.utils.FileUtils;
 
@@ -54,7 +54,7 @@ public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent bootintent) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-		
+
         boolean enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_SRGB_SWITCH, false);
         restore(SRGBModeSwitch.getFile(), enabled);
 
@@ -66,8 +66,8 @@ public class BootReceiver extends BroadcastReceiver {
         enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_DCI_SWITCH, false);
         restore(DCIModeSwitch.getFile(), enabled);
 
-	enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_TAPTOWAKE_SWITCH, false);
-	restore(TapToWakeSwitch.getFile(), enabled);
+	/* enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_TAPTOWAKE_SWITCH, false);
+	restore(TapToWakeSwitch.getFile(), enabled);*/
 
         VibratorStrengthPreference.restore(context);
     }
