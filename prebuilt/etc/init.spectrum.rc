@@ -3,90 +3,111 @@
 # Implimentation inspired by Franco's fku profiles
 
 # Initialization
-on property:sys.boot_completed=1
+on property:sys.boot_completed=1	
    # Set default profile on first boot
-   exec u:r:init:s0 root root -- /init.spectrum.sh
-   exec u:r:su:s0 root root -- /init.spectrum.sh
+
    # Enable Spectrum support
    setprop spectrum.support 1
+   # Set default profile on first boot
+   setprop persist.spectrum.profile 0
 
+	
 # ################################################################
-# Battery
-on property:persist.spectrum.profile=2
-   write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor chill
-   write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor smartmax_eps
-
-   write /sys/module/mdss_fb/parameters/backlight_dimmer 1
-   write /sys/module/adreno_idler/parameters/adreno_idler_active 1
-   write /sys/module/cpu_boost/parameters/input_boost_enabled 0
-   write /sys/class/leds/lcd-backlight/max_brightness 127
-   write /sys/class/kgsl/kgsl-3d0/devfreq/min_freq 27000000
-   write /sys/class/kgsl/kgsl-3d0/max_gpuclk 390000000
-   write /sys/class/misc/btk_control/btkc_mode 2
-   write /sys/class/misc/btk_control/btkc_timeout 0
-   write /sys/block/mmcblk0/queue/scheduler noop
-   write /sys/block/mmcblk0/queue/read_ahead_kb 1024
-   write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 0
-   write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 3
-   write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 8
-
-
 # Balance (default profile)
 on property:persist.spectrum.profile=0
-write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "alucard"
-write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "electron"
-write /sys/module/cpu_boost/parameters/input_boost_enabled 1
-write /sys/module/cpu_boost/parameters/input_boost_freq "0:729600 1:0 2:729600 3:0"
-write /sys/module/cpu_boost/parameters/input_boost_ms 20
-write /sys/module/msm_performance/parameters/touchboost 1
-write /sys/class/devfreq/b00000.qcom,kgsl-3d0/min_freq 133000000
-write /sys/class/devfreq/b00000.qcom,kgsl-3d0/governor msm-adreno-tz
-write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
-write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 8
-write /sys/module/mdss_fb/parameters/backlight_dimmer 1
-write /sys/class/leds/lcd-backlight/max_brightness 200
-   
-# Performance 
-on property:persist.spectrum.profile=1
-	write /sys/block/sda/queue/scheduler "deadline"
-	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "nightmare"
-	write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "darkness"
-	write /sys/module/cpu_boost/parameters/input_boost_freq "0:1228800 1:1228800 2:1248000 3:1248000"
-	write /sys/module/cpu_boost/parameters/input_boost_ms 400
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 300
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "22000 480000:10000 729600:32000 1228800:30000"
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 42000
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack -1
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "45 480000:35 652800:49 844800:60 960000:75 1113600:85 1228800:90 1401600:95 1593600:100"
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 45000
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 1
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 0
+	
+	
+# Configure governor settings for big cluster
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 300
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "40000 940800:55000 1248000:33000 1632000:32000"
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 40000
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack -1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "35 729600:30 940800:32 1113600:35 1248000:37 1401600:65 1632000:72 1708800:85 1824000:99 1996800:99 2150400:100"
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 40000
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/fast_ramp_down 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 0
+	
+	write  /sys/block/sda/queue/scheduler "noop"
+	write /sys/module/cpu_boost/parameters/input_boost 1
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:103600 1:103600 2:0 3:0"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 0
 	write /sys/module/msm_performance/parameters/touchboost 1
-	write /sys/class/devfreq/b00000.qcom,kgsl-3d0/min_freq 133000000
-	write /sys/class/devfreq/b00000.qcom,kgsl-3d0/governor msm-adreno-tz
-   write /sys/module/mdss_fb/parameters/backlight_dimmer 0
-   write /sys/class/leds/lcd-backlight/max_brightness 200
-   write /sys/module/adreno_idler/parameters/adreno_idler_active 1
-   write /sys/block/mmcblk0/queue/scheduler maple
-   write /sys/block/mmcblk0/queue/read_ahead_kb 1024
-   write /sys/class/kgsl/kgsl-3d0/devfreq/min_freq 100000000
-   write /sys/class/kgsl/kgsl-3d0/max_gpuclk 510000000
-   write /sys/class/misc/btk_control/btkc_mode 1
-   write /sys/class/misc/btk_control/btkc_timeout 1000
-   write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 1
-   write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
-   write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 7
+	write /sys/module/msm_thermal/parameters/enabled Y
+	write /sys/module/msm_thermal/core_control/enabled 0
 
+# Performance
+on property:persist.spectrum.profile=1
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "performance"
+	write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "performance"
+	write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 1
+	write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
+	write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 7
+	write /sys/module/mdss_fb/parameters/backlight_dimmer 0
+	write /sys/class/leds/lcd-backlight/max_brightness 200
+	
+	write /sys/module/cpu_boost/parameters/sched_boost_on_input Y
+    write /sys/module/cpu_boost/parameters/input_boost_freq 0:103600 1:103600 2:103600 3:103600
+    write /sys/module/cpu_boost/parameters/input_boost_ms 2000
+    write /sys/module/msm_performance/parameters/touchboost 1
+	write /sys/module/msm_thermal/parameters/enabled Y
+	write /sys/module/msm_thermal/core_control/enabled 0
+
+# Battery
+on property:persist.spectrum.profile=2
+   write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "conservative"
+   write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "conservative"
+	write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
+	write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 8
+	write /sys/module/mdss_fb/parameters/backlight_dimmer 1
+	write /sys/class/leds/lcd-backlight/max_brightness 200
+
+	write /sys/module/cpu_boost/parameters/sched_boost_on_input N
+    write /sys/module/cpu_boost/parameters/input_boost_freq 0:103600 1:103600 2:0 3:0
+    write /sys/module/cpu_boost/parameters/input_boost_ms 0
+    write /sys/module/msm_performance/parameters/touchboost 0
+	write /sys/module/msm_thermal/parameters/enabled Y
+	write /sys/module/msm_thermal/core_control/enabled 0
 
 # Gaming
 on property:persist.spectrum.profile=3
-   write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor gabriel
-   write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor elementalx
-   write /sys/module/mdss_fb/parameters/backlight_dimmer 0
-   write /sys/module/adreno_idler/parameters/adreno_idler_active 1
-   write /sys/class/leds/lcd-backlight/max_brightness 255
-   write /sys/block/mmcblk0/queue/scheduler maple
-   write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-   write /sys/module/cpu_boost/parameters/input_boost_enabled 1
-   write /sys/module/cpu_boost/parameters/input_boost_ms 400
-   write /sys/module/cpu_boost/parameters/input_boost_freq "0:1228800 1:1228800 2:1248000 3:1248000"
-   write /sys/class/kgsl/kgsl-3d0/devfreq/min_freq 100000000
-   write /sys/class/kgsl/kgsl-3d0/max_gpuclk 630000000
-   write /sys/class/misc/btk_control/btkc_mode 0
-   write /sys/class/misc/btk_control/btkc_timeout 0
-   write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 2
-   write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
-   write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 7
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "alucard"
+	write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "alucard"
+	write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 2
+	write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
+	write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 7
+	write /sys/module/mdss_fb/parameters/backlight_dimmer 0
+	write /sys/class/leds/lcd-backlight/max_brightness 255
+   
+	write /sys/module/cpu_boost/parameters/sched_boost_on_input Y
+    write /sys/module/cpu_boost/parameters/input_boost_freq 0:103600 1:103600 2:103600 3:103600
+    write /sys/module/cpu_boost/parameters/input_boost_ms 4000
+    write /sys/module/msm_performance/parameters/touchboost 1
+	write /sys/module/msm_thermal/parameters/enabled N
+	write /sys/module/msm_thermal/core_control/enabled 1
 
