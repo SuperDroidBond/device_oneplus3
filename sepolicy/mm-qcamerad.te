@@ -1,10 +1,13 @@
 allow mm-qcamerad camera_data_file:sock_file { create unlink write };
+allow mm-qcamerad camera_socket:sock_file { create unlink write };
 allow mm-qcamerad system_server:unix_stream_socket rw_socket_perms;
 allow mm-qcamerad sensorservice_service:service_manager find;
 allow mm-qcamerad vendor_camera_data_file:file rw_file_perms;
 allow mm-qcamerad camera_data_file:lnk_file rw_file_perms;
 allow mm-qcamerad system_data_file:lnk_file rw_file_perms;
 allow mm-qcamerad permission_service:service_manager find;
+allow mm-qcamerad sysfs_graphics:file r_file_perms;
+allow mm-qcamerad sysfs:file r_file_perms;
 set_prop(mm-qcamerad, camera_prop);
 get_prop(mm-qcamerad, diag_prop)
 binder_call(mm-qcamerad, servicemanager);
