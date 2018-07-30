@@ -65,13 +65,11 @@ on enable-low-power
 	
 	write  /sys/block/sda/queue/scheduler "noop"
 	write /sys/module/cpu_boost/parameters/input_boost 1
-    write /sys/module/cpu_boost/parameters/input_boost_freq "0:103600 1:103600 2:0 3:0"
-    write /sys/module/cpu_boost/parameters/input_boost_ms 0
+  write /sys/module/cpu_boost/parameters/input_boost_freq "0:103600 1:103600 2:0 3:0"
+  write /sys/module/cpu_boost/parameters/input_boost_ms 0
 	write /sys/module/msm_performance/parameters/touchboost 1
 	write /sys/module/msm_thermal/parameters/enabled Y
 	write /sys/module/msm_thermal/core_control/enabled 0		
-
-
 	
     # Enable bus-dcvs
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
