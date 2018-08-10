@@ -125,8 +125,8 @@ AUDIO_FEATURE_ENABLED_PLAYBACK_ULL := false
 
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 BOARD_USES_ALSA_AUDIO := true
-BOARD_SUPPORTS_SOUND_TRIGGER := true
-USE_CUSTOM_AUDIO_POLICY := 1
+#BOARD_SUPPORTS_SOUND_TRIGGER := true
+#USE_CUSTOM_AUDIO_POLICY := 1
 USE_XML_AUDIO_POLICY_CONF := 1
 TARGET_USES_QCOM_MM_AUDIO := true
 
@@ -191,13 +191,12 @@ USE_DEVICE_SPECIFIC_GPS := true
 
 BOARD_ROOT_EXTRA_FOLDERS := bt_firmware firmware persist
 
-WITH_DEXPREOPT := true
-DONT_DEXPREOPT_PREBUILTS := true
+WITH_DEXPREOPT := false
 
 # selinux
-include device/qcom/sepolicy/sepolicy.mk
+#include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
+#BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
 
 DEVICE_MANIFEST_FILE := $(BOARD_PATH)/configs/manifest.xml
 

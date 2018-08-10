@@ -225,11 +225,11 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full
 
 # Telephony packages
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     ims-ext-common \
     telephony-ext
 
-PRODUCT_BOOT_JARS += \
+#PRODUCT_BOOT_JARS += \
     telephony-ext
 
 # Wifi
@@ -271,11 +271,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcamera_parameters_shim
 
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     Oneplus3Parts
 
 # Doze mode
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     OneplusDoze
 
 # bluetooth
@@ -288,12 +288,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qdcm_calib_data_samsung_s6e3fa5_1080p_cmd_mode_dsi_panel.xml:$(TARGET_COPY_OUT_VENDOR)/etc/qdcm_calib_data_samsung_s6e3fa5_1080p_cmd_mode_dsi_panel.xml
 
 # ANT+
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     AntHalService \
     com.dsi.ant.antradio_library \
     libantradio
 
-PRODUCT_COPY_FILES += \
+#PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml
 
 # For android_filesystem_config.h
