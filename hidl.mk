@@ -56,7 +56,7 @@ PRODUCT_PACKAGES += \
 
 #Nfc
 PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.0-impl
+    android.hardware.nfc@1.1-service
 
 # health
 PRODUCT_PACKAGES += \
