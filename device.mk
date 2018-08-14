@@ -243,9 +243,9 @@ PRODUCT_PACKAGES += \
     qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml \
     qdcm_calib_data_samsung_s6e3fa5_1080p_cmd_mode_dsi_panel.xml
 
-# Doze mode
+# OneplusShit
 PRODUCT_PACKAGES += \
-    OneplusDoze
+    OneplusShit
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -255,7 +255,6 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
-    OneplusPocketMode \
     android.hardware.biometrics.fingerprint@2.1-service
 
 # Gatekeeper HAL
@@ -489,6 +488,3 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
-
-# Inherit from oppo-common
-$(call inherit-product, device/oppo/common/common.mk)
