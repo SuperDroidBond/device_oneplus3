@@ -129,6 +129,10 @@ on boot
     chown system system /proc/tri-state-key/keyCode_bottom
     chmod 0660 /proc/tri-state-key/keyCode_bottom
 
+    # Vibrator permissions
+    chown root system /sys/devices/virtual/timed_output/vibrator/vtg_level
+    chmod 0660 /sys/devices/virtual/timed_output/vibrator/vtg_level
+
     # Graphics
     chown system system /sys/class/graphics/fb0/srgb
     chmod 0664 /sys/class/graphics/fb0/srgb
@@ -140,6 +144,8 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/night_mode
     chown system graphics /sys/class/graphics/fb0/hbm
     chmod 0664 /sys/class/graphics/fb0/hbm
+    chown system graphics /sys/class/graphics/fb0/oneplus_mode
+    chmod 0664 /sys/class/graphics/fb0/oneplus_mode
 
     # Fingerprint
     chmod 0664 /sys/devices/soc/soc:fpc_fpc1020/irq
