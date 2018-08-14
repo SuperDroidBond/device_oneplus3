@@ -187,7 +187,8 @@ USE_DEVICE_SPECIFIC_GPS := true
 
 BOARD_ROOT_EXTRA_FOLDERS := bt_firmware firmware persist
 
-WITH_DEXPREOPT := false
+WITH_DEXPREOPT := true
+DONT_DEXPREOPT_PREBUILTS := true
 
 # selinux
 #include device/qcom/sepolicy/sepolicy.mk
