@@ -30,14 +30,18 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string>
+#include "android-base/logging.h"
 #include <android-base/properties.h>
+
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
-#include "util.h"
-#include "android-base/logging.h"
+
+using android::base::GetProperty;
+using android::init::property_set;
+using android::init::import_kernel_cmdline;
 
 void property_override(char const prop[], char const value[])
 {
@@ -117,7 +121,7 @@ void load_op3t(const char *model) {
     property_override("ro.product.device", "OnePlus3T");
     property_override("ro.build.description", "OnePlus3-user 8.0.0 OPR6.170623.013 83 release-keys");
     property_override("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3T:8.0.0/OPR6.170623.013/10250816:user/release-keys");
-    android::init::property_set("ro.power_profile.override", "power_profile_3t");
+    property_set("ro.power_profile.override", "power_profile_3t");
 }
 
 static void import_panel_prop(const std::string& key, const std::string& value, bool for_emulator) {
@@ -132,7 +136,7 @@ static void import_panel_prop(const std::string& key, const std::string& value, 
 }
 
 void vendor_load_properties() {
-    std::string rf_version = android::base::GetProperty("ro.boot.rf_version", "");
+    std::string rf_version = GetProperty("ro.boot.rf_version", "");
 
     if (rf_version == "11") {
         /* China */
@@ -190,5 +194,5 @@ void vendor_load_properties() {
 
     init_alarm_boot_properties();
 
-    android::init::import_kernel_cmdline(false, import_panel_prop);
+    import_kernel_cmdline(false, import_panel_prop);
 }
