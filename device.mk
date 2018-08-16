@@ -270,11 +270,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcamera_parameters_shim
 
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     Oneplus3Parts
 
 # Doze mode
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     OneplusDoze
 
 # bluetooth
