@@ -99,11 +99,11 @@
     <string name="vib_strength_title_head">Strength</string>
     <string name="vib_strength_summary_head">Define the strength of the vibrator</string>
     <string name="srgb_mode_summary"></string>
-    <string name="srgb_mode_title">sRGB Mode</string>
+    <string name="srgb_mode_title">sRGB mode</string>
     <string name="hbm_mode_summary"></string>
-    <string name="hbm_mode_title">High Brightness Mode</string>
+    <string name="hbm_mode_title">High brightness mode</string>
     <string name="dci_mode_summary"></string>
-    <string name="dci_mode_title">Wide Color Gamut Mode</string>
+    <string name="dci_mode_title">Wide color gamut mode</string>
     <string name="oneplus_mode_summary"></string>
     <string name="oneplus_mode_title">Oneplus mode</string>
     <string name="night_mode_summary"></string>
@@ -164,6 +164,6 @@
     <string name="shortcut_action_help_main">To add a %1$s, select the Add icon. Once a %1$s is added, selecting the row will change the target%2$s\n\nTo remove a %1$s, swipe the row horizontally left or right. Re-order a %1$s in the list by vertically dragging the anchor on the left.\n\nTo clear or reset to defaults, select the reset option.</string>
 
     <!-- Device specific settings -->
-    <string name="screen_off_gesture_settings_title">OnePlus Gestures</string>
+    <string name="screen_off_gesture_settings_title">Screen off gestures</string>
 
 </resources>
