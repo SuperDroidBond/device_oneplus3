@@ -38,8 +38,8 @@
             android:name="com.oneplus.shit.settings.ShitPanelSettings"
             android:exported="true"
             android:label="@string/device_extras" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+	    <intent-filter>
+		<action android:name="com.android.settings.action.EXTRA_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -56,14 +56,14 @@
 
         <activity android:name="com.oneplus.shit.settings.KeyHandler" />
 		
-        <!-- Gestures Settings -->
-	<activity
+        <!-- Gestures Settings
+		<activity
             android:name="com.oneplus.shit.settings.ScreenOffGestureSettings"
             android:label="@string/screen_off_gesture_title">
           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
           </intent-filter>
-        </activity>
+	</activity>-->
 		
         <service
             android:name="com.oneplus.shit.settings.HBMModeTileService"
