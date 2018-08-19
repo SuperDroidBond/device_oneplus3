@@ -107,6 +107,10 @@ PRODUCT_PACKAGES += \
 #PRODUCT_BOOT_JARS += \
     org.ifaa.android.manager
 
+# OneplusShit
+PRODUCT_PACKAGES += \
+    OneplusShit
+
 # audio
 PRODUCT_PACKAGES += \
     audiod \
