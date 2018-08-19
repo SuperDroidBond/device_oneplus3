@@ -23,7 +23,7 @@
 BOARD_PATH := device/oneplus/oneplus3
 
 TARGET_NO_BOOTLOADER := true
-TARGET_OTA_ASSERT_DEVICE := none
+TARGET_OTA_ASSERT_DEVICE := OnePlus3,oneplus3,OnePlus3T,oneplus3t
 TARGET_BOOTLOADER_BOARD_NAME := msm8996
 
 # Platform
@@ -57,7 +57,7 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-TARGET_KERNEL_APPEND_DTB := true
+#TARGET_KERNEL_APPEND_DTB := true
 TARGET_KERNEL_SOURCE := kernel/oneplus/msm8996
 TARGET_KERNEL_CONFIG := nos_oneplus3_defconfig
 
@@ -175,7 +175,6 @@ BOARD_ANT_WIRELESS_DEVICE := "qualcomm-uart"
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
 
 # CNE and DPM
 BOARD_USES_QCNE := true
@@ -192,7 +191,6 @@ DONT_DEXPREOPT_PREBUILTS := true
 
 # selinux
 #include device/qcom/sepolicy/sepolicy.mk
-
 #BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
 
 DEVICE_MANIFEST_FILE := $(BOARD_PATH)/configs/manifest.xml
