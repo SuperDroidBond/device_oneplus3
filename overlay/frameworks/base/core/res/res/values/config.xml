@@ -209,6 +209,9 @@
     <bool name="config_setColorTransformAccelerated">true</bool>
 
     <!-- Operating volatage for bluetooth controller. 0 by default-->
+    <integer translatable="false" name="config_bluetooth_idle_cur_ma">5</integer>
+    <integer translatable="false" name="config_bluetooth_rx_cur_ma">17</integer>
+    <integer translatable="false" name="config_bluetooth_tx_cur_ma">46</integer>
     <integer translatable="false" name="config_bluetooth_operating_voltage_mv">3300</integer>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -328,7 +331,7 @@
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
-
+    
     <!-- Whether WiFi display is supported by this device.
          There are many prerequisites for this feature to work correctly.
          Here are a few of them:
