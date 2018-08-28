@@ -260,12 +260,12 @@
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
     <!-- Flag specifying whether WFC over IMS is available on device -->
-    <!--bool name="config_device_wfc_ims_available">true</bool-->
+    <bool name="config_device_wfc_ims_available">true</bool>
 
     <!-- Flag specifying whether WFC over IMS should be available for carrier: independent of
          carrier provisioning. If false: hard disabled. If true: then depends on carrier
          provisioning, availability etc -->
-    <!--bool name="config_carrier_wfc_ims_available">true</bool-->
+    <bool name="config_carrier_wfc_ims_available">true</bool>
 
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
@@ -424,10 +424,10 @@
    <bool name="config_sustainedPerformanceModeSupported">true</bool>
 
    <!-- ImsService package name to bind to by default, if config_dynamic_bind_ims is true -->
-   <!--string name="config_ims_package">org.codeaurora.ims</string-->
-
+   <string name="config_ims_package">org.codeaurora.ims</string>
+   
    <!-- Flag specifying whether or not IMS will use the ImsResolver dynamically -->
-   <!--bool name="config_dynamic_bind_ims">true</bool-->
+   <bool name="config_dynamic_bind_ims">true</bool>
 
    <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
    in hardware. -->
