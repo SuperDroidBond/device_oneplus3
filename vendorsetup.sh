@@ -22,5 +22,5 @@
 
 #ALLOW_MISSING_DEPENDENCIES := true
 
-add_lunch_combo bliss_oneplus3-userdebug
-add_lunch_combo bliss_oneplus3-eng
+add_lunch_combo xtended_oneplus3-userdebug
+add_lunch_combo xtended_oneplus3-eng

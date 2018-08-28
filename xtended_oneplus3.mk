@@ -24,7 +24,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
 # Inherit some common Nitrogen stuff.
-$(call inherit-product, vendor/bliss/config/common.mk)
+$(call inherit-product, vendor/xtended/config/common_full_phone.mk)
 
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/oneplus/oneplus3/device.mk)
@@ -34,12 +34,12 @@ TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := bliss_oneplus3
+PRODUCT_NAME := xtended_oneplus3
 PRODUCT_DEVICE := oneplus3
 PRODUCT_BRAND := OnePlus
 PRODUCT_MODEL := OnePlus
 PRODUCT_MANUFACTURER := OnePlus
 
-BLISS_BUILDTYPE := OFFICIAL
+XTENDED_BUILD_TYPE := OFFICIAL
 
 #BUILD_FINGERPRINT=OnePlus/OnePlus3/OnePlus3T:8.0.0/OPR6.170623.013/10250816:user/release-keys

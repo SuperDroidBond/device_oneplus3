@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/bliss.mk
+    $(LOCAL_DIR)/xtended_oneplus3.mk

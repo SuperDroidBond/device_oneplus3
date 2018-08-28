@@ -38,10 +38,15 @@
             android:name="com.oneplus.shit.settings.ShitPanelSettings"
             android:exported="true"
             android:label="@string/device_extras" >
-	    <intent-filter>
-		<action android:name="com.android.settings.action.EXTRA_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
+            <intent-filter>
+                    <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
             </intent-filter>
+          <meta-data
+                   android:name="com.android.settings.icon"
+                   android:resource="@drawable/app_icon" />
+          <meta-data
+                   android:name="com.android.settings.category"
+                   android:value="com.android.settings.category.ia.homepage" />
         </activity>
 
         <!-- Additional button settings (Button settings) -->
