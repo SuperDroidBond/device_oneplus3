@@ -749,6 +749,8 @@ on property:sys.boot_completed=1
     write /sys/block/sde/queue/read_ahead_kb 512
     #WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wdsp0/boot
+    stop cameraserver
+    start cameraserver
 
 on property:persist.radio.atfwd.start=false
     stop atfwd
