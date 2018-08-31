@@ -68,16 +68,12 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 80000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2246400
 
-    # Re-enable thermal hotplug
-    write /sys/module/msm_thermal/core_control/enabled 1
-
     # Input boost configuration
-    write /sys/kernel/cpu_input_boost/ib_freqs "1286400 537600"
-    write /sys/kernel/cpu_input_boost/ib_duration_ms 600
-    write /sys/kernel/cpu_input_boost/enabled 1
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1593600 2:1555200"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 200
 
     # Setting b.L scheduler parameters
-    write /proc/sys/kernel/sched_boost 0
+    write /proc/sys/kernel/sched_boost 1
     write /proc/sys/kernel/sched_upmigrate 95
     write /proc/sys/kernel/sched_downmigrate 90
     write /proc/sys/kernel/sched_freq_inc_notify 400000
@@ -120,16 +116,6 @@ on enable-low-power
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-2
 
-    # disable wakelocks
-    write /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws 0
-    write /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws 0
-    write /sys/module/wakeup/parameters/enable_ipa_ws 0
-    write /sys/module/wakeup/parameters/enable_wlan_ws 0
-    write /sys/module/wakeup/parameters/enable_timerfd_ws 0
-    write /sys/module/wakeup/parameters/enable_netlink_ws 0
-    write /sys/module/wakeup/parameters/enable_netmgr_wl_ws 0
-    write /sys/module/wakeup/parameters/enable_wlan_pno_wl_ws 0
-    write /sys/module/wakeup/parameters/enable_wcnss_filter_lock_ws 0
 
 on charger
     write /sys/devices/system/cpu/cpu1/online 0
@@ -141,8 +127,9 @@ on charger
 
 on property:sys.boot_completed=1
     trigger enable-low-power
-    setprop sys.io.scheduler cfq
+    setprop sys.io.scheduler zen
     write /sys/block/sda/queue/read_ahead_kb 128
 
 on property:init.svc.recovery=running
     trigger enable-low-power
+
