@@ -190,7 +190,20 @@ persist.data.iwlan.enable=true
 persist.vendor.radio.data_ltd_sys_ind=1
 persist.vendor.radio.data_con_rprt=1
 persist.radio.efssync=true
-#end
+persist.vendor.radio.force_on_dc=true
+persist.radio.custom_ecc=1
+persist.radio.data_con_rprt=1
+persist.vendor.radio.data_ltd_sys_ind=1
+persist.radio.data_ltd_sys_ind=1
+persist.vendor.radio.ignore_dom_time=10
+persist.radio.ignore_dom_time=10
+persist.radio.rat_on=combine
+persist.radio.is_wps_enabled=true
+persist.radio.videopause.mode=1
+persist.radio.sap_silent_pin=1
+persist.radio.always_send_plmn=true
+persist.rcs.supported=1
+persist.dbg.ims_volte_enable=1
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
@@ -230,3 +243,5 @@ persist.cust.tel.eons=1
 ro.config.hw_fast_dormancy=1
 persist.debug.force_burn_in=true
 ro.gps.agps_provider=1
+
+# end
