@@ -11,6 +11,8 @@
 
 # HALs
 /(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider@2\.4-service\.oneplus3       u:object_r:hal_camera_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.oneplus3    u:object_r:hal_light_default_exec:s0
+
 
 # Sys files
 /sys/devices/soc/soc:fpc_fpc1020/irq                            u:object_r:sysfs_fpc:s0
