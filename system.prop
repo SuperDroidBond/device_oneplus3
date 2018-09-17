@@ -28,7 +28,8 @@ dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 sdm.debug.disable_skip_validate=1
 debug.sf.recomputecrop=0
-ro.sf.lcd_density=480
+ro.sf.lcd_density=421
+sdm.perf_hint_window=50
 
 #ifdef VENDOR_EDIT
 #liuhuisheng@OnePlus 20171016 for input
