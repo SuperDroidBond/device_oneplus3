@@ -2298,14 +2298,17 @@
 
     <path name="voice-handset">
         <path name="handset" />
+        <ctl name="RX0 Digital Volume" value="90" />
     </path>
 
     <path name="voice-handset-tmus">
         <path name="handset" />
+        <ctl name="RX0 Digital Volume" value="90" />
     </path>
 
     <path name="voice-speaker">
         <path name="speaker-mono" />
+        <ctl name="RX0 Digital Volume" value="90" />
     </path>
 
     <path name="voice-speaker-fluid">
