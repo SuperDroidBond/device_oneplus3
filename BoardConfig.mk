@@ -201,6 +201,7 @@ DONT_DEXPREOPT_PREBUILTS := true
 #BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
 
 DEVICE_MANIFEST_FILE := $(BOARD_PATH)/configs/manifest.xml
+DEVICE_MATRIX_FILE   := $(BOARD_PATH)/configs/compatibility_matrix.xml
 
 TARGET_FS_CONFIG_GEN := $(BOARD_PATH)/configs/config.fs
 
