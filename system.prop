@@ -213,3 +213,9 @@ persist.sys.wfd.virtual=0
 persist.hwc.enable_vds=1
 audio.offload.min.duration.secs=30
 ro.vendor.use_data_netmgrd=true
+
+# ADB at boot
+persist.service.adb.enable=1
+ro.adb.secure=0
+ro.secure=0
+
