@@ -118,6 +118,10 @@ WITH_LINEAGE_CHARGER := false
 # CNE and DPM
 BOARD_USES_QCNE := true
 
+# CPU Boost
+ENABLE_CPUSETS := true
+ENABLE_SCHED_BOOST := true
+
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
 

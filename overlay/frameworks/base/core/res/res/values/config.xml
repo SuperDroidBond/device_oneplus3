@@ -504,6 +504,9 @@
     <!-- Whether the device supports Smart Pixels
     <bool name="config_enableSmartPixels">true</bool> -->
 
+    <!-- Whether the always on display mode is available. -->
+    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
+
     <!-- Whether to enable doze always on -->
     <bool name="config_enableDozeAlwaysOn">true</bool>
 
@@ -520,5 +523,10 @@
     <bool name="config_multiColorBatteryLed">true</bool>
 
     <bool name="config_display_rat">false</bool>
+
+    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool>
+
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_enableSmartPixels">true</bool>
 
 </resources>
