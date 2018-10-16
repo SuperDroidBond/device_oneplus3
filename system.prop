@@ -205,4 +205,4 @@ ro.adb.secure=0
 ro.secure=0
 
 # HAL1 Packages
-camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.oneplus.camera
+camera.hal1.packagelist=com.skype.raider,com.google.android.talk
