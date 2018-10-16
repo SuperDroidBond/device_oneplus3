@@ -33,11 +33,11 @@
     <string name="notification_slider_for_rotation">Rotation</string>
     <string name="notification_slider_for_ringer">Ringer</string>
     <string name="notification_slider_for_caffeine">Caffeine</string>
-    <string name="notification_slider_for_notification_ringer">Notification and ringer</string>
+    <string name="notification_slider_for_notification_ringer">Notification and Ringer</string>
 
-    <string name="notification_slider_mode_total_silence">Total silence</string>
-    <string name="notification_slider_mode_alarms_only">Alarms only</string>
-    <string name="notification_slider_mode_priority_only">Priority only</string>
+    <string name="notification_slider_mode_total_silence">Total Silence</string>
+    <string name="notification_slider_mode_alarms_only">Alarms Only</string>
+    <string name="notification_slider_mode_priority_only">Priority Only</string>
     <string name="notification_slider_mode_none">All</string>
 
     <string name="notification_slider_flashlight_off">Off</string>
@@ -69,20 +69,20 @@
     <string name="reset">Reset</string>
     <string name="reset_message">Reset all entries to default?</string>
 
-    <string name="screen_off_gesture_title">Screen off gestures</string>
+    <string name="screen_off_gesture_title">Screen-Off Gestures</string>
     <string name="group_applications">Applications</string>
     <string name="select_custom_app_title">Select custom application</string>
 
     <string name="enable_gestures_title">OnePlus Gestures</string>
     <string name="enable_gestures_summary">Enable screen off gestures</string>
     <string name="gestures_title">Gestures</string>
-    <string name="gesture_arrow_down_title">Arrow down</string>
-    <string name="gesture_arrow_left_title">Arrow left</string>
-    <string name="gesture_arrow_right_title">Arrow right</string>
-    <string name="gesture_arrow_up_title">Arrow up</string>
+    <string name="gesture_arrow_down_title">Arrow Down</string>
+    <string name="gesture_arrow_left_title">Arrow Left</string>
+    <string name="gesture_arrow_right_title">Arrow Right</string>
+    <string name="gesture_arrow_up_title">Arrow Up</string>
     <string name="gesture_circle_title">Circle</string>
-    <string name="gesture_double_swipe_title">Double finger swipe down</string>
-    <string name="gesture_double_tap_title">Double tap</string>
+    <string name="gesture_double_swipe_title">Double Finger Swipe Down</string>
+    <string name="gesture_double_tap_title">Double Tap</string>
 
     <string name="button_swap_title">Swap Buttons</string>
     <string name="button_swap_summary">Swap the order of recents and back buttons</string>
