@@ -1,5 +1,5 @@
 ifeq ($(BOARD_VNDK_VERSION),)
-$(warning ************* BOARD VNDK is not enabled - compiling vndk-sp ***************************)
+$(warning BOARD VNDK is not enabled - compiling vndk-sp instead)
 LOCAL_PATH := $(call my-dir)
 
 include $(LOCAL_PATH)/vndk-sp-libs.mk
