@@ -50,6 +50,7 @@ static inline const char* BtmGetDefaultName()
 #define MAX_L2CAP_CHANNELS    16
 #define BLE_VND_INCLUDED   TRUE
 // skips conn update at conn completion
-#define BT_CLEAN_TURN_ON_DISABLED 1
+#define BT_CLEAN_TURN_ON_DISABLED TRUE
+#define BTM_SCO_ENHANCED_SYNC_ENABLED FALSE
 #undef PROPERTY_VALUE_MAX
 #endif
