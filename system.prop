@@ -218,8 +218,21 @@ ro.vendor.use_data_netmgrd=true
 
 # ADB at boot
 persist.service.adb.enable=1
+persist.service.debuggable=1
+persist.sys.usb.config=mtp,adb
 ro.adb.secure=0
 ro.secure=0
 
 # HAL1 Packages
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.oneplus.camera
+
+# OldSchool
+wifi.supplicant_scan_interval=2400
+persist.service.lgospd.enable=0
+persist.service.pcsync.enable=0
+touch.pressure.scale=0.003
+ro.media.enc.jpeg.quality=100
+persist.cust.tel.eons=1
+ro.config.hw_fast_dormancy=1
+persist.debug.force_burn_in=true
+ro.gps.agps_provider=1
