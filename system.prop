@@ -226,6 +226,9 @@ ro.secure=0
 # HAL1 Packages
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.oneplus.camera
 
+# Sim reset fix
+persist.radio.aosp_usr_pref_sel=true
+
 # OldSchool
 wifi.supplicant_scan_interval=2400
 persist.service.lgospd.enable=0
