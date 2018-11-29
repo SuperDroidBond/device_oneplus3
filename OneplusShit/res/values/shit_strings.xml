@@ -26,7 +26,7 @@
     <string name="notification_slider_middle_position">Middle position</string>
     <string name="notification_slider_bottom_position">Bottom position</string>
 
-    <string name="notification_slider_usage_title">Use slider for</string>
+    <string name="notification_slider_usage_title">Use Alert-Slider for</string>
     <string name="notification_slider_for_notification">Notification</string>
     <string name="notification_slider_for_flashlight">Flashlight</string>
     <string name="notification_slider_for_brightness">Brightness</string>
@@ -90,10 +90,10 @@
     <!-- Gesture shortcuts -->
     <string name="screen_gestures_panel_title">OnePlus Gestures</string>
     <string name="gestures_dashboard_summary">Gestures specific to OnePlus devices</string>
-    <string name="app_name">Oneplus Special Features</string>
+    <string name="app_name">OnePlus Special Features</string>
 
     <!-- New Options -->
-    <string name="device_extras">Oneplus Shit</string>
+    <string name="device_extras">OnePlus Shit</string>
     <string name="graphics_title">Graphics</string>
     <string name="category_vibrator">Vibrator</string>
     <string name="vib_strength_title_head">Strength</string>
@@ -105,7 +105,7 @@
     <string name="dci_mode_summary"></string>
     <string name="dci_mode_title">Wide Color Gamut Mode</string>
     <string name="oneplus_mode_summary"></string>
-    <string name="oneplus_mode_title">Oneplus mode</string>
+    <string name="oneplus_mode_title">OnePlus mode</string>
     <string name="night_mode_summary"></string>
     <string name="night_mode_title">Night mode</string>
     <string name="display_category">Display</string>
@@ -114,7 +114,7 @@
     <string name="taptowake_title">D2TW</string>
     <string name="taptowake_summary">Double Tap To Wake</string>
     <string name="slider_op_title">Shitty Slider</string>
-    <string name="tile_hbm_mode">High Brithness Mode</string>
+    <string name="tile_hbm_mode">High Brigthness</string>
     <string name="slider_op_summary">Notification Slider Settings</string>
 
     <!-- Shortcut actions -->
