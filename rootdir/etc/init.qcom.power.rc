@@ -30,16 +30,46 @@ on enable-low-power
     # Set sync wakee policy tunable
     write /proc/sys/kernel/sched_prefer_sync_wakee_to_waker 1
 
-    # Configure governor settings for little cluster
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-
-    # Online CPU2
-    write /sys/devices/system/cpu/cpu2/online 1
-
-    # Configure governor settings for big cluster
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
-
-
+# Configure governor settings for little cluster
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 300
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "22000 480000:10000 729600:32000 1228800:30000"
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 42000
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack -1
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "45 480000:35 652800:49 844800:60 960000:75 1113600:85 1228800:90 1401600:95 1593600:100"
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 45000
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down 1
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 1
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 0
+	write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 0
+	
+	
+# Configure governor settings for big cluster
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 300
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "40000 940800:55000 1248000:33000 1632000:32000"
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 40000
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack -1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "35 729600:30 940800:32 1113600:35 1248000:37 1401600:65 1632000:72 1708800:85 1824000:99 1996800:99 2150400:100"
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 40000
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/fast_ramp_down 1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 1
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 0
+	write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 0
+    
+    
     # Enable bus-dcvs
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
     write /sys/class/devfreq/soc:qcom,cpubw/polling_interval 50
