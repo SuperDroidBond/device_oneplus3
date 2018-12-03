@@ -50,7 +50,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 0
 		
 # Configure governor settings for big cluster
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 300
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "40000 940800:55000 1248000:33000 1632000:32000"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 40000
