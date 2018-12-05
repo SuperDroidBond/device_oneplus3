@@ -23,6 +23,9 @@ $(call inherit-product, device/oneplus/oneplus3/device.mk)
 # Inherit some common Xtended stuff.
 $(call inherit-product, vendor/xtended/config/common_full_phone.mk)
 
+# Vendor security patch level
+VENDOR_SECURITY_PATCH := 2018-11-01
+
 PRODUCT_NAME := xtended_oneplus3
 PRODUCT_DEVICE := oneplus3
 PRODUCT_MANUFACTURER := OnePlus
