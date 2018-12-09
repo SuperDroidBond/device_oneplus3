@@ -53,6 +53,17 @@
 
     <PreferenceCategory
         android:title="@string/graphics_title">
+
+        <Preference
+            android:key="kcal"
+            android:title="@string/kcal_title"
+            android:summary="@string/kcal_summary"
+            android:persistent="false" >
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.oneplus.shit.settings"
+                    android:targetClass="com.oneplus.shit.settings.DisplayCalibration" />
+        </Preference>
+
         <SwitchPreference
             android:key="srgb"
             android:summary="@string/srgb_mode_summary"

@@ -28,6 +28,8 @@ import android.provider.Settings;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.preference.TwoStatePreference;
@@ -42,6 +44,7 @@ import android.util.Log;
 import com.oneplus.shit.settings.R;
 
 public class ShitPanelSettings extends PreferenceActivity {
+
     public static final String KEY_VIBSTRENGTH = "vib_strength";
 
     /*public static final String KEY_TAPTOWAKE_SWITCH = "taptowake";*/
@@ -80,5 +83,6 @@ public class ShitPanelSettings extends PreferenceActivity {
         if (isPanelSupported) {
             mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
         }
+
     }
 }
