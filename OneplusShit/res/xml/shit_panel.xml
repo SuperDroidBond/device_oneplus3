@@ -42,6 +42,15 @@
         android:title="@string/taptowake_title"
         android:defaultValue="true" />-->
 
+    <ListPreference
+        android:key="spectrum"
+        android:title="@string/spectrum_title"
+        android:summary="@string/spectrum_summary"
+        android:defaultValue="0"
+        android:entries="@array/spectrum_profiles"
+        android:entryValues="@array/spectrum_values"
+        android:dialogTitle="@string/spectrum_title" />
+
     <PreferenceCategory
         android:title="@string/category_vibrator">
         <com.oneplus.shit.settings.VibratorStrengthPreference
@@ -53,7 +62,6 @@
 
     <PreferenceCategory
         android:title="@string/graphics_title">
-
         <Preference
             android:key="kcal"
             android:title="@string/kcal_title"
@@ -83,5 +91,4 @@
             android:defaultValue="false" />
 
     </PreferenceCategory>
-
 </PreferenceScreen>
