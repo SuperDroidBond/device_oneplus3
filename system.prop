@@ -30,6 +30,9 @@ sdm.debug.disable_skip_validate=1
 debug.sf.recomputecrop=0
 ro.sf.lcd_density=421
 sdm.perf_hint_window=50
+vendor.gralloc.enable_fb_ubwc=1
+vendor.gralloc.disable_wb_ubwc=1
+ro.opengles.version=196610
 
 #ifdef VENDOR_EDIT
 #liuhuisheng@OnePlus 20171016 for input
@@ -220,7 +223,7 @@ ro.adb.secure=0
 ro.secure=0
 
 # HAL1 Packages
-camera.hal1.packagelist=com.skype.raider,com.google.android.talk
+camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.oneplus.camera
 
 # VoLTE Prop
 persist.dbg.ims_volte_enable=1

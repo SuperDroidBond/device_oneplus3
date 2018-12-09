@@ -244,6 +244,9 @@ PRODUCT_PACKAGES += \
     vendor.display.color@1.0-service \
     vendor.display.color@1.0-impl
 
+PRODUCT_BOOT_JARS += \
+    WfdCommon
+
 PRODUCT_PROPERTY_OVERRIDES  += \
     ro.opengles.version=196610
 
