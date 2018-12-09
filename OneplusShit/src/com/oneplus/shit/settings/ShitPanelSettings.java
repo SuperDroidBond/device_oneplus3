@@ -24,7 +24,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.provider.Settings;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
@@ -43,7 +45,8 @@ import android.util.Log;
 
 import com.oneplus.shit.settings.R;
 
-public class ShitPanelSettings extends PreferenceActivity {
+public class ShitPanelSettings extends PreferenceActivity implements
+                                  Preference.OnPreferenceChangeListener {
 
     public static final String KEY_VIBSTRENGTH = "vib_strength";
 
@@ -52,12 +55,15 @@ public class ShitPanelSettings extends PreferenceActivity {
     public static final String KEY_SRGB_SWITCH = "srgb";
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_DCI_SWITCH = "dci";
+    private static final String SPECTRUM_KEY = "spectrum";
+    private static final String SPECTRUM_SYSTEM_PROPERTY = "persist.spectrum.profile";
 
     private VibratorStrengthPreference mVibratorStrength;
     /*private TwoStatePreference mTapToWakeSwitch;*/
     private TwoStatePreference mSRGBModeSwitch;
     private TwoStatePreference mHBMModeSwitch;
     private TwoStatePreference mDCIModeSwitch;
+    private ListPreference mSpectrum;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,5 +90,23 @@ public class ShitPanelSettings extends PreferenceActivity {
             mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
         }
 
+        mSpectrum = (ListPreference) findPreference(SPECTRUM_KEY);
+        if( mSpectrum != null ) {
+            mSpectrum.setValue(SystemProperties.get(SPECTRUM_SYSTEM_PROPERTY, "0"));
+            mSpectrum.setOnPreferenceChangeListener(this);
+        }
     }
+
+     @Override
+     public boolean onPreferenceChange(Preference preference, Object newValue) {
+         final String key = preference.getKey();
+         boolean value;
+         String strvalue;
+         if (SPECTRUM_KEY.equals(key)) {
+            strvalue = (String) newValue;
+            SystemProperties.set(SPECTRUM_SYSTEM_PROPERTY, strvalue);
+            return true;
+         }
+        return true;
+     }
 }
