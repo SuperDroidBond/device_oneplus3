@@ -64,6 +64,15 @@
                 <action android:name="android.intent.action.MAIN" />
           </intent-filter>
 	</activity>
+
+        <!-- Display Calibration -->
+        <activity
+            android:name="com.oneplus.shit.settings.DisplayCalibration"
+            android:label="@string/kcal_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 		
         <service
             android:name="com.oneplus.shit.settings.HBMModeTileService"
