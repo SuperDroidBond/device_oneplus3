@@ -195,6 +195,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=rome \
     vendor.qcom.bluetooth.soc=rome
 
+# Spectrum (for initial config)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.spectrum.profile=0
+
 # Camera
 PRODUCT_PACKAGES += \
     Snap \
@@ -387,6 +391,7 @@ PRODUCT_PACKAGES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
+    init.spectrum.rc \
     init.class_main.sh \
     init.qcom.early_boot.sh \
     init.qcom.post_boot.sh \
