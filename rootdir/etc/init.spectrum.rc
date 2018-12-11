@@ -87,21 +87,21 @@ on property:persist.spectrum.profile=0
 
 # Performance
 on property:persist.spectrum.profile=1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "chill"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "chill"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "performance"
 
 # Battery
 on property:persist.spectrum.profile=2
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "smartmax_eps"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "smartmax_eps"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "conservative"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "conservative"
 
 # Gaming
 on property:persist.spectrum.profile=3
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "lionheart"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "lionheart"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "ondemand"
 
 # Ultra Battery
 on property:persist.spectrum.profile=4
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "smartmax_eps"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "smartmax_eps"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
 
