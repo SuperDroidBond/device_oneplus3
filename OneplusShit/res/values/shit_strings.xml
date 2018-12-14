@@ -178,6 +178,7 @@
     <string name="kcal_contrast">Contrast</string>
     <string name="menu_reset">Reset</string>
     <string name="kcal_color_temp">Color temperature (K)</string>
+    <string name="reading_mode_title">Reading mode</string>
 
     <!-- Spectrum Profiles -->
     <string name="spectrum_title">Kernel Profile</string>

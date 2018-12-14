@@ -83,6 +83,8 @@ public class Startup extends BroadcastReceiver {
         restore(DCIModeSwitch.getFile(), enabled);
         VibratorStrengthPreference.restore(context);
         DisplayCalibration.restore(context);
+        // always reset on reboot
+        sharedPrefs.edit().putBoolean("reading_mode", false).commit();
     }
 
     private boolean getPreferenceBoolean(Context context, String key, boolean defaultValue) {
