@@ -1,6 +1,6 @@
--keep public class com.oneplus.shit.KeyHandler
+-keep public class com.oneplus.shit.settings.KeyHandler
 
--keepclassmembers public class com.oneplus.shit.KeyHandler {
+-keepclassmembers public class com.oneplus.shit.settings.KeyHandler {
     public <init>(android.content.Context, android.util.AttributeSet);
     *;
 }
