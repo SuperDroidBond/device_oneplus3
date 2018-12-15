@@ -19,7 +19,7 @@
           package="com.oneplus.shit.settings"
           android:versionCode="2"
           android:versionName="2.0" >
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INJECT_EVENTS"/>
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -39,17 +39,17 @@
             android:exported="true"
             android:label="@string/device_extras" >
 	    <intent-filter>
-		<action android:name="com.android.settings.action.EXTRA_SETTINGS" />
+		<action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <!-- Additional button settings (Button settings) -->
         <activity
             android:name="com.oneplus.shit.settings.ButtonSettingsActivity"
 	    android:label="@string/slider_op_title"
 	    android:theme="@style/Theme.Settings">
-            <intent-filter>
+	    <intent-filter>
+		<action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -61,19 +61,39 @@
             android:name="com.oneplus.shit.settings.ScreenOffGestureSettings"
             android:label="@string/screen_off_gesture_title">
           <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+	        <action android:name="android.intent.action.MAIN" />
+    	        <category android:name="android.intent.category.DEFAULT" />
           </intent-filter>
 	</activity>
-
         <!-- Display Calibration -->
         <activity
             android:name="com.oneplus.shit.settings.DisplayCalibration"
             android:label="@string/kcal_title">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+		 <action android:name="android.intent.action.MAIN" />
+  	         <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-		
+        <!-- OnePlus Panel Modes -->
+        <activity
+            android:name="com.oneplus.shit.settings.PanelSettingsActivity"
+	    android:label="@string/panel_category_title"
+	    android:launchMode="singleTask" >
+            <intent-filter>
+		 <action android:name="android.intent.action.MAIN" />
+  	         <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name="com.oneplus.shit.settings.PanelModeTileService"
+            android:icon="@drawable/ic_panel_tile"
+            android:label="@string/tile_panel_mode"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
         <service
             android:name="com.oneplus.shit.settings.HBMModeTileService"
             android:icon="@drawable/ic_hbm_tile"
@@ -84,12 +104,10 @@
                     android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
         </service>
-		
         <receiver android:name="com.oneplus.shit.settings.Startup" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>
-
 </manifest>
