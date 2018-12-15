@@ -76,11 +76,13 @@ public class Startup extends BroadcastReceiver {
         boolean enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_SRGB_SWITCH, false);
         restore(SRGBModeSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_HBM_SWITCH, false);
-        if (enabled) {
-            restore(HBMModeSwitch.getFile(), "2");
-        }
+        restore(HBMModeSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_DCI_SWITCH, false);
         restore(DCIModeSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_NIGHT_SWITCH, false);
+        restore(NightModeSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_ONEPLUS_SWITCH, false);
+        restore(OnePlusModeSwitch.getFile(), enabled);
         VibratorStrengthPreference.restore(context);
         DisplayCalibration.restore(context);
         // always reset on reboot
