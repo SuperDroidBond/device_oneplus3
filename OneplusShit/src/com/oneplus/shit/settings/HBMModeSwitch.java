@@ -46,7 +46,7 @@ public class HBMModeSwitch implements OnPreferenceChangeListener {
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
-        FileUtils.writeValue(getFile(), enabled ? "1" : "0");
+        FileUtils.writeValue(getFile(), enabled ? "2" : "0");
         return true;
     }
 }
