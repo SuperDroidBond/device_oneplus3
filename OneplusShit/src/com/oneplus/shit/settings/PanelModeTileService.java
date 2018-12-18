@@ -17,11 +17,9 @@
 */
 package com.oneplus.shit.settings;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.service.quicksettings.TileService;
 
-@TargetApi(24)
 public class PanelModeTileService extends TileService {
     @Override
     public void onDestroy() {
@@ -51,7 +49,9 @@ public class PanelModeTileService extends TileService {
     @Override
     public void onClick() {
         super.onClick();
-        Intent panelModes = new Intent(this, PanelSettingsActivity.class);
+        sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+	Intent panelModes = new Intent(this, PanelSettingsActivity.class);
+        panelModes.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivityAndCollapse(panelModes);
     }
 }
