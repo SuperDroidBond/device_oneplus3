@@ -499,6 +499,10 @@
          before setting power profiles on boot. -->
     <bool name="config_waitForMpctlOnBoot">true</bool>
 
-	<!-- Whether the device supports Smart Pixels -->
+    <!-- Whether the device supports Smart Pixels -->
     <bool name="config_enableSmartPixels">true</bool>
+
+    <!-- Whether the device has outdated qti-telephony-common.jar -->
+    <bool name="config_oldQtiTelephony">false</bool>
+
 </resources>
