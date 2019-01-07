@@ -68,18 +68,20 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 0
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 0   
 
+	write  /sys/block/sda/queue/scheduler "noop"
+	
     # Set thermal restrictions
     write /sys/kernel/msm_thermal/enabled 0
-    write /sys/kernel/msm_thermal/zone0 "1401600 1785600 40 38"
-    write /sys/kernel/msm_thermal/zone1 "1324800 1555200 41 40"
-    write /sys/kernel/msm_thermal/zone2 "1228800 1478400 42 41"
-    write /sys/kernel/msm_thermal/zone3 "1228800 1401600 43 42"
-    write /sys/kernel/msm_thermal/zone4 "1190400 1324800 44 43"
-    write /sys/kernel/msm_thermal/zone5 "1190400 1248000 46 44"
-    write /sys/kernel/msm_thermal/zone6 "1113600 1190400 48 46"
-    write /sys/kernel/msm_thermal/zone7 "1036800 940800 53 50"
-    write /sys/kernel/msm_thermal/zone8 "729600 729600 65 60"
-    write /sys/kernel/msm_thermal/sampling_ms 8000
+    write /sys/kernel/msm_thermal/zone0 "1401600 1785600 37 35"
+    write /sys/kernel/msm_thermal/zone1 "1324800 1555200 38 37"
+    write /sys/kernel/msm_thermal/zone2 "1228800 1478400 39 38"
+    write /sys/kernel/msm_thermal/zone3 "1228800 1401600 40 39"
+    write /sys/kernel/msm_thermal/zone4 "1190400 1324800 41 40"
+    write /sys/kernel/msm_thermal/zone5 "1190400 1248000 43 41"
+    write /sys/kernel/msm_thermal/zone6 "1113600 1190400 45 43"
+    write /sys/kernel/msm_thermal/zone7 "1036800 940800 50 45"
+    write /sys/kernel/msm_thermal/zone8 "729600 729600 55 50"
+    write /sys/kernel/msm_thermal/sampling_ms 6000
     write /sys/kernel/msm_thermal/enabled 1
 
     # Enable bus-dcvs
