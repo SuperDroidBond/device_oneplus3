@@ -27,7 +27,7 @@ import android.util.Log;
 
 import java.util.List;
 
-import org.lineageos.internal.util.FileUtils;
+import com.android.internal.util.havoc.FileUtils;
 
 public class PocketSensor implements SensorEventListener {
 
