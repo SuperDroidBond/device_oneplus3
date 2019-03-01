@@ -444,28 +444,6 @@
     <!-- For high brightness mode -->
     <integer name="config_outdoorAmbientLux">20000</integer>
 
-    <!-- Turn on LiveDisplay auto mode by default -->
-    <integer name="config_defaultLiveDisplayMode">2</integer>
-
-    <!-- Display mode remapping table.
-         If the mode names returned by the backend do not match
-         the predefined and translated strings in the Settings
-         app, they can be remapped here. The format is
-         "oldname:newname", one per entry. -->
-    <string-array name="config_displayModeMappings" translatable="false">
-        <item>standard:standard</item>
-        <item>dynamic:dynamic</item>
-        <item>cinema:cinema</item>
-        <item>astronomy:astronomy</item>
-        <item>photography:photography</item>
-        <item>basic:basic</item>
-        <item>srgb:srgb</item>
-        <item>dci_p3:dci_p3</item>
-    </string-array>
-
-    <!-- Should we filter any display modes which are unampped? -->
-    <bool name="config_filterDisplayModes">true</bool>
-
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
          of the following keys present:
