@@ -507,5 +507,8 @@
 
     <!-- Whether device ignores the RSSNR signal implementation -->
     <bool name="config_ignoreRssnrSignalLevel">true</bool>
-    
+
+    <!-- Enable OP Cam hack -->
+    <bool name="config_enableOPcamhack">true</bool>
+
 </resources>
