@@ -654,4 +654,7 @@ non-doze state -->
         <item>org.microg.nlp</item>
     </string-array>
 
+    <!-- Enable OP Cam hack -->
+    <bool name="config_enableOPcamhack">true</bool>
+
 </resources>
