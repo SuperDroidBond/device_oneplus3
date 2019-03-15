@@ -37,7 +37,7 @@ public final class NotificationRingerController extends SliderControllerBase {
     private static final int NOTIFICATION_ALL = 63;
     private static final int RINGER_VIBRATE = 64;
     private static final int RINGER_SILENT = 65;
-    private static final int CHANGE_DELAY = 500;
+    private static final int CHANGE_DELAY = 100;
 
     private final NotificationManager mNotificationManager;
     private final AudioManager mAudioManager;
