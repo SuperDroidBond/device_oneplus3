@@ -17,11 +17,11 @@
 <resources>
 
     <!-- The default usage of slider -->
-    <string name="config_defaultNotificationSliderUsage" translatable="false">1</string>
+    <string name="config_defaultNotificationSliderUsage" translatable="false">6</string>
 
     <!-- The default actions of slider when use for notification -->
     <string-array name="config_defaultSliderActionsForNotification" translatable="false">
-        <item>11</item>
+        <item>10</item>
         <item>12</item>
         <item>13</item>
     </string-array>
@@ -63,7 +63,7 @@
 
     <!-- The default actions of slider when use for notification and ringer -->
     <string-array name="config_defaultSliderActionsForNotificationRinger" translatable="false">
-        <item>70</item>
+        <item>75</item>
         <item>74</item>
         <item>73</item>
     </string-array>
