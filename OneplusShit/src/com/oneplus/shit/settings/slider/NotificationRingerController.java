@@ -42,8 +42,8 @@ public final class NotificationRingerController extends SliderControllerBase {
     private final NotificationManager mNotificationManager;
     private final AudioManager mAudioManager;
     private Handler mHandler;
-    private int mCurrentRinger;
-    private int mCurrentNotif;
+    private int mRingMode;
+    private int mZenMode;
 
     public NotificationRingerController(Context context) {
         super(context);
@@ -58,64 +58,70 @@ public final class NotificationRingerController extends SliderControllerBase {
 
         switch (action) {
             case RINGER_VIBRATE:
-                mCurrentRinger = RINGER_VIBRATE;
+                mRingMode = RINGER_VIBRATE;
                 mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (mCurrentRinger != RINGER_VIBRATE) return;
+                        if (mRingMode != RINGER_VIBRATE) return;
                         mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
                     }
                 }, CHANGE_DELAY);
                 return true;
             case RINGER_SILENT:
-                mCurrentRinger = RINGER_SILENT;
+                mRingMode = RINGER_SILENT;
                 mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (mCurrentRinger != RINGER_SILENT) return;
+                        if (mRingMode != RINGER_SILENT) return;
                         mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
                     }
                 }, CHANGE_DELAY);
                 return true;
             case NOTIFICATION_TOTAL_SILENCE:
-                mCurrentNotif = NOTIFICATION_TOTAL_SILENCE;
+                mZenMode = NOTIFICATION_TOTAL_SILENCE;
                 mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (mCurrentNotif != NOTIFICATION_TOTAL_SILENCE) return;
+                        if (mZenMode != NOTIFICATION_TOTAL_SILENCE) return;
                         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
                     }
                 }, CHANGE_DELAY);
                 return true;
             case NOTIFICATION_ALARMS_ONLY:
-                mCurrentNotif = NOTIFICATION_ALARMS_ONLY;
+                mZenMode = NOTIFICATION_ALARMS_ONLY;
                 mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (mCurrentNotif != NOTIFICATION_ALARMS_ONLY) return;
+                        if (mZenMode != NOTIFICATION_ALARMS_ONLY) return;
                         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_ALARMS, null, TAG);
                     }
                 }, CHANGE_DELAY);
                 return true;
             case NOTIFICATION_PRIORITY_ONLY:
-                mCurrentNotif = NOTIFICATION_PRIORITY_ONLY;
+                mZenMode = NOTIFICATION_PRIORITY_ONLY;
                 mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (mCurrentNotif != NOTIFICATION_PRIORITY_ONLY) return;
+                        if (mZenMode != NOTIFICATION_PRIORITY_ONLY) return;
                         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
                     }
                 }, CHANGE_DELAY);
-
                 return true;
             case NOTIFICATION_ALL:
-                mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+                mRingMode = NOTIFICATION_ALL;
                 mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mRingMode != NOTIFICATION_ALL) return;
+                        mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+                    }
+                }, CHANGE_DELAY);
                 return true;
             default:
                 return false;

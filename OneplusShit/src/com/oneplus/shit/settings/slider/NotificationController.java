@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The MoKee Open Source Project
+ * Copyright (C) 2018 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.oneplus.shit.settings.slider;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.media.AudioManager;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.SparseIntArray;
@@ -34,6 +36,7 @@ public final class NotificationController extends SliderControllerBase {
     private static final int NOTIFICATION_ALARMS_ONLY = 11;
     private static final int NOTIFICATION_PRIORITY_ONLY = 12;
     private static final int NOTIFICATION_ALL = 13;
+    private static final int CHANGE_DELAY = 100;
 
     private static final SparseIntArray MODES = new SparseIntArray();
     static {
@@ -48,17 +51,30 @@ public final class NotificationController extends SliderControllerBase {
     }
 
     private final NotificationManager mNotificationManager;
+    private final AudioManager mAudioManager;
+    private Handler mHandler;
+    private int mZenMode;
 
     public NotificationController(Context context) {
         super(context);
+        mHandler = new Handler();
         mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE);
+        mAudioManager = getSystemService(Context.AUDIO_SERVICE);
     }
 
     @Override
     protected boolean processAction(int action) {
         Log.d(TAG, "slider action: " + action);
         if (MODES.indexOfKey(action) >= 0) {
-            mNotificationManager.setZenMode(MODES.get(action), null, TAG);
+            mZenMode = MODES.indexOfKey(action);
+            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (mZenMode != MODES.indexOfKey(action)) return;
+                    mNotificationManager.setZenMode(MODES.get(action), null, TAG);
+                }
+            }, CHANGE_DELAY);
             return true;
         } else {
             return false;
@@ -67,6 +83,8 @@ public final class NotificationController extends SliderControllerBase {
 
     @Override
     public void reset() {
+        mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
     }
 }
+
