@@ -33,7 +33,7 @@ public final class NotificationController extends SliderControllerBase {
     private static final int NOTIFICATION_TOTAL_SILENCE = 10;
     private static final int NOTIFICATION_ALARMS_ONLY = 11;
     private static final int NOTIFICATION_PRIORITY_ONLY = 12;
-    private static final int NOTIFICATION_NONE = 13;
+    private static final int NOTIFICATION_ALL = 13;
 
     private static final SparseIntArray MODES = new SparseIntArray();
     static {
@@ -43,7 +43,7 @@ public final class NotificationController extends SliderControllerBase {
                 Settings.Global.ZEN_MODE_ALARMS);
         MODES.put(NOTIFICATION_PRIORITY_ONLY,
                 Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        MODES.put(NOTIFICATION_NONE,
+        MODES.put(NOTIFICATION_ALL,
                 Settings.Global.ZEN_MODE_OFF);
     }
 
