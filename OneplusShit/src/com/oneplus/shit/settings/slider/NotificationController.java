@@ -33,7 +33,6 @@ public final class NotificationController extends SliderControllerBase {
     private static final String TAG = "NotificationController";
 
     private static final int NOTIFICATION_TOTAL_SILENCE = 10;
-    private static final int NOTIFICATION_ALARMS_ONLY = 11;
     private static final int NOTIFICATION_PRIORITY_ONLY = 12;
     private static final int NOTIFICATION_ALL = 13;
     private static final int CHANGE_DELAY = 100;
@@ -42,8 +41,6 @@ public final class NotificationController extends SliderControllerBase {
     static {
         MODES.put(NOTIFICATION_TOTAL_SILENCE,
                 Settings.Global.ZEN_MODE_NO_INTERRUPTIONS);
-        MODES.put(NOTIFICATION_ALARMS_ONLY,
-                Settings.Global.ZEN_MODE_ALARMS);
         MODES.put(NOTIFICATION_PRIORITY_ONLY,
                 Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         MODES.put(NOTIFICATION_ALL,
