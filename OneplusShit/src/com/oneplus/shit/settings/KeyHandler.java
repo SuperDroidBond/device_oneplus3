@@ -127,11 +127,11 @@ public class KeyHandler implements DeviceKeyHandler {
                 new IntentFilter(ButtonConstants.ACTION_UPDATE_SLIDER_SETTINGS));
 
         mEventHandler = new EventHandler();
-        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mPowerManager = context.getSystemService(PowerManager.class);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mNotificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager = context.getSystemService(SensorManager.class);
         mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         mProximityWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "ProximityWakeLock");

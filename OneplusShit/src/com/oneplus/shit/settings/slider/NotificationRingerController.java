@@ -47,8 +47,8 @@ public final class NotificationRingerController extends SliderControllerBase {
     public NotificationRingerController(Context context) {
         super(context);
         mHandler = new Handler();
-        mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE);
-        mAudioManager = getSystemService(Context.AUDIO_SERVICE);
+        mNotificationManager = context.getSystemService(NotificationManager.class);
+        mAudioManager = context.getSystemService(AudioManager.class);
     }
 
     @Override
