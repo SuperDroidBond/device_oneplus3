@@ -59,9 +59,8 @@ public final class FlashlightController extends SliderControllerBase {
 
     public FlashlightController(Context context) {
         super(context);
-        mCameraManager = getSystemService(Context.CAMERA_SERVICE);
-
-        PowerManager pm = getSystemService(Context.POWER_SERVICE);
+        mCameraManager = context.getSystemService(CameraManager.class);
+        PowerManager pm = context.getSystemService(PowerManager.class);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
     }
 
