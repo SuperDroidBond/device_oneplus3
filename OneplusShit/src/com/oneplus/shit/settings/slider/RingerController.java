@@ -44,7 +44,7 @@ public final class RingerController extends SliderControllerBase {
 
     public RingerController(Context context) {
         super(context);
-        mAudioManager = getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager = context.getSystemService(AudioManager.class);
     }
 
     @Override
