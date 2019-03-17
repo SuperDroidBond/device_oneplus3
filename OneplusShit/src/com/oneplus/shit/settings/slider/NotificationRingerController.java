@@ -25,11 +25,22 @@ import android.util.Log;
 
 import com.oneplus.shit.settings.SliderControllerBase;
 
+import android.content.res.Resources;
+import android.os.Looper;
+import android.view.Gravity;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.widget.Toast;
+
+import com.oneplus.shit.settings.R;
+
 public final class NotificationRingerController extends SliderControllerBase {
 
     public static final int ID = 6;
 
     private static final String TAG = "NotificationRingerController";
+    public static final String PACKAGE_SYSTEMUI = "com.android.systemui";
 
     private static final int NOTIFICATION_TOTAL_SILENCE = 70;
     private static final int NOTIFICATION_PRIORITY_ONLY = 72;
@@ -43,6 +54,7 @@ public final class NotificationRingerController extends SliderControllerBase {
     private Handler mHandler;
     private int mRingMode;
     private int mZenMode;
+    private Toast toast;
 
     public NotificationRingerController(Context context) {
         super(context);
@@ -59,6 +71,7 @@ public final class NotificationRingerController extends SliderControllerBase {
             case RINGER_VIBRATE:
                 mRingMode = RINGER_VIBRATE;
                 mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
+       	        showToast(R.string.toast_ringer_vibrate, Toast.LENGTH_SHORT, 350);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -70,6 +83,7 @@ public final class NotificationRingerController extends SliderControllerBase {
             case RINGER_SILENT:
                 mRingMode = RINGER_SILENT;
                 mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
+                showToast(R.string.toast_ringer_silent, Toast.LENGTH_SHORT, 350);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -81,6 +95,7 @@ public final class NotificationRingerController extends SliderControllerBase {
             case NOTIFICATION_TOTAL_SILENCE:
                 mZenMode = NOTIFICATION_TOTAL_SILENCE;
                 mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
+                showToast(R.string.toast_total_silence, Toast.LENGTH_SHORT, 350);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -92,6 +107,7 @@ public final class NotificationRingerController extends SliderControllerBase {
             case NOTIFICATION_PRIORITY_ONLY:
                 mZenMode = NOTIFICATION_PRIORITY_ONLY;
                 mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+                showToast(R.string.toast_priority_only, Toast.LENGTH_SHORT, 350);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -103,6 +119,7 @@ public final class NotificationRingerController extends SliderControllerBase {
             case NOTIFICATION_ALL:
                 mRingMode = NOTIFICATION_ALL;
                 mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
+                showToast(R.string.toast_ringer_normal, Toast.LENGTH_SHORT, 350);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -120,6 +137,38 @@ public final class NotificationRingerController extends SliderControllerBase {
     public void reset() {
         mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
+    }
+
+    void showToast(int messageId, int duration, int yOffset) {
+	Context resCtx = getPackageContext(mContext, "com.oneplus.shit.settings");
+        final String message = resCtx.getResources().getString(messageId);
+	Context ctx = getPackageContext(mContext, PACKAGE_SYSTEMUI);
+	Handler handler = new Handler(Looper.getMainLooper());
+	handler.post(new Runnable() {
+	    @Override
+	    public void run() {
+		if (toast != null) toast.cancel();
+		toast = Toast.makeText(ctx, message, duration);
+		toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, yOffset);
+		toast.show();
+		}
+	    });
+    }
+
+    public static Context getPackageContext(Context context, String packageName) {
+        Context pkgContext = null;
+        if (context.getPackageName().equals(packageName)) {
+            pkgContext = context;
+        } else {
+            try {
+                pkgContext = context.createPackageContext(packageName,
+                        Context.CONTEXT_IGNORE_SECURITY
+                                | Context.CONTEXT_INCLUDE_CODE);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return pkgContext;
     }
 }
 
