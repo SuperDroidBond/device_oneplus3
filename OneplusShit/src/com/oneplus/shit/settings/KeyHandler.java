@@ -23,6 +23,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -48,6 +49,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -58,6 +60,13 @@ import com.oneplus.shit.settings.ScreenOffGesture;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.gzosp.ActionConstants;
 import com.android.internal.util.gzosp.Action;
+import android.view.Gravity;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.widget.Toast;
+
+import com.oneplus.shit.settings.R;
 
 public class KeyHandler implements DeviceKeyHandler {
 
