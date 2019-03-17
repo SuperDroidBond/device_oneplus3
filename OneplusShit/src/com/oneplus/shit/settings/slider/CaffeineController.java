@@ -27,11 +27,23 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 
 import com.oneplus.shit.settings.SliderControllerBase;
 
+import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.Gravity;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.widget.Toast;
+
+import com.oneplus.shit.settings.R;
+
 public final class CaffeineController extends SliderControllerBase {
 
     public static final int ID = 7;
 
     private static final String TAG = "CaffeineController";
+    public static final String PACKAGE_SYSTEMUI = "com.android.systemui";
 
     private static final int CAFFEINE_OFF = 60;
     private static final int CAFFEINE_5MIN = 61;
@@ -43,6 +55,7 @@ public final class CaffeineController extends SliderControllerBase {
     private ScreenStateReceiver mScreenStateReceiver;
 
     private int lastAction = CAFFEINE_OFF;
+    private Toast toast;
 
     public CaffeineController(Context context) {
         super(context);
@@ -64,22 +77,27 @@ public final class CaffeineController extends SliderControllerBase {
         switch (action) {
             case CAFFEINE_OFF:
                 mScreenStateReceiver.unregister();
+       	        showToast(R.string.toast_caffine_off, Toast.LENGTH_SHORT, 350);
                 return true;
             case CAFFEINE_5MIN:
                 mWakeLock.acquire(MINUTES.toMillis(5));
                 mScreenStateReceiver.register();
+                showToast(R.string.toast_caffine_5min, Toast.LENGTH_SHORT, 350);
                 return true;
             case CAFFEINE_10MIN:
                 mWakeLock.acquire(MINUTES.toMillis(10));
                 mScreenStateReceiver.register();
+                showToast(R.string.toast_caffine_10min, Toast.LENGTH_SHORT, 350);
                 return true;
             case CAFFEINE_30MIN:
                 mWakeLock.acquire(MINUTES.toMillis(30));
                 mScreenStateReceiver.register();
+                showToast(R.string.toast_caffine_30min, Toast.LENGTH_SHORT, 350);
                 return true;
             case CAFFEINE_INFINITY:
                 mWakeLock.acquire();
                 mScreenStateReceiver.register();
+                showToast(R.string.toast_caffine_infinity, Toast.LENGTH_SHORT, 350);
                 return true;
             default:
                 return false;
@@ -129,5 +147,37 @@ public final class CaffeineController extends SliderControllerBase {
                     break;
             }
         }
+    }
+
+    void showToast(int messageId, int duration, int yOffset) {
+	Context resCtx = getPackageContext(mContext, "com.oneplus.shit.settings");
+        final String message = resCtx.getResources().getString(messageId);
+	Context ctx = getPackageContext(mContext, PACKAGE_SYSTEMUI);
+	Handler handler = new Handler(Looper.getMainLooper());
+	handler.post(new Runnable() {
+	    @Override
+	    public void run() {
+		if (toast != null) toast.cancel();
+		toast = Toast.makeText(ctx, message, duration);
+		toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, yOffset);
+		toast.show();
+		}
+	    });
+    }
+
+    public static Context getPackageContext(Context context, String packageName) {
+        Context pkgContext = null;
+        if (context.getPackageName().equals(packageName)) {
+            pkgContext = context;
+        } else {
+            try {
+                pkgContext = context.createPackageContext(packageName,
+                        Context.CONTEXT_IGNORE_SECURITY
+                                | Context.CONTEXT_INCLUDE_CODE);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return pkgContext;
     }
 }
