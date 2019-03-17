@@ -189,4 +189,26 @@
     <string name="off_mode_title">Off</string>
     <string name="tile_panel_mode">Panel modes</string>
 
+    <!-- Toast Text -->
+    <string name="toast_ringer_vibrate">Vibrate</string>
+    <string name="toast_ringer_normal">Ring Normal</string>
+    <string name="toast_priority_only">Priority Only</string>
+    <string name="toast_ringer_silent">Ring Silent</string>
+    <string name="toast_total_silence">Total Silence</string>
+    <string name="toast_auto_brightness">Auto Brightness</string>
+    <string name="toast_max_brightness">Max Brightness</string>
+    <string name="toast_min_brightness">Min Brightness</string>
+    <string name="flash_blink">Flash Blink</string>
+    <string name="flash_on">Flash On</string>
+    <string name="flash_off">Flash Off</string>
+    <string name="toast_caffine_infinity">Caffine Infinity</string>
+    <string name="toast_caffine_30min">Caffine 30 Min</string>
+    <string name="toast_caffine_10min">Caffine 10 Min</string>
+    <string name="toast_caffine_5min">Caffine 5 Min</string>
+    <string name="toast_caffine_off">Caffine Off</string>
+    <string name="toast_rot_auto">Rotation Auto</string>
+    <string name="toast_rot_0">Rotation 0 Deg</string>
+    <string name="toast_rot_90">Rotation 90 Deg</string>
+    <string name="toast_rot_270">Rotation 270 Deg</string>
+
 </resources>

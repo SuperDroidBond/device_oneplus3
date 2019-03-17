@@ -26,11 +26,22 @@ import android.util.Log;
 
 import com.oneplus.shit.settings.SliderControllerBase;
 
+import android.content.res.Resources;
+import android.os.Looper;
+import android.view.Gravity;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.widget.Toast;
+
+import com.oneplus.shit.settings.R;
+
 public final class FlashlightController extends SliderControllerBase {
 
     public static final int ID = 2;
 
     private static final String TAG = "FlashlightController";
+    public static final String PACKAGE_SYSTEMUI = "com.android.systemui";
 
     private static final int FLASHLIGHT_OFF = 20;
     private static final int FLASHLIGHT_ON = 21;
@@ -44,6 +55,7 @@ public final class FlashlightController extends SliderControllerBase {
     private boolean mTorchEnabled = false;
 
     private PowerManager.WakeLock mWakeLock;
+    private Toast toast;
 
     private final Handler mBlinkHandler = new Handler();
     private final Runnable mBlinkRunnble = new Runnable() {
@@ -72,6 +84,7 @@ public final class FlashlightController extends SliderControllerBase {
             case FLASHLIGHT_OFF:
                 succeed = setTorchMode(false);
                 mBlinkHandler.removeCallbacksAndMessages(null);
+      	        showToast(R.string.flash_off, Toast.LENGTH_SHORT, 350);
                 if (mWakeLock.isHeld()) {
                     mWakeLock.release();
                 }
@@ -80,6 +93,7 @@ public final class FlashlightController extends SliderControllerBase {
                 mCameraId = getCameraId();
                 succeed = setTorchMode(true);
                 mBlinkHandler.removeCallbacksAndMessages(null);
+                showToast(R.string.flash_on, Toast.LENGTH_SHORT, 350);
                 if (mWakeLock.isHeld()) {
                     mWakeLock.release();
                 }
@@ -87,6 +101,7 @@ public final class FlashlightController extends SliderControllerBase {
             case FLASHLIGHT_BLINK:
                 mBlinkHandler.removeCallbacksAndMessages(null);
                 mCameraId = getCameraId();
+                showToast(R.string.flash_blink, Toast.LENGTH_SHORT, 350);
                 if (setTorchMode(true)) {
                     mWakeLock.acquire();
                     mBlinkHandler.postDelayed(mBlinkRunnble, BLINK_INTERVAL);
@@ -144,4 +159,37 @@ public final class FlashlightController extends SliderControllerBase {
 
         return null;
     }
+
+    void showToast(int messageId, int duration, int yOffset) {
+	Context resCtx = getPackageContext(mContext, "com.oneplus.shit.settings");
+        final String message = resCtx.getResources().getString(messageId);
+	Context ctx = getPackageContext(mContext, PACKAGE_SYSTEMUI);
+	Handler handler = new Handler(Looper.getMainLooper());
+	handler.post(new Runnable() {
+	    @Override
+	    public void run() {
+		if (toast != null) toast.cancel();
+		toast = Toast.makeText(ctx, message, duration);
+		toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, yOffset);
+		toast.show();
+		}
+	    });
+    }
+
+    public static Context getPackageContext(Context context, String packageName) {
+        Context pkgContext = null;
+        if (context.getPackageName().equals(packageName)) {
+            pkgContext = context;
+        } else {
+            try {
+                pkgContext = context.createPackageContext(packageName,
+                        Context.CONTEXT_IGNORE_SECURITY
+                                | Context.CONTEXT_INCLUDE_CODE);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return pkgContext;
+    }
 }
+
