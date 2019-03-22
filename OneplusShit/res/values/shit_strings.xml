@@ -106,8 +106,6 @@
     <string name="dci_mode_title">Wide Color Gamut Mode</string>
     <string name="oneplus_mode_summary"></string>
     <string name="oneplus_mode_title">OnePlus mode</string>
-    <string name="night_mode_summary"></string>
-    <string name="night_mode_title">Night mode</string>
     <string name="display_category">Display</string>
     <string name="device_doze_title">Ambient Display</string>
     <string name="device_doze_summary">Ambient Display Options</string>
@@ -178,7 +176,6 @@
     <string name="kcal_contrast">Contrast</string>
     <string name="menu_reset">Reset</string>
     <string name="kcal_color_temp">Color temperature (K)</string>
-    <string name="reading_mode_title">Reading mode</string>
 
     <!-- Spectrum Profiles -->
     <string name="spectrum_title">Kernel Profile</string>

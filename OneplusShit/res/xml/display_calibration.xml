@@ -87,10 +87,5 @@
         app:min_value="224"
         app:default_value="256"/>
 
-    <SwitchPreference
-        android:key="reading_mode"
-        android:title="@string/reading_mode_title"
-        android:disableDependentsState="true" />
-		
 </PreferenceScreen>
 

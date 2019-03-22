@@ -39,7 +39,6 @@ import android.util.SparseArray;
 import android.util.Slog;
 import android.view.Menu;
 import android.view.MenuInflater;
-import com.android.internal.app.ColorDisplayController;
 
 import java.util.List;
 import java.util.Arrays;
@@ -58,13 +57,6 @@ public class DisplayCalibration extends PreferenceActivity implements
     public static final String KEY_KCAL_SATURATION = "kcal_saturation";
     public static final String KEY_KCAL_CONTRAST = "kcal_contrast";
     public static final String KEY_KCAL_COLOR_TEMP = "kcal_color_temp";
-    private static final String PREF_READING_MODE = "reading_mode";
-
-    private static final int LEVEL_COLOR_MATRIX_READING = 201;
-
-    private static final SparseArray<float[]> mColorMatrix = new SparseArray<>(3);
-    private static final int SURFACE_FLINGER_TRANSACTION_COLOR_MATRIX = 1015;
-    private static final float[][] mTempColorMatrix = new float[2][16];
 
     private SeekBarPreference mKcalRed;
     private SeekBarPreference mKcalBlue;
@@ -74,7 +66,6 @@ public class DisplayCalibration extends PreferenceActivity implements
     private SeekBarPreference mKcalColorTemp;
     private SharedPreferences mPrefs;
     private SwitchPreference mKcalEnabled;
-    private SwitchPreference mReadingMode;
     private boolean mEnabled;
 
     private String mRed;
@@ -85,25 +76,6 @@ public class DisplayCalibration extends PreferenceActivity implements
     private static final String COLOR_FILE_CONTRAST = "/sys/devices/platform/kcal_ctrl.0/kcal_cont";
     private static final String COLOR_FILE_SATURATION = "/sys/devices/platform/kcal_ctrl.0/kcal_sat";
     private static final String COLOR_FILE_ENABLE = "/sys/devices/platform/kcal_ctrl.0/kcal_enable";
-
-    /**
-     * Matrix and offset used for converting color to grayscale.
-     * Copied from com.android.server.accessibility.DisplayAdjustmentUtils.MATRIX_GRAYSCALE
-     */
-    private static final float[] MATRIX_GRAYSCALE = new float[] {
-            .2126f, .2126f, .2126f, 0,
-            .7152f, .7152f, .7152f, 0,
-            .0722f, .0722f, .0722f, 0,
-            0,      0,      0, 1
-    };
-
-    /** Full color matrix and offset */
-    private static final float[] MATRIX_NORMAL = new float[] {
-            1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -150,7 +122,6 @@ public class DisplayCalibration extends PreferenceActivity implements
         mGreen = String.valueOf(mPrefs.getInt(KEY_KCAL_GREEN, mKcalGreen.def));
         mBlue = String.valueOf(mPrefs.getInt(KEY_KCAL_BLUE, mKcalBlue.def));
 
-        mReadingMode = (SwitchPreference) findPreference(PREF_READING_MODE);
     }
 
     private boolean isSupported(String file) {
@@ -226,15 +197,6 @@ public class DisplayCalibration extends PreferenceActivity implements
         mKcalColorTemp.setValue(cct);
     }
  
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference == mReadingMode) {
-            boolean checked = ((SwitchPreference)preference).isChecked();
-            setReadingMode(checked);
-            return true;
-        }
-        return onPreferenceTreeClick(preference);
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mKcalEnabled) {
@@ -320,71 +282,4 @@ public class DisplayCalibration extends PreferenceActivity implements
         }
         return false;
     }
-
-    public static void setReadingMode(boolean state) {
-         setColorMatrix(LEVEL_COLOR_MATRIX_READING,
-              state ? MATRIX_GRAYSCALE : MATRIX_NORMAL);
-    }
-
-    public static void setColorMatrix(int level, float[] value) {
-        if (value != null && value.length != 16) {
-            throw new IllegalArgumentException("Expected length: 16 (4x4 matrix)"
-                    + ", actual length: " + value.length);
-        }
-
-        synchronized (mColorMatrix) {
-            final float[] oldValue = mColorMatrix.get(level);
-            if (!Arrays.equals(oldValue, value)) {
-                if (value == null) {
-                    mColorMatrix.remove(level);
-                } else if (oldValue == null) {
-                    mColorMatrix.put(level, Arrays.copyOf(value, value.length));
-                } else {
-                    System.arraycopy(value, 0, oldValue, 0, value.length);
-                }
-
-                // Update the current color transform.
-                applyColorMatrix(computeColorMatrixLocked());
-            }
-        }
-    }
-
-    private static void applyColorMatrix(float[] m) {
-        final IBinder flinger = ServiceManager.getService("SurfaceFlinger");
-        if (flinger != null) {
-            final Parcel data = Parcel.obtain();
-            data.writeInterfaceToken("android.ui.ISurfaceComposer");
-            if (m != null) {
-                data.writeInt(1);
-                for (int i = 0; i < 16; i++) {
-                    data.writeFloat(m[i]);
-                }
-            } else {
-                data.writeInt(0);
-            }
-            try {
-                flinger.transact(SURFACE_FLINGER_TRANSACTION_COLOR_MATRIX, data, null, 0);
-            } catch (RemoteException ex) {
-                Slog.e(TAG, "Failed to set color transform", ex);
-            } finally {
-                data.recycle();
-            }
-        }
-    }
-
-    private static float[] computeColorMatrixLocked() {
-        final int count = mColorMatrix.size();
-        if (count == 0) {
-            return null;
-        }
-
-        final float[][] result = mTempColorMatrix;
-        Matrix.setIdentityM(result[0], 0);
-        for (int i = 0; i < count; i++) {
-            float[] rhs = mColorMatrix.valueAt(i);
-            Matrix.multiplyMM(result[(i + 1) % 2], 0, result[i % 2], 0, rhs, 0);
-        }
-        return result[count % 2];
-    }
 }
-
