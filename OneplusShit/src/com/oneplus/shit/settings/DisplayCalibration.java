@@ -31,6 +31,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import java.util.List;
+import java.util.Arrays;
+
 import android.app.ActionBar;
 import com.oneplus.shit.settings.utils.SeekBarPreference;
 import com.oneplus.shit.settings.R;
@@ -271,4 +274,3 @@ public class DisplayCalibration extends PreferenceActivity implements
         return false;
     }
 }
-

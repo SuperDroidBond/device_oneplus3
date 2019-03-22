@@ -79,8 +79,6 @@ public class Startup extends BroadcastReceiver {
         restore(HBMModeSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_DCI_SWITCH, false);
         restore(DCIModeSwitch.getFile(), enabled);
-        enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_NIGHT_SWITCH, false);
-        restore(NightModeSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(ShitPanelSettings.KEY_ONEPLUS_SWITCH, false);
         restore(OnePlusModeSwitch.getFile(), enabled);
         VibratorStrengthPreference.restore(context);
