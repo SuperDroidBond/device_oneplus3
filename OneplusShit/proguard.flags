@@ -4,3 +4,6 @@
     public <init>(android.content.Context, android.util.AttributeSet);
     *;
 }
+-keep class com.oneplus.shit.settings.dirac.* {
+  *;
+}
