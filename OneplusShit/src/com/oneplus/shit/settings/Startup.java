@@ -38,6 +38,8 @@ import com.oneplus.shit.settings.ShitPanelSettings;
 import com.oneplus.shit.settings.VibratorStrengthPreference ;
 import com.oneplus.shit.settings.utils.FileUtils;
 
+import com.oneplus.shit.settings.dirac.DiracUtils;
+
 import java.io.File;
 
 public class Startup extends BroadcastReceiver {
@@ -83,6 +85,7 @@ public class Startup extends BroadcastReceiver {
         restore(OnePlusModeSwitch.getFile(), enabled);
         VibratorStrengthPreference.restore(context);
         DisplayCalibration.restore(context);
+        DiracUtils.initialize();
     }
 
     private boolean getPreferenceBoolean(Context context, String key, boolean defaultValue) {
