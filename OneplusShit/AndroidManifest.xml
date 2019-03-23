@@ -74,6 +74,15 @@
   	         <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- Dirac Sounds -->
+        <activity
+            android:name="com.oneplus.shit.settings.dirac.DiracActivity"
+            android:label="@string/dirac_title">
+            <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <!-- OnePlus Panel Modes -->
         <activity
             android:name="com.oneplus.shit.settings.PanelSettingsActivity"
