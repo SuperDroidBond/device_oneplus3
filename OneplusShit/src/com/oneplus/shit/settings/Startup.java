@@ -85,7 +85,7 @@ public class Startup extends BroadcastReceiver {
         restore(OnePlusModeSwitch.getFile(), enabled);
         VibratorStrengthPreference.restore(context);
         DisplayCalibration.restore(context);
-        new DiracUtils(context);
+        new DiracUtils(context).onBootCompleted();
     }
 
     private boolean getPreferenceBoolean(Context context, String key, boolean defaultValue) {
