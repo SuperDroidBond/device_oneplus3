@@ -188,6 +188,10 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3154116608
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 57436708864
 BOARD_FLASH_BLOCK_SIZE := 262144
 TARGET_USES_MKE2FS := true
+BOARD_ROOT_EXTRA_SYMLINKS := \
+    /vendor/dsp:/dsp \
+    /vendor/firmware_mnt:/firmware \
+    /vendor/bt_firmware:/bt_firmware
 
 # Power
 TARGET_HAS_NO_WLAN_STATS := true
