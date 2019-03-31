@@ -1,4 +1,6 @@
 allow hal_perf_default hal_camera_default:process signull;
 allow hal_perf_default hal_graphics_composer_default:process signull;
 allow hal_perf_default self:capability kill;
-allow hal_perf_default system_server:dir search;
+allow hal_perf_default system_server:dir {search read write open};
+allow hal_perf_default system_server:file {read write open};
+allow hal_perf_default priv_app:file write;
