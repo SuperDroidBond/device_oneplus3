@@ -33,6 +33,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.widget.Toast;
+import android.app.ActivityThread;
 
 import com.oneplus.shit.settings.R;
 
@@ -56,6 +57,8 @@ public final class FlashlightController extends SliderControllerBase {
 
     private PowerManager.WakeLock mWakeLock;
     private Toast toast;
+    private final Context mSysUiContext;
+    private final Context mResContext;
 
     private final Handler mBlinkHandler = new Handler();
     private final Runnable mBlinkRunnble = new Runnable() {
@@ -74,6 +77,8 @@ public final class FlashlightController extends SliderControllerBase {
         mCameraManager = context.getSystemService(CameraManager.class);
         PowerManager pm = context.getSystemService(PowerManager.class);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+        mSysUiContext = ActivityThread.currentActivityThread().getSystemUiContext();
+        mResContext = getPackageContext(mContext, "com.oneplus.shit.settings");
     }
 
     @Override
@@ -161,19 +166,17 @@ public final class FlashlightController extends SliderControllerBase {
     }
 
     void showToast(int messageId, int duration, int yOffset) {
-	Context resCtx = getPackageContext(mContext, "com.oneplus.shit.settings");
-        final String message = resCtx.getResources().getString(messageId);
-	Context ctx = getPackageContext(mContext, PACKAGE_SYSTEMUI);
-	Handler handler = new Handler(Looper.getMainLooper());
-	handler.post(new Runnable() {
-	    @Override
-	    public void run() {
-		if (toast != null) toast.cancel();
-		toast = Toast.makeText(ctx, message, duration);
-		toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, yOffset);
-		toast.show();
-		}
-	    });
+        final String message = mResContext.getResources().getString(messageId);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+        @Override
+        public void run() {
+            if (toast != null) toast.cancel();
+            toast = Toast.makeText(mSysUiContext, message, duration);
+            toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, yOffset);
+            toast.show();
+            }
+        });
     }
 
     public static Context getPackageContext(Context context, String packageName) {
