@@ -32,6 +32,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.widget.Toast;
+import android.app.ActivityThread;
 
 import com.oneplus.shit.settings.R;
 
@@ -55,12 +56,16 @@ public final class NotificationRingerController extends SliderControllerBase {
     private int mRingMode;
     private int mZenMode;
     private Toast toast;
+    private final Context mSysUiContext;
+    private final Context mResContext;
 
     public NotificationRingerController(Context context) {
         super(context);
         mHandler = new Handler();
         mNotificationManager = context.getSystemService(NotificationManager.class);
         mAudioManager = context.getSystemService(AudioManager.class);
+        mSysUiContext = ActivityThread.currentActivityThread().getSystemUiContext();
+        mResContext = getPackageContext(mContext, "com.oneplus.shit.settings");
     }
 
     @Override
@@ -140,19 +145,17 @@ public final class NotificationRingerController extends SliderControllerBase {
     }
 
     void showToast(int messageId, int duration, int yOffset) {
-	Context resCtx = getPackageContext(mContext, "com.oneplus.shit.settings");
-        final String message = resCtx.getResources().getString(messageId);
-	Context ctx = getPackageContext(mContext, PACKAGE_SYSTEMUI);
-	Handler handler = new Handler(Looper.getMainLooper());
-	handler.post(new Runnable() {
-	    @Override
-	    public void run() {
-		if (toast != null) toast.cancel();
-		toast = Toast.makeText(ctx, message, duration);
-		toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, yOffset);
-		toast.show();
-		}
-	    });
+        final String message = mResContext.getResources().getString(messageId);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+        @Override
+        public void run() {
+            if (toast != null) toast.cancel();
+            toast = Toast.makeText(mSysUiContext, message, duration);
+            toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, yOffset);
+            toast.show();
+            }
+        });
     }
 
     public static Context getPackageContext(Context context, String packageName) {
