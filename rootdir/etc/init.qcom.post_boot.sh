@@ -3347,7 +3347,7 @@ case "$target" in
     echo 100 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 
     echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
     echo 3000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+    echo 1478400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
     echo -1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
     echo "70 652800:45 844800:50 1036800:60 1228800:70 1401600:85 1478400:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
     echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
@@ -3362,7 +3362,7 @@ case "$target" in
     echo 99 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
     echo "19000 1400000:39000 1700000:19000 2100000:79000" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
     echo 3000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
-    echo 883200 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
+    echo 1400000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
     echo -1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
     echo "85 1555200:80 1824000:90 2150400:95" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
     echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif
@@ -3374,9 +3374,6 @@ case "$target" in
     echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load
     echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
     echo 2000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration
-
-    # Enable sched boost
-    echo 1 > /proc/sys/kernel/sched_boost
 
         echo 1 > /sys/module/msm_thermal/core_control/enabled
         # Setting b.L scheduler parameters
