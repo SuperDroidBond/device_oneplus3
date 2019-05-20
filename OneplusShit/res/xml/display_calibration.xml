@@ -21,6 +21,15 @@
         android:summary="@string/kcal_enabled_summary"
         android:persistent="false" />
 
+    <ListPreference
+        android:key="presets_list"
+        android:title="@string/presets_list_title"
+        android:summary="%s"
+        android:entries="@array/presets_entries"
+        android:entryValues="@array/presets_values"
+        android:dependency="kcal_enabled"
+        android:defaultValue="0"/>
+
     <com.oneplus.shit.settings.utils.SeekBarPreference
         android:key="kcal_value"
         android:title="@string/kcal_value"
@@ -116,15 +125,6 @@
         android:dependency="kcal_enabled"
         android:disableDependentsState="true"
         android:persistent="false"/>
-
-    <ListPreference
-        android:key="presets_list"
-        android:title="@string/presets_list_title"
-        android:summary="%s"
-        android:entries="@array/presets_entries"
-        android:entryValues="@array/presets_values"
-        android:dependency="kcal_enabled"
-        android:defaultValue="0"/>
 
 </PreferenceScreen>
 
