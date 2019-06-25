@@ -69,6 +69,22 @@ on property:persist.spectrum.profile=0
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 2000
 
     write  /sys/block/sda/queue/scheduler "cfq"
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:844800 1:307800 2:691200 3:307800"
+    
+    # Set thermal restrictions
+    write /sys/kernel/msm_thermal/enabled 0
+    write /sys/kernel/msm_thermal/zone0 "1401600 1785600 40 38"
+    write /sys/kernel/msm_thermal/zone1 "1324800 1555200 41 40"
+    write /sys/kernel/msm_thermal/zone2 "1228800 1478400 42 41"
+    write /sys/kernel/msm_thermal/zone3 "1228800 1401600 43 42"
+    write /sys/kernel/msm_thermal/zone4 "1190400 1324800 44 43"
+    write /sys/kernel/msm_thermal/zone5 "1190400 1248000 46 44"
+    write /sys/kernel/msm_thermal/zone6 "1113600 1190400 48 46"
+    write /sys/kernel/msm_thermal/zone7 "1036800 940800 53 50"
+    write /sys/kernel/msm_thermal/zone8 "729600 729600 65 60"
+    write /sys/kernel/msm_thermal/sampling_ms 8000
+    write /sys/kernel/msm_thermal/enabled 1
+    
 
 # Performance
 on property:persist.spectrum.profile=1
