@@ -238,4 +238,8 @@ persist.data.iwlan.ipsec.ap=1
 persist.sys.cust.lte_config=true
 persist.radio.volte.dan_support=true
 
+# Enable GL composition backpressure.
+debug.sf.enable_gl_backpressure=1
+
 #The End
+
