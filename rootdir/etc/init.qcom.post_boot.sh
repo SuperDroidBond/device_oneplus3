@@ -3340,42 +3340,59 @@ esac
 
 case "$target" in
     "msm8996")
-        # disable thermal hotplug to switch governor
-        echo 0 > /sys/module/msm_thermal/core_control/enabled
+        
    echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
     echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-    echo 100 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-    echo 3000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 
-    echo 1478400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-    echo -1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-    echo "70 652800:45 844800:50 1036800:60 1228800:70 1401600:85 1478400:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows
-    echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
-    echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
-    echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
-    echo 4000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration    
-    echo 99 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load
-    echo "19000 1400000:39000 1700000:19000 2100000:79000" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay
-    echo 3000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate
-    echo 1400000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq
-    echo -1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack
-    echo "85 1555200:80 1824000:90 2150400:95" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads
-    echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif
-    echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost
-    echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/fast_ramp_down
-    echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows
-    echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif
-    echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
-    echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load
-    echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis
-    echo 2000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration
+echo  300  >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 
+echo  "22000 480000:10000 729600:32000 1228800:30000" >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 
+echo  43333 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 
+echo  1431649098 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 
+echo  1593600 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 
+echo  "45 480000:35 652800:49 844800:60 960000:75 1113600:85 1228800:90 1401600:95 1593600:100" >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
+echo  45000 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 
+echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 
+echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/powersave_bias
+echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost 
+echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down 
+echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 
+echo  1 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 
+echo  1 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 
+echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 
+echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 
+echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 
+echo  300 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 
+echo  "40000 940800:55000 1248000:33000 1632000:32000" >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay 
+echo  40000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 
+echo  1431649098 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack 
+echo  2150400 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 
+echo  "35 729600:30 940800:32 1113600:35 1248000:37 1401600:65 1632000:72 1708800:85 1824000:99 1996800:99 2150400:100" >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
+echo  40000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 
+echo  1 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 
+echo  0 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/powersave_bias 
+echo  0 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost 
+echo  0 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/fast_ramp_down 
+echo  0 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows 
+echo  1 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 
+echo  1 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 
+echo  0 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 
+echo  0 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 
+echo  0 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 
+echo 0 > /sys/module/cpu_boost/parameters/input_boost_enabled
 
-        echo 1 > /sys/module/msm_thermal/core_control/enabled
+    # Set thermal restrictions
+    write /sys/kernel/msm_thermal/enabled 0
+    write /sys/kernel/msm_thermal/zone0 "1593600 2150800 40 38"
+    write /sys/kernel/msm_thermal/zone1 "1401800 2073800 42 40"
+    write /sys/kernel/msm_thermal/zone2 "1228800 1920800 44 42"
+    write /sys/kernel/msm_thermal/zone3 "1228800 1824600 46 44"
+    write /sys/kernel/msm_thermal/zone4 "1190400 1708600 48 46"
+    write /sys/kernel/msm_thermal/zone5 "1190400 1555800 50 48"
+    write /sys/kernel/msm_thermal/zone6 "1113600 1248600 55 50"
+    write /sys/kernel/msm_thermal/zone7 "940800 1036800  60 55"
+    write /sys/kernel/msm_thermal/zone8 "729600 729600 65 60"
+    write /sys/kernel/msm_thermal/sampling_ms 8000
+    write /sys/kernel/msm_thermal/enabled 1
+    
         # Setting b.L scheduler parameters
         echo 0 > /proc/sys/kernel/sched_boost
         echo 1 > /proc/sys/kernel/sched_migration_fixup
