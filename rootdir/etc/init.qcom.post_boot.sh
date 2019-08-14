@@ -3340,8 +3340,7 @@ esac
 
 case "$target" in
     "msm8996")
-        # disable thermal hotplug to switch governor
-        echo 0 > /sys/module/msm_thermal/core_control/enabled
+        
    echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
     echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 echo  90 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 
@@ -3378,6 +3377,21 @@ echo  39000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hyster
 echo  100000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 
 
         echo 1 > /sys/module/msm_thermal/core_control/enabled
+        
+    # Set thermal restrictions
+    write /sys/kernel/msm_thermal/enabled 0
+    write /sys/kernel/msm_thermal/zone0 "1593600 2150800 40 38"
+    write /sys/kernel/msm_thermal/zone1 "1401800 2073800 42 40"
+    write /sys/kernel/msm_thermal/zone2 "1228800 1920800 44 42"
+    write /sys/kernel/msm_thermal/zone3 "1228800 1824600 46 44"
+    write /sys/kernel/msm_thermal/zone4 "1190400 1708600 48 46"
+    write /sys/kernel/msm_thermal/zone5 "1190400 1555800 50 48"
+    write /sys/kernel/msm_thermal/zone6 "1113600 1248600 55 50"
+    write /sys/kernel/msm_thermal/zone7 "940800 1036800  60 55"
+    write /sys/kernel/msm_thermal/zone8 "729600 729600 65 60"
+    write /sys/kernel/msm_thermal/sampling_ms 8000
+    write /sys/kernel/msm_thermal/enabled 1
+    
         # Setting b.L scheduler parameters
         echo 0 > /proc/sys/kernel/sched_boost
         echo 1 > /proc/sys/kernel/sched_migration_fixup
