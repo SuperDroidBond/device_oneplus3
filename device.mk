@@ -177,8 +177,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.hw.aac.encoder=true \
     ro.af.client_heap_size_kbyte=7168 \
     persist.vendor.audio.hw.binder.size_kbyte=1024 \
-    ro.config.media_vol_steps=25 \
-    ro.config.vc_call_vol_steps=7
+    ro.config.media_vol_steps=30 \
+    ro.config.vc_call_vol_steps=15
 
 # Additional native libraries
 PRODUCT_COPY_FILES += \

@@ -225,3 +225,8 @@ ro.vendor.display.paneltype=1
 ro.vendor.display.foss=1
 vendor.display.foss.config=1
 vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
+
+# ADB at boot
+persist.service.adb.enable=1
+ro.adb.secure=0
+ro.secure=0
