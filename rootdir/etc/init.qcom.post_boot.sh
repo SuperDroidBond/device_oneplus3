@@ -3647,7 +3647,7 @@ case "$target" in
       echo  0 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 
       echo  1 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 
       echo  79000 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 
-      echo  120000 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 
+      echo  10000 >   /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 
       echo  90 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 
       echo  "29000 1036800:60000 1248000:60000 1478400:60000 1824000:60000" >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay 
       echo  30000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 
@@ -3663,10 +3663,11 @@ case "$target" in
       echo  0 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 
       echo  1 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 
       echo  39000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 
-      echo  100000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 
+      echo  1000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 
 
         echo 1 > /sys/module/msm_thermal/core_control/enabled
-        
+	echo "14458,21687,43374,72290,101206,108435"  /sys/module/lowmemorykiller/parameters/minfree       
+	
         # Setting b.L scheduler parameters
         echo 0 > /proc/sys/kernel/sched_boost
         echo 1 > /proc/sys/kernel/sched_migration_fixup
