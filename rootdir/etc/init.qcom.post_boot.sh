@@ -3666,7 +3666,7 @@ case "$target" in
       echo  1000 >   /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 
 
         echo 1 > /sys/module/msm_thermal/core_control/enabled
-	echo "14458,21687,43374,72290,101206,108435"  /sys/module/lowmemorykiller/parameters/minfree       
+	echo "14458,21687,43374,72290,101206,108435" > /sys/module/lowmemorykiller/parameters/minfree       
 	
         # Setting b.L scheduler parameters
         echo 0 > /proc/sys/kernel/sched_boost
