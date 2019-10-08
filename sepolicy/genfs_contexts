@@ -5,6 +5,10 @@ genfscon sysfs /devices/soc/soc:fpc_fpc1020         u:object_r:sysfs_fpc:s0
 genfscon sysfs /devices/soc/soc:qcom,bcl/power_supply/bcl/type          u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/soc/msm-bcl-14/power_supply/fg_adc/type         u:object_r:sysfs_batteryinfo:s0
 
+#Touchpanel
+genfscon proc /touchpanel                           u:object_r:proc_touchpanel:s0
+genfscon proc /s1302                                u:object_r:proc_touchpanel:s0
+
 # LEDs
 genfscon sysfs /devices/soc/leds-qpnp-18/leds       u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/soc/leds-qpnp-24/leds       u:object_r:sysfs_leds:s0
