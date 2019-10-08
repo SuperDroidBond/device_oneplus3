@@ -92,6 +92,26 @@ on boot
     # Touchscreen
     chown system system /proc/touchpanel/double_tap_enable
     chmod 0660 /proc/touchpanel/double_tap_enable
+    chown system system /proc/touchpanel/up_swipe_enable
+    chmod 0660 /proc/touchpanel/up_swipe_enable
+    chown system system /proc/touchpanel/down_swipe_enable
+    chmod 0660 /proc/touchpanel/down_swipe_enable
+    chown system system /proc/touchpanel/left_swipe_enable
+    chmod 0660 /proc/touchpanel/left_swipe_enable
+    chown system system /proc/touchpanel/right_swipe_enable
+    chmod 0660 /proc/touchpanel/right_swipe_enable
+    chown system system /proc/touchpanel/double_swipe_enable
+    chmod 0660 /proc/touchpanel/double_swipe_enable
+    chown system system /proc/touchpanel/up_arrow_enable
+    chmod 0660 /proc/touchpanel/up_arrow_enable
+    chown system system /proc/touchpanel/down_arrow_enable
+    chmod 0660 /proc/touchpanel/down_arrow_enable
+    chown system system /proc/touchpanel/left_arrow_enable
+    chmod 0660 /proc/touchpanel/left_arrow_enable
+    chown system system /proc/touchpanel/right_arrow_enable
+    chmod 0660 /proc/touchpanel/right_arrow_enable
+    chown system system /proc/touchpanel/letter_o_enable
+    chmod 0660 /proc/touchpanel/letter_o_enable
 
     # Buttons
     chown system system /proc/s1302/key_rep
@@ -105,6 +125,38 @@ on boot
 
     chown system system /proc/tri-state-key/keyCode_bottom
     chmod 0660 /proc/tri-state-key/keyCode_bottom
+
+    # Vibrator permissions
+    chown root system /sys/devices/virtual/timed_output/vibrator/vtg_level
+    chmod 0660 /sys/devices/virtual/timed_output/vibrator/vtg_level
+
+    # Graphics
+    chown system system /sys/class/graphics/fb0/srgb
+    chmod 0664 /sys/class/graphics/fb0/srgb
+    chown system system /sys/class/graphics/fb0/dci_p3
+    chmod 0664 /sys/class/graphics/fb0/dci_p3
+    chown system graphics /sys/class/graphics/fb0/oneplus_mode
+    chmod 0664 /sys/class/graphics/fb0/oneplus_mode
+    chown system graphics /sys/class/graphics/fb0/night_mode
+    chmod 0664 /sys/class/graphics/fb0/night_mode
+    chown system graphics /sys/class/graphics/fb0/hbm
+    chmod 0664 /sys/class/graphics/fb0/hbm
+
+    # KCAL permissions
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_enable
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_enable
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_cont
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_cont
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_sat
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_sat
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_hue
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_hue
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_min
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_min
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_val
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_val
 
     # Fingerprint
     chmod 0664 /sys/devices/soc/soc:fpc_fpc1020/irq
