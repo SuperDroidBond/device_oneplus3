@@ -515,3 +515,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     WfdCommon
+
+#inherit our OneplusShit
+$(call inherit-product, device/oneplus/OneplusShit/opshit.mk)
