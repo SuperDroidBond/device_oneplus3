@@ -1,2 +1,11 @@
 allow system_app sysfs_fpc:dir search;
 allow system_app sysfs_fpc:file rw_file_perms;
+#TouchPanel
+allow system_app proc_touchpanel:dir search;
+allow system_app proc_touchpanel:file rw_file_perms;
+#OPShit
+allow system_app sysfs:file write;
+allow system_app sysfs_switch:dir search;
+#Spectrum
+allow system_app spectrum_prop:property_service set;
+get_prop(system_app, spectrum_prop);
