@@ -430,18 +430,18 @@
          The location framework also has support for installation
          of new location providers at run-time. The new package does not
          have to be explicitly listed here, however it must have a signature
-         that matches the signature of at least one package on this list.
+         that matches the signature of at least one package on this list.-->
          
-    <string-array name="config_locationProviderPackageNames" translatable="false">-->
-        <!-- The standard AOSP fused location provider
+    <string-array name="config_locationProviderPackageNames" translatable="false">
+        <!-- The standard AOSP fused location provider-->
         <item>com.qualcomm.location</item>
-        <item>com.android.location.fused</item>-->
-        <!-- microG unifiednlp location provider (standalone) 
+        <item>com.android.location.fused</item>
+	<!-- microG unifiednlp location provider (standalone) -->
         <item>org.microg.nlp</item>
-    </string-array>-->
+    </string-array>
 
-    <!-- Whether device ignores the RSSNR signal implementation
-    <bool name="config_ignoreRssnrSignalLevel">true</bool>-->
+    <!-- Whether device ignores the RSSNR signal implementation-->
+    <bool name="config_ignoreRssnrSignalLevel">true</bool>
 
     <!-- Whether the device supports Smart Pixels 
     <bool name="config_enableSmartPixels">true</bool>-->
