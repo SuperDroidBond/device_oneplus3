@@ -1,0 +1,1 @@
+allow vold_prepare_subdirs userdata_block_device:blk_file r_file_perms;
