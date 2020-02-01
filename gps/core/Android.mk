@@ -9,6 +9,12 @@ LOCAL_MODULE := libloc_core
 LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
+ifeq ($(TARGET_DEVICE),apq8026_lw)
+LOCAL_CFLAGS += -DPDK_FEATURE_SET
+else ifeq ($(BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET),true)
+LOCAL_CFLAGS += -DPDK_FEATURE_SET
+endif
+
 LOCAL_SHARED_LIBRARIES := \
     liblog \
     libutils \
@@ -21,7 +27,7 @@ LOCAL_SRC_FILES += \
     LocApiBase.cpp \
     LocAdapterBase.cpp \
     ContextBase.cpp \
-    LocContext.cpp \
+    LocDualContext.cpp \
     loc_core_log.cpp \
     data-items/DataItemsFactoryProxy.cpp \
     SystemStatusOsObserver.cpp \
