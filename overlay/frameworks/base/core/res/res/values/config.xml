@@ -523,4 +523,7 @@
     <integer name="config_sysCPUTempMultiplier">10</integer>
     <integer name="config_sysBatteryTempMultiplier">10</integer>
 
+    <!-- Smart Charing is available for OP3 -->
+    <bool name="config_smartChargingAvailable">true</bool>
+
 </resources>
