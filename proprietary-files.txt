@@ -34,18 +34,16 @@ vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 
-# Alipay
--priv-app/IFAAService/IFAAService.apk
-lib64/vendor.oneplus.hardware.ifaa@2.0.so
-vendor/bin/hw/vendor.oneplus.hardware.ifaa@2.0-service
-vendor/etc/init/vendor.oneplus.hardware.ifaa@2.0-service.rc
 
 # ANT+ - system - from miui_DAISYGlobal_V11.0.2.0.QDLMIXM_d59f395371_10.0
 -lib/libantradio.so|76795ae01c5a1d4f8e15ebc1ff8a7f6282cd6797
 -lib64/libantradio.so|6ffd4e9ab3107358d9a4484d4b10430026fa9bf4
 product/lib64/com.qualcomm.qti.ant@1.0.so|f40868ad57012f1a512b14c889bc8380652cc50f
 
-# ANT+ - vendor - from LA.UM.7.5.r1-04000-8x96.0
+# ANT+ - from LA.UM.7.5.r1-04000-8x96.0
+-lib/libantradio.so|4f03cc258ec1806ddb7100252e2b8e6433693027
+lib64/com.qualcomm.qti.ant@1.0.so|f764999a53054c78f9e8a6f1d1bfcad3d446fb02
+-lib64/libantradio.so|247bf6302abcbc55e0006aa7032097069a7a2f96
 vendor/lib64/com.qualcomm.qti.ant@1.0.so|f764999a53054c78f9e8a6f1d1bfcad3d446fb02
 vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so|8ce47bae3b903a56697c69b416927e569d7e7b80
 
@@ -942,13 +940,6 @@ vendor/firmware/a530v1_pm4.fw
 vendor/firmware/a530v2_seq.fw2
 vendor/firmware/a530v3_gpmu.fw2
 vendor/firmware/a530v3_seq.fw2
-
-# Soter
--app/SoterService/SoterService.apk
-vendor/bin/hw/vendor.qti.hardware.soter@1.0-service
-vendor/etc/init/vendor.qti.hardware.soter@1.0-service.rc
-vendor/lib64/hw/vendor.qti.hardware.soter@1.0-impl.so
-vendor/lib64/vendor.qti.hardware.soter@1.0.so
 
 # Thermal - OOS
 vendor/bin/thermal-engine|b15c9e8fa54ebb15dfeb36c7fbc834a28b4c836e

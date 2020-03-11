@@ -633,17 +633,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </interface>
     </hal>
 
-    <!--  Soter service -->
-    <hal format="hidl">
-        <name>vendor.qti.hardware.soter</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ISoter</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-
     <!-- qdutils service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.qdutils_disp</name>
@@ -735,15 +724,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <version>1.0</version>
         <interface>
             <name>IVendorFingerprintExtensions</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.oneplus.hardware.ifaa</name>
-        <transport>hwbinder</transport>
-        <version>2.0</version>
-        <interface>
-            <name>IOneplusIfaa</name>
             <instance>default</instance>
         </interface>
     </hal>
