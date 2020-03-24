@@ -75,6 +75,9 @@ audio.offload.video=true
 #enable music through deep buffer
 audio.deep_buffer.media=true
 
+#Dolby Prop
+vendor.audio.dolby.ds2.enabled=true
+
 #set AudioFlinger client heap size
 ro.af.client_heap_size_kbyte=7168
 
