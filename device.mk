@@ -101,6 +101,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
 
+# FaceUnlock
+TARGET_DISABLE_ALTERNATIVE_FACE_UNLOCK := true
+
 # Alipay
 PRODUCT_PACKAGES += \
     org.ifaa.android.manager
