@@ -544,7 +544,7 @@ framework/com.qti.location.sdk.jar|5dcbf27bd7709a111985e9660b5b61b5fb7a22b1
 framework/izat.xt.srv.jar|98ffd12c789af16d186a4a04c0703a23dc27e347
 lib64/liblocationservice_jni.so|67a0cf23dada00aaef70df443658a2c6041d797d
 lib64/libxt_native.so|d023ae9678d7954285ad61903d73cac14a86e3ce
--priv-app/com.qualcomm.location/com.qualcomm.location.apk|bb395b0e751fd6c2cc66dde30542ab04997dadfd
+#-priv-app/com.qualcomm.location/com.qualcomm.location.apk|bb395b0e751fd6c2cc66dde30542ab04997dadfd
 vendor/bin/loc_launcher|06793983f836a9b42b5ff3848f8fe177134c1379
 vendor/bin/lowi-server|1fe78b543c14196169ab411acfd9dabbfb4636dd
 vendor/bin/slim_daemon|925da604895b095d7e39cf84c7031c6825f32ac0
