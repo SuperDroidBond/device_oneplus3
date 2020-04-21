@@ -951,11 +951,13 @@ vendor/etc/init/vendor.qti.hardware.soter@1.0-service.rc
 vendor/lib64/hw/vendor.qti.hardware.soter@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.soter@1.0.so
 
-# Thermal
-vendor/bin/thermal-engine
--vendor/lib/libthermalclient.so
--vendor/lib64/libthermalclient.so
-vendor/lib64/libthermalioctl.so
+# Thermal - OOS
+vendor/bin/thermal-engine|b15c9e8fa54ebb15dfeb36c7fbc834a28b4c836e
+vendor/lib/hw/thermal.msm8996.so|8b1b1794ed5d15f6141656d8e9d1695812483168
+vendor/lib/libthermalclient.so|270ea373c617584af092dc4ea2aa1c7bf27be7f4
+vendor/lib64/hw/thermal.msm8996.so|62b3fc5ec80cbc5d6d705b7b6f628622add9a2c5
+vendor/lib64/libthermalclient.so|94424d7c8f8daff8bbfd7454fe4d5f1fbf411260
+vendor/lib64/libthermalioctl.so|aa2a0abd8fb9792024efd93f648c129b6a22619e
 
 # Time services - from miui_DAISYGlobal_V11.0.2.0.QDLMIXM_d59f395371_10.0
 bin/move_time_data.sh|56f1f79a88db709a0c7ed5c507b14c55976d6f32
