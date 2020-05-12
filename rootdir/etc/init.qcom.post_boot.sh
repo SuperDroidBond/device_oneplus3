@@ -4235,41 +4235,9 @@ case "$target" in
     "msm8996")
         # disable thermal hotplug to switch governor
       echo 0 > /sys/module/msm_thermal/core_control/enabled
-      echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-      echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-      echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 
-      echo "19000 960000:40000 1228800:40000 1478400:40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 
-      echo 30000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 
-      echo 1036800 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 
-      echo 80000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 
-      echo "80 480000:75 556800:80 729600:85 960000:90 1036800:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 
-      echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 
-      echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 
-      echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost 
-      echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/fast_ramp_down 
-      echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 
-      echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 
-      echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 
-      echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 
-      echo 79000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 
-      echo 10000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 
-      echo 90 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 
-      echo "29000 1036800:60000 1248000:60000 1478400:60000 1824000:60000" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay 
-      echo 30000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 
-      echo 1036800 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 
-      echo 80000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_slack 
-      echo "85 729600:75 940800:80 1036800:85 1401600:90 1824000:95" > /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads 
-      echo 19000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 
-      echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 
-      echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boost 
-      echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/fast_ramp_down 
-      echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/align_windows 
-      echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 
-      echo 0 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 
-      echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 
-      echo 39000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 
-      echo 1000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/boostpulse_duration 
-
+      echo "alucard" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+      echo "alucard" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+     
         echo 1 > /sys/module/msm_thermal/core_control/enabled
 	echo "14458,21687,43374,72290,101206,108435" > /sys/module/lowmemorykiller/parameters/minfree       
 	
