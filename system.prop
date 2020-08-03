@@ -203,11 +203,11 @@ vendor.display.foss.config=1
 vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
 # ADB at boot
-persist.sys.usb.config=adb,mtp
-persist.service.adb.enable=1
-ro.adb.secure=0
 ro.secure=0
+ro.adb.secure=1
 ro.debuggable=1
+persist.service.adb.enable=1
+persist.sys.usb.config=adb,mtp
 
 # VoLTE Props
 persist.vendor.ims.dropset_feature=0
