@@ -4234,18 +4234,18 @@ esac
 case "$target" in
     "msm8996")
     # Stune-Boost
-    write /dev/stune/top-app/schedtune.sched_boost 10
+    write /dev/stune/top-app/schedtune.sched_boost 5
     write /dev/stune/foreground/schedtune.prefer_idle 1
     write /dev/stune/top-app/schedtune.boost 0
     write /dev/stune/top-app/schedtune.prefer_idle 1
     # Governor
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "schedutil"
-    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 0
     write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/iowait_boost_enable 0
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "schedutil"
-    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us 0
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us 0
     write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/iowait_boost_enable 0
     # CPU-Freq
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 307200
