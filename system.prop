@@ -19,6 +19,7 @@ DEVICE_PROVISIONED=1
 # Start in global mode
 ro.telephony.default_network=22,20
 persist.sys.fflag.override.settings_network_and_internet_v2=true
+persist.vendor.radio.aosp_usr_pref_sel=true
 
 debug.sf.hw=1
 debug.sf.latch_unsignaled=1
