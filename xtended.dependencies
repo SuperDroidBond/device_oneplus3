@@ -1,0 +1,21 @@
+[
+ { 
+   "remote": "github", 
+   "repository":"Xtended-Devices/device_oneplus_OneplusShit", 
+   "target_path":"device/oneplus/OneplusShit", 
+   "branch": "xq3t"
+  },
+ { 
+   "remote": "github", 
+   "repository":"mady51/mcd-eas", 
+   "target_path":"kernel/oneplus/msm8996", 
+   "branch": "test"
+  },
+ { 
+   "remote": "github", 
+   "repository":"SuperDroidBond/proprietary_vendor_oneplus", 
+   "target_path":"vendor/oneplus", 
+   "branch": "xq"
+  }
+]
+
