@@ -4234,7 +4234,7 @@ esac
 case "$target" in
     "msm8996")
     # Stune-Boost
-    write /dev/stune/top-app/schedtune.sched_boost 5
+    write /dev/stune/top-app/schedtune.sched_boost 2
     write /dev/stune/foreground/schedtune.prefer_idle 1
     write /dev/stune/top-app/schedtune.boost 0
     write /dev/stune/top-app/schedtune.prefer_idle 1
@@ -4257,7 +4257,7 @@ case "$target" in
     # Input-Boost
     write /sys/module/cpu_boost/parameters/input_boost_enabled 1
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:844800 2:691200"
-    write /sys/module/cpu_boost/parameters/input_boost_ms 80
+    write /sys/module/cpu_boost/parameters/input_boost_ms 40
     write /sys/module/cpu_boost/parameters/dynamic_stune_boost 10
     write /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms 300
     # Scheduler
