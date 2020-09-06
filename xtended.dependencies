@@ -7,9 +7,9 @@
   },
  { 
    "remote": "github", 
-   "repository":"mady51/mcd-eas", 
+   "repository":"mady51/losop3t", 
    "target_path":"kernel/oneplus/msm8996", 
-   "branch": "test"
+   "branch": "thermaltest1"
   },
  { 
    "remote": "github", 
