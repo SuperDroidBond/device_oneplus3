@@ -4234,11 +4234,24 @@ esac
 case "$target" in
     "msm8996")
         # disable thermal hotplug to switch governor
-      echo 0 > /sys/module/msm_thermal/core_control/enabled
+    write /sys/kernel/msm_thermal/enabled 0
       echo "alucard" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
       echo "alucard" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+ # Thermal
+    write /sys/kernel/msm_thermal/zone0 "1516800 2246400 41 40"
+    write /sys/kernel/msm_thermal/zone1 "1440000 2150400 42 41"
+    write /sys/kernel/msm_thermal/zone2 "1363200 2054400 43 42"
+    write /sys/kernel/msm_thermal/zone3 "1363200 1977600 44 43"
+    write /sys/kernel/msm_thermal/zone4 "1286400 1900800 45 44"
+    write /sys/kernel/msm_thermal/zone5 "1286400 1824000 47 45"
+    write /sys/kernel/msm_thermal/zone6 "1132800 1670400 49 47"
+    write /sys/kernel/msm_thermal/zone7 "1056000 1363200 54 49"
+    write /sys/kernel/msm_thermal/zone8 "902400 1056000 58 54"
+    write /sys/kernel/msm_thermal/zone9 "844800 902400 60 58"
+    write /sys/kernel/msm_thermal/zone10 "768000 748800 63 60"
+    write /sys/kernel/msm_thermal/sampling_ms 4000
+    write /sys/kernel/msm_thermal/enabled 1
      
-        echo 1 > /sys/module/msm_thermal/core_control/enabled
 	echo "14458,21687,43374,72290,101206,108435" > /sys/module/lowmemorykiller/parameters/minfree       
 	
         # Setting b.L scheduler parameters
