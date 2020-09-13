@@ -34,16 +34,12 @@ vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 
-
 # ANT+ - system - from miui_DAISYGlobal_V11.0.2.0.QDLMIXM_d59f395371_10.0
 -lib/libantradio.so|76795ae01c5a1d4f8e15ebc1ff8a7f6282cd6797
 -lib64/libantradio.so|6ffd4e9ab3107358d9a4484d4b10430026fa9bf4
 product/lib64/com.qualcomm.qti.ant@1.0.so|f40868ad57012f1a512b14c889bc8380652cc50f
 
-# ANT+ - from LA.UM.7.5.r1-04000-8x96.0
--lib/libantradio.so|4f03cc258ec1806ddb7100252e2b8e6433693027
-lib64/com.qualcomm.qti.ant@1.0.so|f764999a53054c78f9e8a6f1d1bfcad3d446fb02
--lib64/libantradio.so|247bf6302abcbc55e0006aa7032097069a7a2f96
+# ANT+ - vendor - from LA.UM.7.5.r1-04000-8x96.0
 vendor/lib64/com.qualcomm.qti.ant@1.0.so|f764999a53054c78f9e8a6f1d1bfcad3d446fb02
 vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so|8ce47bae3b903a56697c69b416927e569d7e7b80
 
@@ -428,7 +424,7 @@ product/lib64/com.quicinc.cne.constants@1.0.so|e2f9123a013c2c116b02a1e057870f885
 product/lib64/com.quicinc.cne.constants@2.0.so|b58e07086d9992d0911391ad185f277e1cfd4fe5
 product/lib64/com.quicinc.cne.constants@2.1.so|92fc6a953b061fea1895e58fa298ce8de8a6d03c
 -vendor/app/CneApp/CneApp.apk|2356a0335ab8e0106832a9325f972467654fd1f0
--vendor/app/IWlanService/IWlanService.apk|12da3d82b6cc062d2af29a0b5f43fc8acf9adbb2
+-vendor/app/IWlanService/IWlanService.apk|32cb03f65a3412c7e0390b445ce5f36bcedfb809
 vendor/bin/cnd|edba24c950546f80478916bb1ffe02ed58f4c96d
 vendor/etc/cne/wqeclient/ATT/ATT_profile1.xml|578f3f8f56059bfdbef926bcc68d01c15e06951f
 vendor/etc/cne/wqeclient/ATT/ATT_profile2.xml|1fb42c672a12b6660bdce3ea94e0c43719dd9de8
@@ -613,22 +609,22 @@ vendor/lib64/librs_adreno.so|5ec4bcbf396d1e2ed97201e84562c410dc1f52d4
 vendor/lib64/librs_adreno_sha1.so|a9b829487e668e1f8cf638260b8f90a2b4a30771
 
 # Graphics (SDM) - from LA.UM.8.6.r1-04400-89xx.0
-vendor/lib/libscalar.so|2843b818e48b298d51fe1c8c21a6fb8c67c8d18b
-vendor/lib/libsdm-color.so|f052cb28efd13d6332402a242f0ad6b9938f50dc
-vendor/lib/libsdm-diag.so|4e3449788c769a0eee0f4494ff1ead1072d6c639
--vendor/lib/libsdm-disp-vndapis.so|470b725055f9261a0a97d7f5293c1f3eeb71eb04
-vendor/lib/libsdmextension.so|db03cddf373709b70e96449efe0fd71c6b4ea397
+vendor/lib/libscalar.so|7ac579768ffd2caee903d69d8fd3f7918b04ffbe
+vendor/lib/libsdm-color.so|fa3feba972c1076c3055367c969212df5e0e4a90
+vendor/lib/libsdm-diag.so|46b5c2d6fab1e655efde1657b2e51dc00c00b763
+-vendor/lib/libsdm-disp-vndapis.so|9bd99e0024f5abcc285f64aadea8725556f16789
+vendor/lib/libsdmextension.so|ed08025c0bd11445f0a0489cfdca7831a2b8b478
 vendor/lib/libtinyxml2_1.so|ef2167416f7a5a503256c5e818fcfa660d5146f4
-vendor/lib64/libscalar.so|7a4eba33218ad22abfc27d5213711972998bc0ea
-vendor/lib64/libsdm-color.so|e7ab3c8485e6bce768694f62d6d21f49f742da1f
-vendor/lib64/libsdm-diag.so|6db8c3e993f4f217e631ef9b83d063f9af0f2a26
--vendor/lib64/libsdm-disp-vndapis.so|a09df3c5521567b292cb0e5f1f53df7d1fe2e1b7
-vendor/lib64/libsdmextension.so|0b6150765452307c81b5ada615b191527e67c6a8
+vendor/lib64/libscalar.so|b7feb3266d5bccab8b26c49eea6ac8e295192f9a
+vendor/lib64/libsdm-color.so|335415c8f85a1e2e102667c24dffb166e7b08e75
+vendor/lib64/libsdm-diag.so|87373a043267b9b3bb923931a910119a9deb425f
+-vendor/lib64/libsdm-disp-vndapis.so|b1dede9efa81e8d0374343612ad7ad0d967e8e29
+vendor/lib64/libsdmextension.so|6184043b163c502e3b89dbc216421f096a01d5b3
 vendor/lib64/libtinyxml2_1.so|56d4d5d0ea010f951de219c7b9fd2c9695a5b9d2
 
 # Graphics - Vulkan - from LA.UM.8.6.r1-04400-89xx.0
-vendor/lib/hw/vulkan.msm8953.so:vendor/lib/hw/vulkan.msm8996.so|ce9e86e26d40ecf2f05ad60f93c43ebbb49efa67
-vendor/lib64/hw/vulkan.msm8953.so:vendor/lib64/hw/vulkan.msm8996.so|742c1182ad0ac5e48c12d279e085711d8046da73
+vendor/lib/hw/vulkan.msm8953.so:vendor/lib/hw/vulkan.msm8996.so|e930991b19059c905f4539deb08ed8f2555a9fde
+vendor/lib64/hw/vulkan.msm8953.so:vendor/lib64/hw/vulkan.msm8996.so|b7ccc760d439b03aabe05e35586559d327382935
 
 # Keystore
 vendor/lib/hw/keystore.msm8996.so
