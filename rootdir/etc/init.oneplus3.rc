@@ -63,6 +63,9 @@ on post-fs-data
     #Create folder of camera
     mkdir /data/misc/camera 0770 camera camera
 
+    # NFC local data and nfcee xml storage
+    mkdir /data/vendor/nfc 0770 nfc nfc
+
 on early-boot
     chown system system /mnt/vendor/persist/sensors/gyro_sensitity_cal
 
@@ -212,6 +215,10 @@ on boot
     # Smart Charging
     chmod 0666 /sys/class/power_supply/battery/charging_enabled
     chown system system /sys/class/power_supply/battery/charging_enabled 
+
+    # NFC
+    chmod 0666 /dev/pn544
+    chown nfc nfc /dev/pn544
 
 on charger
     # Enable UFS powersaving
