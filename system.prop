@@ -25,7 +25,6 @@ debug.sf.hw=1
 debug.sf.latch_unsignaled=1
 debug.egl.hw=1
 debug.gralloc.enable_fb_ubwc=1
-dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 debug.sf.recomputecrop=0
@@ -202,11 +201,14 @@ vendor.display.foss.config=1
 vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
 
 # ADB at boot
-ro.secure=0
-ro.adb.secure=1
-ro.debuggable=1
+ro.adb.secure=0
 persist.service.adb.enable=1
 persist.sys.usb.config=adb,mtp
+
+# for 3.18.x kernel 
+#Bypass BPF
+bpf.progs_loaded=1
+ro.kernel.ebpf.supported=false
 
 # VoLTE Props
 persist.vendor.ims.dropset_feature=0
